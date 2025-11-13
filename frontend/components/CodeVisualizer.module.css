@@ -173,14 +173,14 @@
 }
 
 .itemHighlightedOutgoing {
-  fill: #fff59d !important;
-  stroke: #fbc02d !important;
+  fill: #c8e6c9 !important;
+  stroke: #43a047 !important;
   stroke-width: 2px !important;
 }
 
 .itemHighlightedIncoming {
-  fill: #c8e6c9 !important;
-  stroke: #43a047 !important;
+  fill: #fff59d !important;
+  stroke: #fbc02d !important;
   stroke-width: 2px !important;
 }
 
@@ -226,15 +226,15 @@
 }
 
 .connectionOutgoing {
-  stroke: #ff5252 !important;
-  stroke-width: 3px;
-  filter: drop-shadow(0 0 6px rgba(244, 67, 54, 0.6));
-}
-
-.connectionIncoming {
   stroke: #4caf50 !important;
   stroke-width: 3px;
   filter: drop-shadow(0 0 6px rgba(76, 175, 80, 0.6));
+}
+
+.connectionIncoming {
+  stroke: #fbc02d !important;
+  stroke-width: 3px;
+  filter: drop-shadow(0 0 6px rgba(251, 192, 45, 0.6));
 }
 
 .connectionLabel {
@@ -249,11 +249,11 @@
 }
 
 .connectionLabelOutgoing {
-  fill: #b71c1c;
+  fill: #1b5e20;
 }
 
 .connectionLabelIncoming {
-  fill: #1b5e20;
+  fill: #b71c1c;
 }
 
 .loadPanel {

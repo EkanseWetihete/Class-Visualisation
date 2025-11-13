@@ -75,10 +75,10 @@ export const Canvas: React.FC<CanvasProps> = ({
             <polygon points="0 0, 10 3, 0 6" fill="#64b5f6" />
           </marker>
           <marker id="arrowheadOutgoing" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-            <polygon points="0 0, 10 3, 0 6" fill="#ff5252" />
+            <polygon points="0 0, 10 3, 0 6" fill="#4caf50" />
           </marker>
           <marker id="arrowheadIncoming" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-            <polygon points="0 0, 10 3, 0 6" fill="#4caf50" />
+            <polygon points="0 0, 10 3, 0 6" fill="#fbc02d" />
           </marker>
         </defs>
 
