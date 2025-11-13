@@ -7,8 +7,19 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
       const filePath = path.join(process.cwd(), '..', 'output.json');
       const data = fs.readFileSync(filePath, 'utf8');
+      const stats = fs.statSync(filePath);
       const jsonData = JSON.parse(data);
-      res.status(200).json(jsonData);
+
+      const meta = {
+        version: `${stats.mtimeMs}-${stats.size}`,
+        lastModified: stats.mtimeMs,
+        size: stats.size
+      };
+
+      res.status(200).json({
+        ...jsonData,
+        _meta: meta
+      });
     } catch (error) {
       res.status(500).json({ error: 'Failed to load output.json' });
     }
