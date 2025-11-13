@@ -1,0 +1,192 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  position: relative;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 24px;
+  color: #fff;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+
+.controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.controls button {
+  padding: 8px 16px;
+  border: none;
+  background: #2196f3;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.controls button:hover {
+  background: #1976d2;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+}
+
+.controls button:active {
+  transform: translateY(0);
+}
+
+.zoomLevel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  min-width: 50px;
+  text-align: center;
+}
+
+.canvasContainer {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  cursor: grab;
+}
+
+.canvasContainer:active {
+  cursor: grabbing;
+}
+
+.canvas {
+  display: block;
+  transform-origin: 0 0;
+}
+
+/* File Box Styles */
+.fileBox {
+  fill: #ffffff;
+  stroke: #1976d2;
+  stroke-width: 3;
+  rx: 8;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.25));
+}
+
+.fileTitle {
+  font-size: 16px;
+  font-weight: 700;
+  fill: #1976d2;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Class Box Styles */
+.classBox {
+  fill: #e3f2fd;
+  stroke: #1565c0;
+  stroke-width: 2;
+  rx: 6;
+  transition: all 0.2s;
+}
+
+.classBox:hover {
+  fill: #bbdefb;
+  filter: drop-shadow(0 4px 8px rgba(21, 101, 192, 0.3));
+}
+
+/* Function Box Styles */
+.functionBox {
+  fill: #f3e5f5;
+  stroke: #6a1b9a;
+  stroke-width: 2;
+  rx: 6;
+  transition: all 0.2s;
+}
+
+.functionBox:hover {
+  fill: #e1bee7;
+  filter: drop-shadow(0 4px 8px rgba(106, 27, 154, 0.3));
+}
+
+/* Item Text Styles */
+.itemName {
+  font-size: 14px;
+  font-weight: 700;
+  fill: #1a237e;
+  font-family: 'Consolas', 'Courier New', monospace;
+}
+
+.itemArgs {
+  font-size: 11px;
+  fill: #455a64;
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-style: italic;
+}
+
+.methodName {
+  font-size: 12px;
+  fill: #37474f;
+  font-family: 'Consolas', 'Courier New', monospace;
+}
+
+.separator {
+  stroke: #90a4ae;
+  stroke-width: 1;
+  stroke-dasharray: 2, 2;
+}
+
+/* Connection Styles */
+.connection {
+  fill: none;
+  stroke: #64b5f6;
+  stroke-width: 2;
+  transition: all 0.2s;
+}
+
+.connection:hover {
+  stroke: #2196f3;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 6px rgba(33, 150, 243, 0.6));
+}
+
+.connectionLabel {
+  font-size: 11px;
+  fill: #1565c0;
+  font-weight: 600;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  paint-order: stroke fill;
+  stroke: rgba(255, 255, 255, 0.8);
+  stroke-width: 3px;
+  pointer-events: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .controls {
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    flex-wrap: wrap;
+  }
+
+  .controls button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .zoomLevel {
+    font-size: 12px;
+  }
+}

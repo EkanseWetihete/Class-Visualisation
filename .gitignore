@@ -1,0 +1,4 @@
+__pycache__/
+.next/
+node_modules/
+dist/

@@ -1,0 +1,118 @@
+{
+    "files": {
+        "Class Visualisation/backend/analyzer.py": {
+            "CodeAnalyzer": {
+                "args": [],
+                "start_line": 5,
+                "end_line": 49,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 6,
+                        "end_line": 8,
+                        "used_functions": {}
+                    },
+                    "visit_ClassDef": {
+                        "args": [
+                            "self",
+                            "node"
+                        ],
+                        "start_line": 10,
+                        "end_line": 22,
+                        "used_functions": {}
+                    },
+                    "visit_FunctionDef": {
+                        "args": [
+                            "self",
+                            "node"
+                        ],
+                        "start_line": 24,
+                        "end_line": 37,
+                        "used_functions": {}
+                    },
+                    "visit_AsyncFunctionDef": {
+                        "args": [
+                            "self",
+                            "node"
+                        ],
+                        "start_line": 39,
+                        "end_line": 40,
+                        "used_functions": {}
+                    },
+                    "visit_Name": {
+                        "args": [
+                            "self",
+                            "node"
+                        ],
+                        "start_line": 42,
+                        "end_line": 44,
+                        "used_functions": {}
+                    },
+                    "visit_Attribute": {
+                        "args": [
+                            "self",
+                            "node"
+                        ],
+                        "start_line": 46,
+                        "end_line": 49,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "analyze_file": {
+                "args": [
+                    "file_path"
+                ],
+                "start_line": 53,
+                "end_line": 66,
+                "used_functions": {
+                    "CodeAnalyzer": "from backend.analyzer"
+                }
+            }
+        },
+        "Class Visualisation/backend/main.py": {
+            "main": {
+                "args": [],
+                "start_line": 8,
+                "end_line": 114,
+                "used_functions": {
+                    "get_py_files": "from backend.utils",
+                    "analyze_file": "from backend.analyzer"
+                }
+            }
+        },
+        "Class Visualisation/backend/utils.py": {
+            "get_py_files": {
+                "args": [
+                    "root_dir"
+                ],
+                "start_line": 4,
+                "end_line": 10,
+                "used_functions": {}
+            },
+            "resolve_import": {
+                "args": [
+                    "imp",
+                    "file_path",
+                    "root_dir",
+                    "all_files"
+                ],
+                "start_line": 12,
+                "end_line": 18,
+                "used_functions": {}
+            },
+            "build_relationships": {
+                "args": [
+                    "files_data",
+                    "root_dir"
+                ],
+                "start_line": 20,
+                "end_line": 92,
+                "used_functions": {}
+            }
+        }
+    }
+}
