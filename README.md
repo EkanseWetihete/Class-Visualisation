@@ -35,12 +35,26 @@ A professional UML-style code visualization tool built with Next.js that provide
   - Mouse wheel to zoom in/out
   - Click and drag to pan around the canvas
   - Zoom range: 10% to 300%
-- **Control Panel**: Buttons for Zoom In, Zoom Out, and Reset view
+- **Control Panel**: Buttons for Zoom In, Zoom Out, Reset View, Refresh Data, Save Layout, and Load/Manage
+- **Highlight Toggles**: Checkboxes to enable/disable outgoing (green) and incoming (yellow) reference highlights
 - **Hover Effects**: Boxes and connections highlight on hover
 - **Smooth Transitions**: All interactions have smooth animations
 
+### 🔍 **Reference Highlighting**
+- **Outgoing References**: Right-click on a file, class, or function to highlight all items it references (green arrows and boxes)
+- **Incoming References**: Right-click to also highlight all items that reference the selected entity (yellow arrows and boxes)
+- **Toggle Controls**: Independent toggles to show/hide outgoing or incoming highlights
+- **Visual Feedback**: Selected items have red borders, highlighted references use color-coded arrows and fills
+
+### 💾 **Layout Management**
+- **Save Layouts**: Save current drag positions as named layouts, scoped to the active data file
+- **Load Layouts**: Restore saved layouts from a panel, automatically switching data files if needed
+- **Load Panel**: Overlay interface to manage saved layouts and select different data files
+- **Persistent Storage**: Layouts stored in localStorage with metadata (name, data file, timestamp)
+- **Data File Selection**: Choose from multiple JSON files in the `data/` directory for visualization
+
 ### 📊 **Data Structure**
-The system reads from `output.json` which contains:
+The system reads from JSON files in the `data/` directory (e.g., `output.json`), supporting multiple data files for different projects or analyses. Each file contains:
 ```json
 {
   "files": {
@@ -61,9 +75,41 @@ The system reads from `output.json` which contains:
         "used_functions": { ... }
       }
     }
+  },
+  "_meta": {
+    "version": "file_hash",
+    "lastModified": 1234567890,
+    "size": 1024,
+    "file": "output.json"
   }
 }
 ```
+
+## Backend Analyzer
+
+The system includes a Python-based backend analyzer that processes Python codebases to extract structural and dependency information.
+
+### Features
+- **AST Parsing**: Uses Python's `ast` module to analyze source code
+- **Dependency Tracking**: Identifies function and class references across modules
+- **Metadata Generation**: Creates versioned JSON output with file metadata
+- **Multi-File Support**: Processes entire project directories and generates separate JSON files
+
+### Usage
+```bash
+cd backend
+pip install -r requirements.txt
+python main.py  # Analyzes the sample project and generates output.json
+```
+
+### Output
+Generates JSON files in the `data/` directory with detailed code structure, including:
+- Function and class definitions with arguments and line numbers
+- Method lists for classes
+- Cross-references between functions and modules
+- File metadata for versioning and caching
+
+The analyzer is designed to work with any Python project structure and can be extended for additional analysis features.
 
 ## How to Use
 
@@ -88,13 +134,17 @@ npm start
 ## Analyzing New Projects
 
 1. Place your Python project in the `backend` analyzer
-2. Run the analyzer to generate `output.json`
-3. The frontend will automatically display the new analysis
-4. Use the visualization to:
+2. Install backend dependencies: `cd backend && pip install -r requirements.txt`
+3. Run the analyzer: `python main.py` (or `python analyzer.py` depending on entry point)
+4. Generated JSON files will be saved to `data/` directory
+5. The frontend will automatically list available data files
+6. Use the visualization to:
    - Understand code structure
    - Trace function dependencies
    - Identify cross-module relationships
    - Navigate complex codebases visually
+   - Save and load custom layouts for different views
+   - Toggle highlights for outgoing/incoming references
 
 ## Design Philosophy
 
@@ -107,11 +157,18 @@ npm start
 
 ## Technical Stack
 
-- **Next.js 14**: React framework for server-side rendering
-- **TypeScript**: Type-safe development
-- **SVG Rendering**: Crisp, scalable graphics
-- **CSS Modules**: Scoped styling
-- **Custom Layout Algorithm**: Grid-based positioning with smart routing
+- **Frontend**:
+  - Next.js 14: React framework for server-side rendering
+  - TypeScript: Type-safe development
+  - SVG Rendering: Crisp, scalable graphics
+  - CSS Modules: Scoped styling
+- **Backend**:
+  - Python: Code analysis using AST parsing
+  - JSON Output: Structured data for visualization
+- **Features**:
+  - Custom Layout Algorithm: Grid-based positioning with smart routing
+  - Local Storage: Persistent layout management
+  - API Routes: Dynamic data file loading and listing
 
 ## Future Enhancements
 
@@ -122,3 +179,5 @@ npm start
 - Minimap for large diagrams
 - Custom color themes
 - Code preview on hover
+- Advanced layout algorithms
+- Collaboration features for team code reviews
