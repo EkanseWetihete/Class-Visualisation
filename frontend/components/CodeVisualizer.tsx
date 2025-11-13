@@ -14,10 +14,24 @@ import { FileBox, Position, ViewBox } from './visualizer/types';
 
 const DEFAULT_VIEWBOX: ViewBox = { x: 0, y: 0 };
 
+type HighlightState = {
+  sourceType: 'file' | 'item';
+  fileId: string;
+  itemId?: string;
+  targetItemIds: Set<string>;
+  connectionIds: Set<string>;
+};
+
+type OutgoingEntry = {
+  targets: Set<string>;
+  connectionIds: Set<string>;
+};
+
 export default function CodeVisualizer() {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const { data, versionKey, status, refresh, lastUpdated, error } = useOutputData();
-  const { positions, updatePosition } = usePersistentPositions(versionKey);
+  const { positions, updatePosition, resetPositions, saveSnapshot, loadSnapshot, hasSnapshot } =
+    usePersistentPositions(versionKey);
 
   const layout = useMemo(() => buildVisualizerLayout(data), [data]);
   const fileBoxes = useMemo(() => applyCustomPositions(layout.fileBoxes, positions), [layout.fileBoxes, positions]);
@@ -35,12 +49,29 @@ export default function CodeVisualizer() {
   const [isPanning, setIsPanning] = useState(false);
   const panStartRef = useRef({ x: 0, y: 0, viewBoxX: 0, viewBoxY: 0 });
   const [draggingFile, setDraggingFile] = useState<{ filePath: string; offsetX: number; offsetY: number } | null>(null);
+  const [highlightState, setHighlightState] = useState<HighlightState | null>(null);
 
-  useEffect(() => {
-    const handleWindowUp = () => setDraggingFile(null);
-    window.addEventListener('mouseup', handleWindowUp);
-    return () => window.removeEventListener('mouseup', handleWindowUp);
-  }, []);
+  const outgoingByFile = useMemo(() => {
+    const map = new Map<string, OutgoingEntry>();
+    layout.connections.forEach(plan => {
+      const entry = map.get(plan.from.fileId) ?? { targets: new Set<string>(), connectionIds: new Set<string>() };
+      entry.targets.add(plan.to.itemId);
+      entry.connectionIds.add(plan.id);
+      map.set(plan.from.fileId, entry);
+    });
+    return map;
+  }, [layout.connections]);
+
+  const outgoingByItem = useMemo(() => {
+    const map = new Map<string, OutgoingEntry>();
+    layout.connections.forEach(plan => {
+      const entry = map.get(plan.from.itemId) ?? { targets: new Set<string>(), connectionIds: new Set<string>() };
+      entry.targets.add(plan.to.itemId);
+      entry.connectionIds.add(plan.id);
+      map.set(plan.from.itemId, entry);
+    });
+    return map;
+  }, [layout.connections]);
 
   const getWorldPoint = useCallback(
     (clientX: number, clientY: number): Position | null => {
@@ -65,6 +96,35 @@ export default function CodeVisualizer() {
     },
     [canvasBounds, viewBox, zoom]
   );
+
+  useEffect(() => {
+    const handleWindowUp = () => setDraggingFile(null);
+    window.addEventListener('mouseup', handleWindowUp);
+    return () => window.removeEventListener('mouseup', handleWindowUp);
+  }, []);
+
+  useEffect(() => {
+    if (!draggingFile) {
+      return;
+    }
+    const handleMove = (event: MouseEvent) => {
+      const point = getWorldPoint(event.clientX, event.clientY);
+      if (!point) {
+        return;
+      }
+      updatePosition(draggingFile.filePath, {
+        x: point.x - draggingFile.offsetX,
+        y: point.y - draggingFile.offsetY
+      });
+    };
+    window.addEventListener('mousemove', handleMove);
+    return () => window.removeEventListener('mousemove', handleMove);
+  }, [draggingFile, getWorldPoint, updatePosition]);
+
+  useEffect(() => {
+    setHighlightState(null);
+    setDraggingFile(null);
+  }, [versionKey]);
 
   const handleWheel = useCallback(
     (e: React.WheelEvent<HTMLDivElement>) => {
@@ -133,18 +193,6 @@ export default function CodeVisualizer() {
 
   const handleCanvasMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
-      if (draggingFile) {
-        const point = getWorldPoint(e.clientX, e.clientY);
-        if (!point) {
-          return;
-        }
-        updatePosition(draggingFile.filePath, {
-          x: point.x - draggingFile.offsetX,
-          y: point.y - draggingFile.offsetY
-        });
-        return;
-      }
-
       if (!isPanning) {
         return;
       }
@@ -166,7 +214,7 @@ export default function CodeVisualizer() {
         y: panStartRef.current.viewBoxY - deltaY * scaleY
       });
     },
-    [canvasBounds, draggingFile, getWorldPoint, isPanning, updatePosition, zoom]
+    [canvasBounds, isPanning, zoom]
   );
 
   const handleCanvasMouseUp = useCallback(() => {
@@ -174,12 +222,16 @@ export default function CodeVisualizer() {
     setDraggingFile(null);
   }, []);
 
+  const handleCanvasContextMenu = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setHighlightState(null);
+  }, []);
+
   const handleFileMouseDown = useCallback(
     (event: React.MouseEvent<SVGGElement>, fileBox: FileBox) => {
       if (event.button !== 0) {
         return;
       }
-      event.stopPropagation();
       event.preventDefault();
 
       const point = getWorldPoint(event.clientX, event.clientY);
@@ -196,11 +248,71 @@ export default function CodeVisualizer() {
     [getWorldPoint]
   );
 
+  const handleFileContextMenu = useCallback(
+    (_event: React.MouseEvent<SVGGElement>, fileBox: FileBox) => {
+      const outgoing = outgoingByFile.get(fileBox.id);
+      setHighlightState({
+        sourceType: 'file',
+        fileId: fileBox.id,
+        targetItemIds: outgoing ? new Set(outgoing.targets) : new Set<string>(),
+        connectionIds: outgoing ? new Set(outgoing.connectionIds) : new Set<string>()
+      });
+    },
+    [outgoingByFile]
+  );
+
+  const handleItemContextMenu = useCallback(
+    (
+      _event: React.MouseEvent<SVGGElement>,
+      payload: { fileBox: FileBox; itemId: string }
+    ) => {
+      const outgoing = outgoingByItem.get(payload.itemId);
+      setHighlightState({
+        sourceType: 'item',
+        fileId: payload.fileBox.id,
+        itemId: payload.itemId,
+        targetItemIds: outgoing ? new Set(outgoing.targets) : new Set<string>(),
+        connectionIds: outgoing ? new Set(outgoing.connectionIds) : new Set<string>()
+      });
+    },
+    [outgoingByItem]
+  );
+
   const handleResetView = useCallback(() => {
     setZoom(1);
     setViewBox(DEFAULT_VIEWBOX);
     setIsPanning(false);
   }, []);
+
+  const handleRefreshData = useCallback(() => {
+    setHighlightState(null);
+    setDraggingFile(null);
+    setIsPanning(false);
+    setZoom(1);
+    setViewBox(DEFAULT_VIEWBOX);
+    resetPositions();
+    return refresh();
+  }, [refresh, resetPositions]);
+
+  const handleSaveLayout = useCallback(() => {
+    if (!versionKey) {
+      return;
+    }
+    saveSnapshot();
+  }, [saveSnapshot, versionKey]);
+
+  const handleLoadLayout = useCallback(() => {
+    if (!versionKey) {
+      return;
+    }
+    loadSnapshot();
+  }, [loadSnapshot, versionKey]);
+
+  const highlightedTargets = highlightState?.targetItemIds ?? new Set<string>();
+  const highlightedConnectionIds = highlightState?.connectionIds ?? new Set<string>();
+  const selectedFileId = highlightState?.fileId;
+  const selectedItemId = highlightState?.itemId;
+  const canPersistLayout = Boolean(versionKey);
 
   if (status === 'loading' && !layout.fileBoxes.length) {
     return <div className={styles.loading}>Loading visualization...</div>;
@@ -217,7 +329,11 @@ export default function CodeVisualizer() {
         onZoomIn={() => zoomAroundCenter(1.2)}
         onZoomOut={() => zoomAroundCenter(0.8)}
         onResetView={handleResetView}
-        onRefresh={refresh}
+        onRefresh={handleRefreshData}
+        onSaveLayout={handleSaveLayout}
+        onLoadLayout={handleLoadLayout}
+        canPersistLayout={canPersistLayout}
+        canLoadLayout={hasSnapshot}
         lastUpdated={lastUpdated}
         isLoading={status === 'loading'}
       />
@@ -229,11 +345,18 @@ export default function CodeVisualizer() {
         svgRef={svgRef}
         fileBoxes={fileBoxes}
         connections={connections}
+        selectedFileId={selectedFileId}
+        selectedItemId={selectedItemId}
+        highlightedTargets={highlightedTargets}
+        highlightedConnectionIds={highlightedConnectionIds}
         onWheel={handleWheel}
         onMouseDown={handleCanvasMouseDown}
         onMouseMove={handleCanvasMouseMove}
         onMouseUp={handleCanvasMouseUp}
+        onContextMenu={handleCanvasContextMenu}
         onFileMouseDown={handleFileMouseDown}
+        onFileContextMenu={handleFileContextMenu}
+        onItemContextMenu={handleItemContextMenu}
       />
     </div>
   );

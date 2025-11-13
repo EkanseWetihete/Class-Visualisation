@@ -96,6 +96,12 @@
   stroke-width: 3;
   rx: 8;
   filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.25));
+  transition: none;
+}
+
+.fileBoxSelected {
+  stroke: #ff5252;
+  stroke-width: 3.5px;
 }
 
 .fileTitle {
@@ -105,13 +111,17 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.fileTitleSelected {
+  fill: #d32f2f;
+}
+
 /* Class Box Styles */
 .classBox {
   fill: #e3f2fd;
   stroke: #1565c0;
   stroke-width: 2;
   rx: 6;
-  transition: all 0.2s;
+  transition: background-color 0.12s ease, filter 0.12s ease;
 }
 
 .classBox:hover {
@@ -125,12 +135,23 @@
   stroke: #6a1b9a;
   stroke-width: 2;
   rx: 6;
-  transition: all 0.2s;
+  transition: background-color 0.12s ease, filter 0.12s ease;
 }
 
 .functionBox:hover {
   fill: #e1bee7;
   filter: drop-shadow(0 4px 8px rgba(106, 27, 154, 0.3));
+}
+
+.itemSelected {
+  stroke: #ff5252;
+  stroke-width: 2.5px !important;
+}
+
+.itemHighlighted {
+  fill: #fff59d !important;
+  stroke: #fbc02d !important;
+  stroke-width: 2px !important;
 }
 
 /* Item Text Styles */
@@ -174,6 +195,12 @@
   filter: drop-shadow(0 0 6px rgba(33, 150, 243, 0.6));
 }
 
+.connectionHighlighted {
+  stroke: #ff5252 !important;
+  stroke-width: 3px;
+  filter: drop-shadow(0 0 6px rgba(244, 67, 54, 0.6));
+}
+
 .connectionLabel {
   font-size: 11px;
   fill: #1565c0;
@@ -183,6 +210,10 @@
   stroke: rgba(255, 255, 255, 0.8);
   stroke-width: 3px;
   pointer-events: none;
+}
+
+.connectionLabelHighlighted {
+  fill: #b71c1c;
 }
 
 /* Responsive adjustments */

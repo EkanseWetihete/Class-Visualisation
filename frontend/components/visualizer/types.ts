@@ -68,6 +68,7 @@ export interface ConnectionAnchor {
 }
 
 export interface ConnectionPlan {
+  id: string;
   from: ConnectionAnchor;
   to: ConnectionAnchor;
   label: string;
@@ -75,6 +76,7 @@ export interface ConnectionPlan {
 }
 
 export interface ConnectionRender {
+  id: string;
   from: string;
   to: string;
   fromPos: Position;

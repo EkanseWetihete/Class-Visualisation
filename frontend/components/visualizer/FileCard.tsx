@@ -5,22 +5,52 @@ import { FileBox } from './types';
 interface FileCardProps {
   fileBox: FileBox;
   onMouseDown: (event: React.MouseEvent<SVGGElement>, fileBox: FileBox) => void;
+  onContextMenuFile: (event: React.MouseEvent<SVGGElement>, fileBox: FileBox) => void;
+  onContextMenuItem: (
+    event: React.MouseEvent<SVGGElement>,
+    payload: { fileBox: FileBox; itemId: string }
+  ) => void;
+  selectedFileId?: string;
+  selectedItemId?: string;
+  highlightedTargets: Set<string>;
 }
 
-export const FileCard: React.FC<FileCardProps> = ({ fileBox, onMouseDown }) => {
+export const FileCard: React.FC<FileCardProps> = ({
+  fileBox,
+  onMouseDown,
+  onContextMenuFile,
+  onContextMenuItem,
+  selectedFileId,
+  selectedItemId,
+  highlightedTargets
+}) => {
+  const isSelectedFile = selectedFileId === fileBox.id || (selectedItemId && fileBox.items.some(item => item.id === selectedItemId));
+  const fileClassName = isSelectedFile ? `${styles.fileBox} ${styles.fileBoxSelected}` : styles.fileBox;
+
   return (
-    <g onMouseDown={event => onMouseDown(event, fileBox)} style={{ cursor: 'grab' }}>
+    <g
+      onMouseDown={event => {
+        event.stopPropagation();
+        onMouseDown(event, fileBox);
+      }}
+      onContextMenu={event => {
+        event.preventDefault();
+        event.stopPropagation();
+        onContextMenuFile(event, fileBox);
+      }}
+      style={{ cursor: 'grab' }}
+    >
       <rect
         x={fileBox.position.x}
         y={fileBox.position.y}
         width={fileBox.size.width}
         height={fileBox.size.height}
-        className={styles.fileBox}
+        className={fileClassName}
       />
       <text
         x={fileBox.position.x + fileBox.size.width / 2}
         y={fileBox.position.y + 20}
-        className={styles.fileTitle}
+        className={isSelectedFile ? `${styles.fileTitle} ${styles.fileTitleSelected}` : styles.fileTitle}
         textAnchor="middle"
       >
         {fileBox.displayName}
@@ -29,15 +59,32 @@ export const FileCard: React.FC<FileCardProps> = ({ fileBox, onMouseDown }) => {
       {fileBox.items.map(item => {
         const itemX = fileBox.position.x + item.position.x;
         const itemY = fileBox.position.y + item.position.y;
+        const isItemSelected = selectedItemId === item.id;
+        const isHighlightTarget = highlightedTargets.has(item.id);
+        const baseClass = item.type === 'class' ? styles.classBox : styles.functionBox;
+        const itemClassName = [
+          baseClass,
+          isItemSelected ? styles.itemSelected : '',
+          !isItemSelected && isHighlightTarget ? styles.itemHighlighted : ''
+        ]
+          .filter(Boolean)
+          .join(' ');
 
         return (
-          <g key={item.id}>
+          <g
+            key={item.id}
+            onContextMenu={event => {
+              event.preventDefault();
+              event.stopPropagation();
+              onContextMenuItem(event, { fileBox, itemId: item.id });
+            }}
+          >
             <rect
               x={itemX}
               y={itemY}
               width={item.size.width}
               height={item.size.height}
-              className={item.type === 'class' ? styles.classBox : styles.functionBox}
+              className={itemClassName}
             />
             <text x={itemX + 10} y={itemY + 22} className={styles.itemName}>
               {item.name}

@@ -10,6 +10,14 @@ interface OutputState {
   lastUpdated?: number;
 }
 
+const buildContentSignature = (files: OutputData['files']): string => {
+  const parts = Object.entries(files).map(([file, members]) => {
+    const memberKeys = Object.keys(members).sort().join('|');
+    return `${file}:${memberKeys}`;
+  });
+  return parts.sort().join('||');
+};
+
 export function useOutputData(pollInterval: number = POLLING_INTERVAL_MS) {
   const [state, setState] = useState<OutputState>({
     data: null,
@@ -34,7 +42,8 @@ export function useOutputData(pollInterval: number = POLLING_INTERVAL_MS) {
         }
         const payload: OutputData = await response.json();
         const meta = payload._meta;
-        const nextVersion = meta?.version ?? `${meta?.lastModified ?? Date.now()}`;
+        const fallbackVersion = buildContentSignature(payload.files);
+        const nextVersion = meta?.version ?? fallbackVersion;
 
         setState(prev => {
           if (!force && prev.versionKey === nextVersion && prev.data) {

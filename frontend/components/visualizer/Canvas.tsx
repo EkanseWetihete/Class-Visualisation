@@ -11,11 +11,18 @@ interface CanvasProps {
   svgRef: React.RefObject<SVGSVGElement>;
   fileBoxes: FileBox[];
   connections: ConnectionRender[];
+  selectedFileId?: string;
+  selectedItemId?: string;
+  highlightedTargets: Set<string>;
+  highlightedConnectionIds: Set<string>;
   onWheel: (event: React.WheelEvent<HTMLDivElement>) => void;
   onMouseDown: (event: React.MouseEvent<HTMLDivElement>) => void;
   onMouseMove: (event: React.MouseEvent<HTMLDivElement>) => void;
   onMouseUp: () => void;
+  onContextMenu: (event: React.MouseEvent<HTMLDivElement>) => void;
   onFileMouseDown: (event: React.MouseEvent<SVGGElement>, fileBox: FileBox) => void;
+  onFileContextMenu: (event: React.MouseEvent<SVGGElement>, fileBox: FileBox) => void;
+  onItemContextMenu: (event: React.MouseEvent<SVGGElement>, payload: { fileBox: FileBox; itemId: string }) => void;
 }
 
 export const Canvas: React.FC<CanvasProps> = ({
@@ -25,11 +32,18 @@ export const Canvas: React.FC<CanvasProps> = ({
   svgRef,
   fileBoxes,
   connections,
+  selectedFileId,
+  selectedItemId,
+  highlightedTargets,
+  highlightedConnectionIds,
   onWheel,
   onMouseDown,
   onMouseMove,
   onMouseUp,
-  onFileMouseDown
+  onContextMenu,
+  onFileMouseDown,
+  onFileContextMenu,
+  onItemContextMenu
 }) => {
   return (
     <div
@@ -39,6 +53,7 @@ export const Canvas: React.FC<CanvasProps> = ({
       onMouseMove={onMouseMove}
       onMouseUp={onMouseUp}
       onMouseLeave={onMouseUp}
+      onContextMenu={onContextMenu}
     >
       <svg
         ref={svgRef}
@@ -53,9 +68,18 @@ export const Canvas: React.FC<CanvasProps> = ({
           </marker>
         </defs>
 
-        <ConnectionLayer connections={connections} />
+        <ConnectionLayer connections={connections} highlightedConnectionIds={highlightedConnectionIds} />
         {fileBoxes.map(fileBox => (
-          <FileCard key={fileBox.id} fileBox={fileBox} onMouseDown={onFileMouseDown} />
+          <FileCard
+            key={fileBox.id}
+            fileBox={fileBox}
+            onMouseDown={onFileMouseDown}
+            onContextMenuFile={onFileContextMenu}
+            onContextMenuItem={onItemContextMenu}
+            selectedFileId={selectedFileId}
+            selectedItemId={selectedItemId}
+            highlightedTargets={highlightedTargets}
+          />
         ))}
       </svg>
     </div>

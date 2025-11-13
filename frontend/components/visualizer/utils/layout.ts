@@ -425,6 +425,7 @@ export function buildVisualizerLayout(data: OutputData | null): VisualizerLayout
     const usageKey = `${source.id}->${target.id}`;
     const usageIndex = edgeUsage.get(usageKey) ?? 0;
     edgeUsage.set(usageKey, usageIndex + 1);
+    const connectionId = `${source.id}->${target.id}#${usageIndex}`;
 
     const methodSuffix =
       usedRef.targetMethods && usedRef.targetMethods.length > 0
@@ -432,6 +433,7 @@ export function buildVisualizerLayout(data: OutputData | null): VisualizerLayout
         : '';
 
     connections.push({
+      id: connectionId,
       from: {
         fileId: source.fileId,
         filePath: source.filePath,
@@ -514,6 +516,7 @@ export function computeConnectionPositions(
       };
 
       return {
+        id: plan.id,
         from: plan.from.itemId,
         to: plan.to.itemId,
         fromPos,
