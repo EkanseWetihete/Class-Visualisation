@@ -8,11 +8,15 @@ interface ControlsProps {
   onResetView: () => void;
   onRefresh: () => void;
   onSaveLayout: () => void;
-  onLoadLayout: () => void;
+  onOpenLoadManager: () => void;
   canPersistLayout: boolean;
-  canLoadLayout: boolean;
   lastUpdated?: number;
   isLoading: boolean;
+  dataFile: string;
+  showOutgoingHighlights: boolean;
+  showIncomingHighlights: boolean;
+  onToggleOutgoing: () => void;
+  onToggleIncoming: () => void;
 }
 
 export const Controls: React.FC<ControlsProps> = ({
@@ -22,11 +26,15 @@ export const Controls: React.FC<ControlsProps> = ({
   onResetView,
   onRefresh,
   onSaveLayout,
-  onLoadLayout,
+  onOpenLoadManager,
   canPersistLayout,
-  canLoadLayout,
   lastUpdated,
-  isLoading
+  isLoading,
+  dataFile,
+  showOutgoingHighlights,
+  showIncomingHighlights,
+  onToggleOutgoing,
+  onToggleIncoming
 }) => {
   const formattedTimestamp = lastUpdated ? new Date(lastUpdated).toLocaleTimeString() : '—';
 
@@ -41,11 +49,20 @@ export const Controls: React.FC<ControlsProps> = ({
       <button onClick={onSaveLayout} disabled={!canPersistLayout}>
         Save Layout
       </button>
-      <button onClick={onLoadLayout} disabled={!canPersistLayout || !canLoadLayout}>
-        Load Layout
-      </button>
+      <button onClick={onOpenLoadManager}>Load / Manage</button>
+      <div className={styles.toggleGroup}>
+        <label className={styles.toggleLabel}>
+          <input type="checkbox" checked={showOutgoingHighlights} onChange={onToggleOutgoing} /> Outgoing
+        </label>
+        <label className={styles.toggleLabel}>
+          <input type="checkbox" checked={showIncomingHighlights} onChange={onToggleIncoming} /> Incoming
+        </label>
+      </div>
       <span className={styles.zoomLevel}>{Math.round(zoom * 100)}%</span>
       <span title="Last refresh time">{formattedTimestamp}</span>
+      <span className={styles.dataFileBadge} title="Currently loaded data file">
+        {dataFile}
+      </span>
     </div>
   );
 };

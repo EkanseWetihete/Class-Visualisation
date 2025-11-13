@@ -1,36 +1,48 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { STORAGE_KEY } from '../constants';
 import { Position } from '../types';
 
-type PositionMap = Record<string, Position>;
+export type PositionMap = Record<string, Position>;
 
-interface StoredLayouts {
-  versions: Record<string, PositionMap>;
-  snapshots: Record<string, PositionMap>;
+interface SavedLayoutRecord {
+  id: string;
+  name: string;
+  dataFile: string;
+  versionKey: string | null;
+  createdAt: number;
+  updatedAt: number;
+  positions: PositionMap;
 }
 
-const createEmptyStore = (): StoredLayouts => ({ versions: {}, snapshots: {} });
+export interface SavedLayoutSummary {
+  id: string;
+  name: string;
+  dataFile: string;
+  versionKey: string | null;
+  createdAt: number;
+  updatedAt: number;
+}
 
-const normalizeStore = (raw: unknown): StoredLayouts => {
+interface LayoutStore {
+  drafts: Record<string, PositionMap>;
+  layouts: Record<string, SavedLayoutRecord>;
+}
+
+const createEmptyStore = (): LayoutStore => ({ drafts: {}, layouts: {} });
+
+const normalizeStore = (raw: unknown): LayoutStore => {
   if (!raw || typeof raw !== 'object') {
     return createEmptyStore();
   }
 
-  const candidate = raw as Partial<StoredLayouts> & Record<string, PositionMap>;
-  if ('versions' in candidate || 'snapshots' in candidate) {
-    return {
-      versions: { ...(candidate.versions ?? {}) },
-      snapshots: { ...(candidate.snapshots ?? {}) }
-    };
-  }
-
+  const candidate = raw as Partial<LayoutStore>;
   return {
-    versions: { ...(raw as Record<string, PositionMap>) },
-    snapshots: {}
+    drafts: { ...(candidate.drafts ?? {}) },
+    layouts: { ...(candidate.layouts ?? {}) }
   };
 };
 
-const readStore = (): StoredLayouts => {
+const readStore = (): LayoutStore => {
   if (typeof window === 'undefined') {
     return createEmptyStore();
   }
@@ -44,7 +56,7 @@ const readStore = (): StoredLayouts => {
   }
 };
 
-const writeStore = (store: StoredLayouts) => {
+const writeStore = (store: LayoutStore) => {
   if (typeof window === 'undefined') {
     return;
   }
@@ -55,36 +67,60 @@ const writeStore = (store: StoredLayouts) => {
   }
 };
 
-export function usePersistentPositions(versionKey: string | null) {
+const toSummary = (record: SavedLayoutRecord): SavedLayoutSummary => {
+  const { positions, ...rest } = record;
+  return rest;
+};
+
+const sortSummaries = (records: SavedLayoutRecord[]): SavedLayoutSummary[] =>
+  records
+    .map(toSummary)
+    .sort((a, b) => b.updatedAt - a.updatedAt);
+
+const makeScopeKey = (dataFile: string, versionKey: string | null) =>
+  `${dataFile || 'default'}::${versionKey ?? 'pending'}`;
+
+const createId = () => {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return `layout-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+};
+
+export function usePersistentPositions(versionKey: string | null, dataFile: string) {
+  const scopeKey = useMemo(() => makeScopeKey(dataFile, versionKey), [dataFile, versionKey]);
   const [positions, setPositions] = useState<PositionMap>({});
-  const [hasSnapshot, setHasSnapshot] = useState(false);
+  const [layouts, setLayouts] = useState<SavedLayoutSummary[]>([]);
+
+  const refreshLayouts = useCallback(() => {
+    const store = readStore();
+    setLayouts(sortSummaries(Object.values(store.layouts ?? {})));
+  }, []);
 
   useEffect(() => {
-    if (!versionKey) {
-      setPositions({});
-      setHasSnapshot(false);
-      return;
-    }
-
     const store = readStore();
-    setPositions(store.versions[versionKey] ?? {});
-    setHasSnapshot(Boolean(store.snapshots[versionKey]));
-  }, [versionKey]);
+    setPositions(store.drafts[scopeKey] ?? {});
+    setLayouts(sortSummaries(Object.values(store.layouts ?? {})));
+  }, [scopeKey]);
+
+  const persistDraft = useCallback(
+    (next: PositionMap) => {
+      const store = readStore();
+      store.drafts[scopeKey] = next;
+      writeStore(store);
+    },
+    [scopeKey]
+  );
 
   const updatePositions = useCallback(
     (updater: PositionMap | ((prev: PositionMap) => PositionMap)) => {
       setPositions(prev => {
-        const base = typeof updater === 'function' ? (updater as (prev: PositionMap) => PositionMap)(prev) : updater;
-        if (!versionKey) {
-          return base;
-        }
-        const store = readStore();
-        store.versions[versionKey] = base;
-        writeStore(store);
-        return base;
+        const next = typeof updater === 'function' ? (updater as (prev: PositionMap) => PositionMap)(prev) : updater;
+        persistDraft(next);
+        return next;
       });
     },
-    [versionKey]
+    [persistDraft]
   );
 
   const updatePosition = useCallback(
@@ -97,44 +133,67 @@ export function usePersistentPositions(versionKey: string | null) {
     [updatePositions]
   );
 
-  const resetPositions = useCallback(() => {
-    if (!versionKey) {
-      setPositions({});
-      return;
-    }
+  const applyPositions = useCallback(
+    (next: PositionMap) => {
+      setPositions(next);
+      persistDraft(next);
+    },
+    [persistDraft]
+  );
 
+  const resetPositions = useCallback(() => {
     const store = readStore();
-    delete store.versions[versionKey];
+    delete store.drafts[scopeKey];
     writeStore(store);
     setPositions({});
-  }, [versionKey]);
+  }, [scopeKey]);
 
-  const saveSnapshot = useCallback(() => {
-    if (!versionKey) {
-      return false;
-    }
+  const saveLayout = useCallback(
+    (name: string) => {
+      const trimmedName = name.trim() || 'Untitled Layout';
+      const store = readStore();
+      const id = createId();
+      const timestamp = Date.now();
+      store.layouts[id] = {
+        id,
+        name: trimmedName,
+        dataFile,
+        versionKey,
+        createdAt: timestamp,
+        updatedAt: timestamp,
+        positions
+      };
+      writeStore(store);
+      setLayouts(sortSummaries(Object.values(store.layouts ?? {})));
+      return id;
+    },
+    [dataFile, positions, versionKey]
+  );
+
+  const deleteLayout = useCallback((layoutId: string) => {
     const store = readStore();
-    store.snapshots[versionKey] = positions;
-    writeStore(store);
-    setHasSnapshot(true);
-    return true;
-  }, [positions, versionKey]);
-
-  const loadSnapshot = useCallback(() => {
-    if (!versionKey) {
+    if (!store.layouts[layoutId]) {
       return false;
     }
+    delete store.layouts[layoutId];
+    writeStore(store);
+    setLayouts(sortSummaries(Object.values(store.layouts ?? {})));
+    return true;
+  }, []);
+
+  const getLayoutById = useCallback((layoutId: string): SavedLayoutRecord | null => {
     const store = readStore();
-    const snapshot = store.snapshots[versionKey];
-    if (!snapshot) {
-      return false;
-    }
-    store.versions[versionKey] = snapshot;
-    writeStore(store);
-    setPositions(snapshot);
-    setHasSnapshot(true);
-    return true;
-  }, [versionKey]);
+    return store.layouts[layoutId] ?? null;
+  }, []);
 
-  return { positions, updatePosition, resetPositions, saveSnapshot, loadSnapshot, hasSnapshot };
+  return {
+    positions,
+    updatePosition,
+    applyPositions,
+    resetPositions,
+    saveLayout,
+    deleteLayout,
+    getLayoutById,
+    layouts
+  };
 }

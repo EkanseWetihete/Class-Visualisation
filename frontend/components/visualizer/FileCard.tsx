@@ -12,7 +12,10 @@ interface FileCardProps {
   ) => void;
   selectedFileId?: string;
   selectedItemId?: string;
-  highlightedTargets: Set<string>;
+  highlightedOutgoingTargets: Set<string>;
+  highlightedIncomingTargets: Set<string>;
+  showOutgoingHighlights: boolean;
+  showIncomingHighlights: boolean;
 }
 
 export const FileCard: React.FC<FileCardProps> = ({
@@ -22,7 +25,10 @@ export const FileCard: React.FC<FileCardProps> = ({
   onContextMenuItem,
   selectedFileId,
   selectedItemId,
-  highlightedTargets
+  highlightedOutgoingTargets,
+  highlightedIncomingTargets,
+  showOutgoingHighlights,
+  showIncomingHighlights
 }) => {
   const isSelectedFile = selectedFileId === fileBox.id || (selectedItemId && fileBox.items.some(item => item.id === selectedItemId));
   const fileClassName = isSelectedFile ? `${styles.fileBox} ${styles.fileBoxSelected}` : styles.fileBox;
@@ -60,12 +66,14 @@ export const FileCard: React.FC<FileCardProps> = ({
         const itemX = fileBox.position.x + item.position.x;
         const itemY = fileBox.position.y + item.position.y;
         const isItemSelected = selectedItemId === item.id;
-        const isHighlightTarget = highlightedTargets.has(item.id);
+        const isOutgoing = showOutgoingHighlights && highlightedOutgoingTargets.has(item.id);
+        const isIncoming = showIncomingHighlights && highlightedIncomingTargets.has(item.id);
         const baseClass = item.type === 'class' ? styles.classBox : styles.functionBox;
         const itemClassName = [
           baseClass,
           isItemSelected ? styles.itemSelected : '',
-          !isItemSelected && isHighlightTarget ? styles.itemHighlighted : ''
+          !isItemSelected && isOutgoing ? styles.itemHighlightedOutgoing : '',
+          !isItemSelected && isIncoming ? styles.itemHighlightedIncoming : ''
         ]
           .filter(Boolean)
           .join(' ');

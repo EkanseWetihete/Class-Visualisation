@@ -60,6 +60,30 @@
   text-align: center;
 }
 
+.toggleGroup {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.toggleLabel {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  font-weight: 600;
+  color: #333;
+}
+
+.dataFileBadge {
+  padding: 4px 8px;
+  background: #e3f2fd;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0d47a1;
+}
+
 .errorBanner {
   position: absolute;
   top: 80px;
@@ -148,9 +172,15 @@
   stroke-width: 2.5px !important;
 }
 
-.itemHighlighted {
+.itemHighlightedOutgoing {
   fill: #fff59d !important;
   stroke: #fbc02d !important;
+  stroke-width: 2px !important;
+}
+
+.itemHighlightedIncoming {
+  fill: #c8e6c9 !important;
+  stroke: #43a047 !important;
   stroke-width: 2px !important;
 }
 
@@ -195,10 +225,16 @@
   filter: drop-shadow(0 0 6px rgba(33, 150, 243, 0.6));
 }
 
-.connectionHighlighted {
+.connectionOutgoing {
   stroke: #ff5252 !important;
   stroke-width: 3px;
   filter: drop-shadow(0 0 6px rgba(244, 67, 54, 0.6));
+}
+
+.connectionIncoming {
+  stroke: #4caf50 !important;
+  stroke-width: 3px;
+  filter: drop-shadow(0 0 6px rgba(76, 175, 80, 0.6));
 }
 
 .connectionLabel {
@@ -212,8 +248,121 @@
   pointer-events: none;
 }
 
-.connectionLabelHighlighted {
+.connectionLabelOutgoing {
   fill: #b71c1c;
+}
+
+.connectionLabelIncoming {
+  fill: #1b5e20;
+}
+
+.loadPanel {
+  position: absolute;
+  top: 90px;
+  right: 20px;
+  width: 360px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 10px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+  padding: 16px;
+  z-index: 110;
+}
+
+.loadPanelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-weight: 700;
+  color: #1a237e;
+}
+
+.loadPanelClose {
+  border: none;
+  background: transparent;
+  color: #d32f2f;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.loadPanelSection {
+  margin-bottom: 16px;
+}
+
+.loadPanelSectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  color: #0d47a1;
+  margin-bottom: 8px;
+}
+
+.loadPanelList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.loadPanelRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 8px 10px;
+  gap: 10px;
+}
+
+.loadPanelRowTitle {
+  font-weight: 600;
+  color: #1f2933;
+}
+
+.loadPanelRowMeta {
+  font-size: 11px;
+  color: #607d8b;
+}
+
+.loadPanelAction {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  background: #2196f3;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.loadPanelAction:disabled {
+  background: #90caf9;
+  cursor: default;
+}
+
+.loadPanelDanger {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  background: #e53935;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.loadPanelEmpty {
+  padding: 12px;
+  text-align: center;
+  font-size: 13px;
+  color: #546e7a;
+  background: #eceff1;
+  border-radius: 8px;
+}
+
+.loadPanelRowActions {
+  display: flex;
+  gap: 8px;
 }
 
 /* Responsive adjustments */

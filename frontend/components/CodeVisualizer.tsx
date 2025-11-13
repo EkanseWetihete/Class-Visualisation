@@ -2,36 +2,39 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import styles from './CodeVisualizer.module.css';
 import { Controls } from './visualizer/Controls';
 import { Canvas } from './visualizer/Canvas';
+import { LoadPanel } from './visualizer/LoadPanel';
 import { useOutputData } from './visualizer/hooks/useOutputData';
-import { usePersistentPositions } from './visualizer/hooks/usePersistentPositions';
+import { PositionMap, usePersistentPositions } from './visualizer/hooks/usePersistentPositions';
 import {
   applyCustomPositions,
   buildVisualizerLayout,
   computeCanvasBounds,
   computeConnectionPositions
 } from './visualizer/utils/layout';
-import { FileBox, Position, ViewBox } from './visualizer/types';
+import { DataFileInfo, FileBox, Position, ViewBox } from './visualizer/types';
 
 const DEFAULT_VIEWBOX: ViewBox = { x: 0, y: 0 };
 
 type HighlightState = {
-  sourceType: 'file' | 'item';
   fileId: string;
   itemId?: string;
-  targetItemIds: Set<string>;
-  connectionIds: Set<string>;
+  outgoingItemIds: Set<string>;
+  incomingItemIds: Set<string>;
+  outgoingConnectionIds: Set<string>;
+  incomingConnectionIds: Set<string>;
 };
 
-type OutgoingEntry = {
-  targets: Set<string>;
-  connectionIds: Set<string>;
+type AggregatedEntry = {
+  items: Set<string>;
+  connections: Set<string>;
 };
 
 export default function CodeVisualizer() {
   const svgRef = useRef<SVGSVGElement | null>(null);
-  const { data, versionKey, status, refresh, lastUpdated, error } = useOutputData();
-  const { positions, updatePosition, resetPositions, saveSnapshot, loadSnapshot, hasSnapshot } =
-    usePersistentPositions(versionKey);
+  const [dataFile, setDataFile] = useState('output.json');
+  const { data, versionKey, status, refresh, lastUpdated, error } = useOutputData(dataFile);
+  const { positions, updatePosition, resetPositions, saveLayout, deleteLayout, getLayoutById, layouts, applyPositions } =
+    usePersistentPositions(versionKey, dataFile);
 
   const layout = useMemo(() => buildVisualizerLayout(data), [data]);
   const fileBoxes = useMemo(() => applyCustomPositions(layout.fileBoxes, positions), [layout.fileBoxes, positions]);
@@ -50,27 +53,34 @@ export default function CodeVisualizer() {
   const panStartRef = useRef({ x: 0, y: 0, viewBoxX: 0, viewBoxY: 0 });
   const [draggingFile, setDraggingFile] = useState<{ filePath: string; offsetX: number; offsetY: number } | null>(null);
   const [highlightState, setHighlightState] = useState<HighlightState | null>(null);
+  const [showOutgoingHighlights, setShowOutgoingHighlights] = useState(true);
+  const [showIncomingHighlights, setShowIncomingHighlights] = useState(true);
+  const [isLoadPanelOpen, setIsLoadPanelOpen] = useState(false);
+  const [dataFiles, setDataFiles] = useState<DataFileInfo[]>([]);
+  const [pendingLayout, setPendingLayout] = useState<{ dataFile: string; positions: PositionMap } | null>(null);
 
-  const outgoingByFile = useMemo(() => {
-    const map = new Map<string, OutgoingEntry>();
-    layout.connections.forEach(plan => {
-      const entry = map.get(plan.from.fileId) ?? { targets: new Set<string>(), connectionIds: new Set<string>() };
-      entry.targets.add(plan.to.itemId);
-      entry.connectionIds.add(plan.id);
-      map.set(plan.from.fileId, entry);
-    });
-    return map;
-  }, [layout.connections]);
+  const connectionAggregates = useMemo(() => {
+    const makeEntry = () => ({ items: new Set<string>(), connections: new Set<string>() });
+    const outgoingByFile = new Map<string, AggregatedEntry>();
+    const outgoingByItem = new Map<string, AggregatedEntry>();
+    const incomingByFile = new Map<string, AggregatedEntry>();
+    const incomingByItem = new Map<string, AggregatedEntry>();
 
-  const outgoingByItem = useMemo(() => {
-    const map = new Map<string, OutgoingEntry>();
+    const addEntry = (map: Map<string, AggregatedEntry>, key: string, itemId: string, connectionId: string) => {
+      const entry = map.get(key) ?? makeEntry();
+      entry.items.add(itemId);
+      entry.connections.add(connectionId);
+      map.set(key, entry);
+    };
+
     layout.connections.forEach(plan => {
-      const entry = map.get(plan.from.itemId) ?? { targets: new Set<string>(), connectionIds: new Set<string>() };
-      entry.targets.add(plan.to.itemId);
-      entry.connectionIds.add(plan.id);
-      map.set(plan.from.itemId, entry);
+      addEntry(outgoingByFile, plan.from.fileId, plan.to.itemId, plan.id);
+      addEntry(outgoingByItem, plan.from.itemId, plan.to.itemId, plan.id);
+      addEntry(incomingByFile, plan.to.fileId, plan.from.itemId, plan.id);
+      addEntry(incomingByItem, plan.to.itemId, plan.from.itemId, plan.id);
     });
-    return map;
+
+    return { outgoingByFile, outgoingByItem, incomingByFile, incomingByItem };
   }, [layout.connections]);
 
   const getWorldPoint = useCallback(
@@ -125,6 +135,43 @@ export default function CodeVisualizer() {
     setHighlightState(null);
     setDraggingFile(null);
   }, [versionKey]);
+
+  const fetchDataFiles = useCallback(async () => {
+    try {
+      const response = await fetch('/api/data-files');
+      if (!response.ok) {
+        throw new Error('Failed to load data file list');
+      }
+      const payload = await response.json();
+      setDataFiles(payload.files ?? []);
+    } catch (err) {
+      console.warn('Unable to load data files', err);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchDataFiles();
+  }, [fetchDataFiles]);
+
+  useEffect(() => {
+    if (dataFiles.length === 0) {
+      return;
+    }
+    if (!dataFiles.some(file => file.name === dataFile)) {
+      setDataFile(dataFiles[0].name);
+    }
+  }, [dataFiles, dataFile]);
+
+  useEffect(() => {
+    if (!pendingLayout) {
+      return;
+    }
+    if (pendingLayout.dataFile !== dataFile) {
+      return;
+    }
+    applyPositions(pendingLayout.positions);
+    setPendingLayout(null);
+  }, [applyPositions, dataFile, pendingLayout]);
 
   const handleWheel = useCallback(
     (e: React.WheelEvent<HTMLDivElement>) => {
@@ -250,15 +297,17 @@ export default function CodeVisualizer() {
 
   const handleFileContextMenu = useCallback(
     (_event: React.MouseEvent<SVGGElement>, fileBox: FileBox) => {
-      const outgoing = outgoingByFile.get(fileBox.id);
+      const outgoing = connectionAggregates.outgoingByFile.get(fileBox.id);
+      const incoming = connectionAggregates.incomingByFile.get(fileBox.id);
       setHighlightState({
-        sourceType: 'file',
         fileId: fileBox.id,
-        targetItemIds: outgoing ? new Set(outgoing.targets) : new Set<string>(),
-        connectionIds: outgoing ? new Set(outgoing.connectionIds) : new Set<string>()
+        outgoingItemIds: outgoing ? new Set(outgoing.items) : new Set<string>(),
+        incomingItemIds: incoming ? new Set(incoming.items) : new Set<string>(),
+        outgoingConnectionIds: outgoing ? new Set(outgoing.connections) : new Set<string>(),
+        incomingConnectionIds: incoming ? new Set(incoming.connections) : new Set<string>()
       });
     },
-    [outgoingByFile]
+    [connectionAggregates]
   );
 
   const handleItemContextMenu = useCallback(
@@ -266,16 +315,18 @@ export default function CodeVisualizer() {
       _event: React.MouseEvent<SVGGElement>,
       payload: { fileBox: FileBox; itemId: string }
     ) => {
-      const outgoing = outgoingByItem.get(payload.itemId);
+      const outgoing = connectionAggregates.outgoingByItem.get(payload.itemId);
+      const incoming = connectionAggregates.incomingByItem.get(payload.itemId);
       setHighlightState({
-        sourceType: 'item',
         fileId: payload.fileBox.id,
         itemId: payload.itemId,
-        targetItemIds: outgoing ? new Set(outgoing.targets) : new Set<string>(),
-        connectionIds: outgoing ? new Set(outgoing.connectionIds) : new Set<string>()
+        outgoingItemIds: outgoing ? new Set(outgoing.items) : new Set<string>(),
+        incomingItemIds: incoming ? new Set(incoming.items) : new Set<string>(),
+        outgoingConnectionIds: outgoing ? new Set(outgoing.connections) : new Set<string>(),
+        incomingConnectionIds: incoming ? new Set(incoming.connections) : new Set<string>()
       });
     },
-    [outgoingByItem]
+    [connectionAggregates]
   );
 
   const handleResetView = useCallback(() => {
@@ -298,18 +349,45 @@ export default function CodeVisualizer() {
     if (!versionKey) {
       return;
     }
-    saveSnapshot();
-  }, [saveSnapshot, versionKey]);
-
-  const handleLoadLayout = useCallback(() => {
-    if (!versionKey) {
+    const defaultName = `${dataFile} @ ${new Date().toLocaleTimeString()}`;
+    const customName = typeof window !== 'undefined' ? window.prompt('Save layout as:', defaultName) : defaultName;
+    if (customName === null) {
       return;
     }
-    loadSnapshot();
-  }, [loadSnapshot, versionKey]);
+    saveLayout(customName);
+    setIsLoadPanelOpen(true);
+  }, [dataFile, saveLayout, versionKey]);
 
-  const highlightedTargets = highlightState?.targetItemIds ?? new Set<string>();
-  const highlightedConnectionIds = highlightState?.connectionIds ?? new Set<string>();
+  const handleLoadSavedLayout = useCallback(
+    (layoutId: string) => {
+      const layoutRecord = getLayoutById(layoutId);
+      if (!layoutRecord) {
+        return;
+      }
+      setPendingLayout({ dataFile: layoutRecord.dataFile, positions: layoutRecord.positions });
+      setDataFile(layoutRecord.dataFile);
+      setIsLoadPanelOpen(false);
+    },
+    [getLayoutById]
+  );
+
+  const handleDeleteLayout = useCallback(
+    (layoutId: string) => {
+      deleteLayout(layoutId);
+    },
+    [deleteLayout]
+  );
+
+  const handleSelectDataFile = useCallback((fileName: string) => {
+    setHighlightState(null);
+    setDataFile(fileName);
+    setIsLoadPanelOpen(false);
+  }, []);
+
+  const highlightedOutgoingTargets = highlightState?.outgoingItemIds ?? new Set<string>();
+  const highlightedIncomingTargets = highlightState?.incomingItemIds ?? new Set<string>();
+  const highlightedOutgoingConnectionIds = highlightState?.outgoingConnectionIds ?? new Set<string>();
+  const highlightedIncomingConnectionIds = highlightState?.incomingConnectionIds ?? new Set<string>();
   const selectedFileId = highlightState?.fileId;
   const selectedItemId = highlightState?.itemId;
   const canPersistLayout = Boolean(versionKey);
@@ -331,11 +409,15 @@ export default function CodeVisualizer() {
         onResetView={handleResetView}
         onRefresh={handleRefreshData}
         onSaveLayout={handleSaveLayout}
-        onLoadLayout={handleLoadLayout}
+        onOpenLoadManager={() => setIsLoadPanelOpen(prev => !prev)}
         canPersistLayout={canPersistLayout}
-        canLoadLayout={hasSnapshot}
         lastUpdated={lastUpdated}
         isLoading={status === 'loading'}
+        dataFile={dataFile}
+        showOutgoingHighlights={showOutgoingHighlights}
+        showIncomingHighlights={showIncomingHighlights}
+        onToggleOutgoing={() => setShowOutgoingHighlights(prev => !prev)}
+        onToggleIncoming={() => setShowIncomingHighlights(prev => !prev)}
       />
       {error && <div className={styles.errorBanner}>{error}</div>}
       <Canvas
@@ -347,8 +429,12 @@ export default function CodeVisualizer() {
         connections={connections}
         selectedFileId={selectedFileId}
         selectedItemId={selectedItemId}
-        highlightedTargets={highlightedTargets}
-        highlightedConnectionIds={highlightedConnectionIds}
+        highlightedOutgoingTargets={highlightedOutgoingTargets}
+        highlightedIncomingTargets={highlightedIncomingTargets}
+        highlightedOutgoingConnectionIds={highlightedOutgoingConnectionIds}
+        highlightedIncomingConnectionIds={highlightedIncomingConnectionIds}
+        showOutgoingHighlights={showOutgoingHighlights}
+        showIncomingHighlights={showIncomingHighlights}
         onWheel={handleWheel}
         onMouseDown={handleCanvasMouseDown}
         onMouseMove={handleCanvasMouseMove}
@@ -357,6 +443,17 @@ export default function CodeVisualizer() {
         onFileMouseDown={handleFileMouseDown}
         onFileContextMenu={handleFileContextMenu}
         onItemContextMenu={handleItemContextMenu}
+      />
+      <LoadPanel
+        isOpen={isLoadPanelOpen}
+        dataFiles={dataFiles}
+        savedLayouts={layouts}
+        currentDataFile={dataFile}
+        onClose={() => setIsLoadPanelOpen(false)}
+        onRefreshDataFiles={fetchDataFiles}
+        onSelectDataFile={handleSelectDataFile}
+        onSelectLayout={handleLoadSavedLayout}
+        onDeleteLayout={handleDeleteLayout}
       />
     </div>
   );

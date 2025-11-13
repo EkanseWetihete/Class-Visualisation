@@ -18,7 +18,7 @@ const buildContentSignature = (files: OutputData['files']): string => {
   return parts.sort().join('||');
 };
 
-export function useOutputData(pollInterval: number = POLLING_INTERVAL_MS) {
+export function useOutputData(dataFile: string, pollInterval: number = POLLING_INTERVAL_MS) {
   const [state, setState] = useState<OutputState>({
     data: null,
     versionKey: null,
@@ -36,14 +36,16 @@ export function useOutputData(pollInterval: number = POLLING_INTERVAL_MS) {
       }));
 
       try {
-        const response = await fetch(`/api/output?ts=${Date.now()}`, { cache: 'no-store' });
+        const response = await fetch(`/api/output?file=${encodeURIComponent(dataFile)}&ts=${Date.now()}`, {
+          cache: 'no-store'
+        });
         if (!response.ok) {
           throw new Error('Failed to load output.json');
         }
         const payload: OutputData = await response.json();
         const meta = payload._meta;
         const fallbackVersion = buildContentSignature(payload.files);
-        const nextVersion = meta?.version ?? fallbackVersion;
+        const nextVersion = `${meta?.file ?? dataFile}:${meta?.version ?? fallbackVersion}`;
 
         setState(prev => {
           if (!force && prev.versionKey === nextVersion && prev.data) {
@@ -67,12 +69,12 @@ export function useOutputData(pollInterval: number = POLLING_INTERVAL_MS) {
         }));
       }
     },
-    []
+    [dataFile]
   );
 
   useEffect(() => {
     runFetch(true);
-  }, [runFetch]);
+  }, [runFetch, dataFile]);
 
   useEffect(() => {
     if (pollTimer.current) {

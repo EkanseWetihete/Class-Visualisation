@@ -13,8 +13,12 @@ interface CanvasProps {
   connections: ConnectionRender[];
   selectedFileId?: string;
   selectedItemId?: string;
-  highlightedTargets: Set<string>;
-  highlightedConnectionIds: Set<string>;
+  highlightedOutgoingTargets: Set<string>;
+  highlightedIncomingTargets: Set<string>;
+  highlightedOutgoingConnectionIds: Set<string>;
+  highlightedIncomingConnectionIds: Set<string>;
+  showOutgoingHighlights: boolean;
+  showIncomingHighlights: boolean;
   onWheel: (event: React.WheelEvent<HTMLDivElement>) => void;
   onMouseDown: (event: React.MouseEvent<HTMLDivElement>) => void;
   onMouseMove: (event: React.MouseEvent<HTMLDivElement>) => void;
@@ -34,8 +38,12 @@ export const Canvas: React.FC<CanvasProps> = ({
   connections,
   selectedFileId,
   selectedItemId,
-  highlightedTargets,
-  highlightedConnectionIds,
+  highlightedOutgoingTargets,
+  highlightedIncomingTargets,
+  highlightedOutgoingConnectionIds,
+  highlightedIncomingConnectionIds,
+  showOutgoingHighlights,
+  showIncomingHighlights,
   onWheel,
   onMouseDown,
   onMouseMove,
@@ -63,12 +71,24 @@ export const Canvas: React.FC<CanvasProps> = ({
         viewBox={`${viewBox.x} ${viewBox.y} ${canvasBounds.width / zoom} ${canvasBounds.height / zoom}`}
       >
         <defs>
-          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+          <marker id="arrowheadDefault" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
             <polygon points="0 0, 10 3, 0 6" fill="#64b5f6" />
+          </marker>
+          <marker id="arrowheadOutgoing" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#ff5252" />
+          </marker>
+          <marker id="arrowheadIncoming" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#4caf50" />
           </marker>
         </defs>
 
-        <ConnectionLayer connections={connections} highlightedConnectionIds={highlightedConnectionIds} />
+        <ConnectionLayer
+          connections={connections}
+          highlightedOutgoingConnectionIds={highlightedOutgoingConnectionIds}
+          highlightedIncomingConnectionIds={highlightedIncomingConnectionIds}
+          showOutgoingHighlights={showOutgoingHighlights}
+          showIncomingHighlights={showIncomingHighlights}
+        />
         {fileBoxes.map(fileBox => (
           <FileCard
             key={fileBox.id}
@@ -78,7 +98,10 @@ export const Canvas: React.FC<CanvasProps> = ({
             onContextMenuItem={onItemContextMenu}
             selectedFileId={selectedFileId}
             selectedItemId={selectedItemId}
-            highlightedTargets={highlightedTargets}
+            highlightedOutgoingTargets={highlightedOutgoingTargets}
+            highlightedIncomingTargets={highlightedIncomingTargets}
+            showOutgoingHighlights={showOutgoingHighlights}
+            showIncomingHighlights={showIncomingHighlights}
           />
         ))}
       </svg>

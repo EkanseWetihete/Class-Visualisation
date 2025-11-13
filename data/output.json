@@ -113,6 +113,2464 @@
                 "end_line": 92,
                 "used_functions": {}
             }
+        },
+        "Class Visualisation/backend/complicated_project/start.py": {
+            "Application": {
+                "args": [],
+                "start_line": 18,
+                "end_line": 72,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 21,
+                        "end_line": 27,
+                        "used_functions": {
+                            "Logger": "from backend.complicated_project.utils.logger",
+                            "DataProcessor": "from backend.complicated_project.core.data_processor",
+                            "NotificationService": "from backend.complicated_project.services.notification_service",
+                            "ReportGenerator": "from backend.complicated_project.services.report_generator",
+                            "UserManager": "from backend.complicated_project.core.user_manager",
+                            "ConfigManager": "from backend.complicated_project.utils.config_manager"
+                        }
+                    },
+                    "initialize": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 29,
+                        "end_line": 35,
+                        "used_functions": {}
+                    },
+                    "process_user_data": {
+                        "args": [
+                            "self",
+                            "user_id"
+                        ],
+                        "start_line": 37,
+                        "end_line": 58,
+                        "used_functions": {}
+                    },
+                    "run_batch_processing": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 60,
+                        "end_line": 72,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "main": {
+                "args": [],
+                "start_line": 74,
+                "end_line": 86,
+                "used_functions": {
+                    "Application": "from backend.complicated_project.start"
+                }
+            }
+        },
+        "Class Visualisation/backend/complicated_project/core/data_processor.py": {
+            "DataProcessor": {
+                "args": [],
+                "start_line": 13,
+                "end_line": 181,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 16,
+                        "end_line": 25,
+                        "used_functions": {
+                            "DataValidator": "from backend.complicated_project.utils.validators",
+                            "Logger": "from backend.complicated_project.utils.logger",
+                            "ConfigManager": "from backend.complicated_project.utils.config_manager"
+                        }
+                    },
+                    "initialize": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 27,
+                        "end_line": 30,
+                        "used_functions": {}
+                    },
+                    "process": {
+                        "args": [
+                            "self",
+                            "raw_data"
+                        ],
+                        "start_line": 32,
+                        "end_line": 76,
+                        "used_functions": {}
+                    },
+                    "_validate_input": {
+                        "args": [
+                            "self",
+                            "data"
+                        ],
+                        "start_line": 78,
+                        "end_line": 91,
+                        "used_functions": {}
+                    },
+                    "_create_dataset": {
+                        "args": [
+                            "self",
+                            "raw_data"
+                        ],
+                        "start_line": 93,
+                        "end_line": 107,
+                        "used_functions": {
+                            "Dataset": "from backend.complicated_project.models.data_models",
+                            "DataPoint": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "_apply_processing_pipeline": {
+                        "args": [
+                            "self",
+                            "dataset"
+                        ],
+                        "start_line": 109,
+                        "end_line": 127,
+                        "used_functions": {
+                            "Dataset": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "_apply_transformations": {
+                        "args": [
+                            "self",
+                            "dataset"
+                        ],
+                        "start_line": 129,
+                        "end_line": 138,
+                        "used_functions": {
+                            "Dataset": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "_calculate_derived_metrics": {
+                        "args": [
+                            "self",
+                            "dataset"
+                        ],
+                        "start_line": 140,
+                        "end_line": 154,
+                        "used_functions": {
+                            "Dataset": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "_update_processing_stats": {
+                        "args": [
+                            "self",
+                            "success",
+                            "processing_time"
+                        ],
+                        "start_line": 156,
+                        "end_line": 167,
+                        "used_functions": {}
+                    },
+                    "get_processing_stats": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 169,
+                        "end_line": 171,
+                        "used_functions": {}
+                    },
+                    "reset_stats": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 173,
+                        "end_line": 181,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            }
+        },
+        "Class Visualisation/backend/complicated_project/core/user_manager.py": {
+            "UserManager": {
+                "args": [],
+                "start_line": 13,
+                "end_line": 188,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 16,
+                        "end_line": 22,
+                        "used_functions": {
+                            "Logger": "from backend.complicated_project.utils.logger",
+                            "InputValidator": "from backend.complicated_project.utils.validators",
+                            "AuditLogger": "from backend.complicated_project.utils.logger",
+                            "ConfigManager": "from backend.complicated_project.utils.config_manager"
+                        }
+                    },
+                    "initialize": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 24,
+                        "end_line": 28,
+                        "used_functions": {}
+                    },
+                    "get_user": {
+                        "args": [
+                            "self",
+                            "user_id"
+                        ],
+                        "start_line": 30,
+                        "end_line": 37,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "create_user": {
+                        "args": [
+                            "self",
+                            "user_data"
+                        ],
+                        "start_line": 39,
+                        "end_line": 65,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "update_user": {
+                        "args": [
+                            "self",
+                            "user_id",
+                            "updates"
+                        ],
+                        "start_line": 67,
+                        "end_line": 89,
+                        "used_functions": {}
+                    },
+                    "delete_user": {
+                        "args": [
+                            "self",
+                            "user_id"
+                        ],
+                        "start_line": 91,
+                        "end_line": 104,
+                        "used_functions": {}
+                    },
+                    "get_active_users": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 106,
+                        "end_line": 115,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "authenticate_user": {
+                        "args": [
+                            "self",
+                            "email",
+                            "password"
+                        ],
+                        "start_line": 117,
+                        "end_line": 132,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "search_users": {
+                        "args": [
+                            "self",
+                            "query"
+                        ],
+                        "start_line": 134,
+                        "end_line": 146,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "get_user_count": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 148,
+                        "end_line": 150,
+                        "used_functions": {}
+                    },
+                    "get_user_stats": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 152,
+                        "end_line": 164,
+                        "used_functions": {}
+                    },
+                    "_load_users": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 166,
+                        "end_line": 178,
+                        "used_functions": {}
+                    },
+                    "_save_users": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 180,
+                        "end_line": 188,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            }
+        },
+        "Class Visualisation/backend/complicated_project/data/database.py": {
+            "DatabaseConnection": {
+                "args": [],
+                "start_line": 15,
+                "end_line": 63,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "db_path"
+                        ],
+                        "start_line": 18,
+                        "end_line": 21,
+                        "used_functions": {
+                            "Logger": "from backend.complicated_project.utils.logger"
+                        }
+                    },
+                    "connect": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 23,
+                        "end_line": 31,
+                        "used_functions": {}
+                    },
+                    "disconnect": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 33,
+                        "end_line": 38,
+                        "used_functions": {}
+                    },
+                    "execute": {
+                        "args": [
+                            "self",
+                            "query",
+                            "params"
+                        ],
+                        "start_line": 40,
+                        "end_line": 53,
+                        "used_functions": {}
+                    },
+                    "fetch_one": {
+                        "args": [
+                            "self",
+                            "query",
+                            "params"
+                        ],
+                        "start_line": 55,
+                        "end_line": 58,
+                        "used_functions": {}
+                    },
+                    "fetch_all": {
+                        "args": [
+                            "self",
+                            "query",
+                            "params"
+                        ],
+                        "start_line": 60,
+                        "end_line": 63,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "BaseRepository": {
+                "args": [],
+                "start_line": 65,
+                "end_line": 160,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "db_connection"
+                        ],
+                        "start_line": 68,
+                        "end_line": 70,
+                        "used_functions": {
+                            "DatabaseConnection": "from backend.complicated_project.data.database",
+                            "Logger": "from backend.complicated_project.utils.logger"
+                        }
+                    },
+                    "table_name": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 73,
+                        "end_line": 75,
+                        "used_functions": {}
+                    },
+                    "to_dict": {
+                        "args": [
+                            "self",
+                            "entity"
+                        ],
+                        "start_line": 78,
+                        "end_line": 80,
+                        "used_functions": {}
+                    },
+                    "from_dict": {
+                        "args": [
+                            "self",
+                            "data"
+                        ],
+                        "start_line": 83,
+                        "end_line": 85,
+                        "used_functions": {}
+                    },
+                    "find_by_id": {
+                        "args": [
+                            "self",
+                            "id"
+                        ],
+                        "start_line": 87,
+                        "end_line": 98,
+                        "used_functions": {}
+                    },
+                    "find_all": {
+                        "args": [
+                            "self",
+                            "limit",
+                            "offset"
+                        ],
+                        "start_line": 100,
+                        "end_line": 109,
+                        "used_functions": {}
+                    },
+                    "save": {
+                        "args": [
+                            "self",
+                            "entity"
+                        ],
+                        "start_line": 111,
+                        "end_line": 125,
+                        "used_functions": {}
+                    },
+                    "_create": {
+                        "args": [
+                            "self",
+                            "data"
+                        ],
+                        "start_line": 127,
+                        "end_line": 138,
+                        "used_functions": {}
+                    },
+                    "_update": {
+                        "args": [
+                            "self",
+                            "id",
+                            "data"
+                        ],
+                        "start_line": 140,
+                        "end_line": 149,
+                        "used_functions": {}
+                    },
+                    "delete": {
+                        "args": [
+                            "self",
+                            "id"
+                        ],
+                        "start_line": 151,
+                        "end_line": 160,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "UserRepository": {
+                "args": [],
+                "start_line": 162,
+                "end_line": 213,
+                "methods": {
+                    "table_name": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 165,
+                        "end_line": 166,
+                        "used_functions": {}
+                    },
+                    "to_dict": {
+                        "args": [
+                            "self",
+                            "user"
+                        ],
+                        "start_line": 168,
+                        "end_line": 181,
+                        "used_functions": {}
+                    },
+                    "from_dict": {
+                        "args": [
+                            "self",
+                            "data"
+                        ],
+                        "start_line": 183,
+                        "end_line": 200,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "find_by_email": {
+                        "args": [
+                            "self",
+                            "email"
+                        ],
+                        "start_line": 202,
+                        "end_line": 213,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {
+                    "BaseRepository": "from backend.complicated_project.data.database"
+                }
+            },
+            "ReportRepository": {
+                "args": [],
+                "start_line": 215,
+                "end_line": 256,
+                "methods": {
+                    "table_name": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 218,
+                        "end_line": 219,
+                        "used_functions": {}
+                    },
+                    "to_dict": {
+                        "args": [
+                            "self",
+                            "report"
+                        ],
+                        "start_line": 221,
+                        "end_line": 232,
+                        "used_functions": {}
+                    },
+                    "from_dict": {
+                        "args": [
+                            "self",
+                            "data"
+                        ],
+                        "start_line": 234,
+                        "end_line": 256,
+                        "used_functions": {
+                            "Report": "from backend.complicated_project.models.report"
+                        }
+                    }
+                },
+                "used_functions": {
+                    "BaseRepository": "from backend.complicated_project.data.database"
+                }
+            },
+            "DatabaseInitializer": {
+                "args": [],
+                "start_line": 258,
+                "end_line": 325,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "db_connection"
+                        ],
+                        "start_line": 261,
+                        "end_line": 263,
+                        "used_functions": {
+                            "DatabaseConnection": "from backend.complicated_project.data.database",
+                            "Logger": "from backend.complicated_project.utils.logger"
+                        }
+                    },
+                    "initialize_schema": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 265,
+                        "end_line": 305,
+                        "used_functions": {}
+                    },
+                    "seed_sample_data": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 307,
+                        "end_line": 325,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user",
+                            "UserRepository": "from backend.complicated_project.data.database"
+                        }
+                    }
+                },
+                "used_functions": {}
+            }
+        },
+        "Class Visualisation/backend/complicated_project/data/sample_data.py": {},
+        "Class Visualisation/backend/complicated_project/models/data_models.py": {
+            "DataPoint": {
+                "args": [],
+                "start_line": 9,
+                "end_line": 38,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "id",
+                            "value",
+                            "timestamp"
+                        ],
+                        "start_line": 12,
+                        "end_line": 18,
+                        "used_functions": {
+                            "DataFormatter": "from backend.complicated_project.utils.formatters"
+                        }
+                    },
+                    "calculate_quality": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 20,
+                        "end_line": 29,
+                        "used_functions": {}
+                    },
+                    "normalize": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 31,
+                        "end_line": 34,
+                        "used_functions": {}
+                    },
+                    "to_csv_row": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 36,
+                        "end_line": 38,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "Dataset": {
+                "args": [],
+                "start_line": 40,
+                "end_line": 87,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "id",
+                            "name",
+                            "points"
+                        ],
+                        "start_line": 43,
+                        "end_line": 49,
+                        "used_functions": {
+                            "DataPoint": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "add_point": {
+                        "args": [
+                            "self",
+                            "point"
+                        ],
+                        "start_line": 51,
+                        "end_line": 55,
+                        "used_functions": {
+                            "DataPoint": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "calculate_average_quality": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 57,
+                        "end_line": 64,
+                        "used_functions": {}
+                    },
+                    "filter_by_quality": {
+                        "args": [
+                            "self",
+                            "min_quality"
+                        ],
+                        "start_line": 66,
+                        "end_line": 68,
+                        "used_functions": {
+                            "DataPoint": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "get_statistics": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 70,
+                        "end_line": 81,
+                        "used_functions": {}
+                    },
+                    "export_to_csv": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 83,
+                        "end_line": 87,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            }
+        },
+        "Class Visualisation/backend/complicated_project/models/report.py": {
+            "Report": {
+                "args": [],
+                "start_line": 10,
+                "end_line": 53,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "id",
+                            "title",
+                            "user",
+                            "data"
+                        ],
+                        "start_line": 13,
+                        "end_line": 23,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user",
+                            "DataFormatter": "from backend.complicated_project.utils.formatters"
+                        }
+                    },
+                    "generate": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 25,
+                        "end_line": 29,
+                        "used_functions": {}
+                    },
+                    "mark_as_failed": {
+                        "args": [
+                            "self",
+                            "error"
+                        ],
+                        "start_line": 31,
+                        "end_line": 34,
+                        "used_functions": {}
+                    },
+                    "get_summary": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 36,
+                        "end_line": 44,
+                        "used_functions": {}
+                    },
+                    "export_to_json": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 46,
+                        "end_line": 48,
+                        "used_functions": {}
+                    },
+                    "get_file_size": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 50,
+                        "end_line": 53,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            }
+        },
+        "Class Visualisation/backend/complicated_project/models/user.py": {
+            "BaseModel": {
+                "args": [],
+                "start_line": 10,
+                "end_line": 30,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "id"
+                        ],
+                        "start_line": 13,
+                        "end_line": 18,
+                        "used_functions": {
+                            "DataValidator": "from backend.complicated_project.utils.validators",
+                            "DataFormatter": "from backend.complicated_project.utils.formatters"
+                        }
+                    },
+                    "validate": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 20,
+                        "end_line": 22,
+                        "used_functions": {}
+                    },
+                    "to_dict": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 24,
+                        "end_line": 26,
+                        "used_functions": {}
+                    },
+                    "update_timestamp": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 28,
+                        "end_line": 30,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "User": {
+                "args": [],
+                "start_line": 32,
+                "end_line": 63,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "id",
+                            "name",
+                            "email",
+                            "raw_data"
+                        ],
+                        "start_line": 35,
+                        "end_line": 43,
+                        "used_functions": {}
+                    },
+                    "authenticate": {
+                        "args": [
+                            "self",
+                            "password"
+                        ],
+                        "start_line": 45,
+                        "end_line": 48,
+                        "used_functions": {}
+                    },
+                    "update_profile": {
+                        "args": [
+                            "self",
+                            "data"
+                        ],
+                        "start_line": 50,
+                        "end_line": 55,
+                        "used_functions": {}
+                    },
+                    "get_display_name": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 57,
+                        "end_line": 59,
+                        "used_functions": {}
+                    },
+                    "is_admin": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 61,
+                        "end_line": 63,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {
+                    "BaseModel": "from backend.complicated_project.models.user"
+                }
+            }
+        },
+        "Class Visualisation/backend/complicated_project/models/__init__.py": {
+            "BaseModel": {
+                "args": [],
+                "start_line": 10,
+                "end_line": 30,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "id"
+                        ],
+                        "start_line": 13,
+                        "end_line": 18,
+                        "used_functions": {
+                            "DataValidator": "from backend.complicated_project.utils.validators",
+                            "DataFormatter": "from backend.complicated_project.utils.formatters"
+                        }
+                    },
+                    "validate": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 20,
+                        "end_line": 22,
+                        "used_functions": {}
+                    },
+                    "to_dict": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 24,
+                        "end_line": 26,
+                        "used_functions": {}
+                    },
+                    "update_timestamp": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 28,
+                        "end_line": 30,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "User": {
+                "args": [],
+                "start_line": 32,
+                "end_line": 63,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "id",
+                            "name",
+                            "email",
+                            "raw_data"
+                        ],
+                        "start_line": 35,
+                        "end_line": 43,
+                        "used_functions": {}
+                    },
+                    "authenticate": {
+                        "args": [
+                            "self",
+                            "password"
+                        ],
+                        "start_line": 45,
+                        "end_line": 48,
+                        "used_functions": {}
+                    },
+                    "update_profile": {
+                        "args": [
+                            "self",
+                            "data"
+                        ],
+                        "start_line": 50,
+                        "end_line": 55,
+                        "used_functions": {}
+                    },
+                    "get_display_name": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 57,
+                        "end_line": 59,
+                        "used_functions": {}
+                    },
+                    "is_admin": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 61,
+                        "end_line": 63,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {
+                    "BaseModel": "from backend.complicated_project.models.user"
+                }
+            },
+            "Report": {
+                "args": [],
+                "start_line": 65,
+                "end_line": 99,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "id",
+                            "title",
+                            "user",
+                            "data"
+                        ],
+                        "start_line": 68,
+                        "end_line": 76,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "generate": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 78,
+                        "end_line": 83,
+                        "used_functions": {}
+                    },
+                    "mark_as_failed": {
+                        "args": [
+                            "self",
+                            "error"
+                        ],
+                        "start_line": 85,
+                        "end_line": 89,
+                        "used_functions": {}
+                    },
+                    "get_summary": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 91,
+                        "end_line": 99,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {
+                    "BaseModel": "from backend.complicated_project.models.user"
+                }
+            },
+            "DataPoint": {
+                "args": [],
+                "start_line": 101,
+                "end_line": 125,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "id",
+                            "value",
+                            "timestamp"
+                        ],
+                        "start_line": 104,
+                        "end_line": 109,
+                        "used_functions": {}
+                    },
+                    "calculate_quality": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 111,
+                        "end_line": 120,
+                        "used_functions": {}
+                    },
+                    "normalize": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 122,
+                        "end_line": 125,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {
+                    "BaseModel": "from backend.complicated_project.models.user"
+                }
+            },
+            "Dataset": {
+                "args": [],
+                "start_line": 127,
+                "end_line": 168,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "id",
+                            "name",
+                            "points"
+                        ],
+                        "start_line": 130,
+                        "end_line": 135,
+                        "used_functions": {
+                            "DataPoint": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "add_point": {
+                        "args": [
+                            "self",
+                            "point"
+                        ],
+                        "start_line": 137,
+                        "end_line": 142,
+                        "used_functions": {
+                            "DataPoint": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "calculate_average_quality": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 144,
+                        "end_line": 151,
+                        "used_functions": {}
+                    },
+                    "filter_by_quality": {
+                        "args": [
+                            "self",
+                            "min_quality"
+                        ],
+                        "start_line": 153,
+                        "end_line": 155,
+                        "used_functions": {
+                            "DataPoint": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "get_statistics": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 157,
+                        "end_line": 168,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {
+                    "BaseModel": "from backend.complicated_project.models.user"
+                }
+            }
+        },
+        "Class Visualisation/backend/complicated_project/services/notification_service.py": {
+            "NotificationService": {
+                "args": [],
+                "start_line": 17,
+                "end_line": 275,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 20,
+                        "end_line": 24,
+                        "used_functions": {
+                            "Logger": "from backend.complicated_project.utils.logger",
+                            "ConfigManager": "from backend.complicated_project.utils.config_manager",
+                            "DataFormatter": "from backend.complicated_project.utils.formatters"
+                        }
+                    },
+                    "send_notification": {
+                        "args": [
+                            "self",
+                            "user",
+                            "message",
+                            "notification_type"
+                        ],
+                        "start_line": 26,
+                        "end_line": 62,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "send_bulk_notification": {
+                        "args": [
+                            "self",
+                            "users",
+                            "message",
+                            "notification_type"
+                        ],
+                        "start_line": 64,
+                        "end_line": 75,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "send_system_alert": {
+                        "args": [
+                            "self",
+                            "alert_message",
+                            "severity"
+                        ],
+                        "start_line": 77,
+                        "end_line": 83,
+                        "used_functions": {}
+                    },
+                    "_get_notification_channels": {
+                        "args": [
+                            "self",
+                            "user",
+                            "notification_type"
+                        ],
+                        "start_line": 85,
+                        "end_line": 108,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "_send_email_notification": {
+                        "args": [
+                            "self",
+                            "user",
+                            "message",
+                            "notification_type"
+                        ],
+                        "start_line": 110,
+                        "end_line": 141,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "_send_sms_notification": {
+                        "args": [
+                            "self",
+                            "user",
+                            "message"
+                        ],
+                        "start_line": 143,
+                        "end_line": 174,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "_send_webhook_notification": {
+                        "args": [
+                            "self",
+                            "user",
+                            "message",
+                            "notification_type"
+                        ],
+                        "start_line": 176,
+                        "end_line": 199,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "_format_email_body": {
+                        "args": [
+                            "self",
+                            "user",
+                            "message",
+                            "notification_type"
+                        ],
+                        "start_line": 201,
+                        "end_line": 229,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "_log_notification": {
+                        "args": [
+                            "self",
+                            "user",
+                            "message",
+                            "notification_type",
+                            "success"
+                        ],
+                        "start_line": 231,
+                        "end_line": 246,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "get_notification_history": {
+                        "args": [
+                            "self",
+                            "user_id",
+                            "limit"
+                        ],
+                        "start_line": 248,
+                        "end_line": 255,
+                        "used_functions": {}
+                    },
+                    "get_notification_stats": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 257,
+                        "end_line": 275,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            }
+        },
+        "Class Visualisation/backend/complicated_project/services/report_generator.py": {
+            "ReportGenerator": {
+                "args": [],
+                "start_line": 15,
+                "end_line": 249,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 18,
+                        "end_line": 23,
+                        "used_functions": {
+                            "Logger": "from backend.complicated_project.utils.logger",
+                            "CSVFormatter": "from backend.complicated_project.utils.formatters",
+                            "ReportFormatter": "from backend.complicated_project.utils.formatters",
+                            "ConfigManager": "from backend.complicated_project.utils.config_manager"
+                        }
+                    },
+                    "generate_report": {
+                        "args": [
+                            "self",
+                            "user",
+                            "processed_data"
+                        ],
+                        "start_line": 25,
+                        "end_line": 57,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user",
+                            "Report": "from backend.complicated_project.models.report"
+                        }
+                    },
+                    "generate_summary_report": {
+                        "args": [
+                            "self",
+                            "reports"
+                        ],
+                        "start_line": 59,
+                        "end_line": 81,
+                        "used_functions": {
+                            "Report": "from backend.complicated_project.models.report"
+                        }
+                    },
+                    "_compile_report_data": {
+                        "args": [
+                            "self",
+                            "user",
+                            "processed_data"
+                        ],
+                        "start_line": 83,
+                        "end_line": 102,
+                        "used_functions": {
+                            "User": "from backend.complicated_project.models.user"
+                        }
+                    },
+                    "_compile_summary_data": {
+                        "args": [
+                            "self",
+                            "reports"
+                        ],
+                        "start_line": 104,
+                        "end_line": 139,
+                        "used_functions": {
+                            "Report": "from backend.complicated_project.models.report"
+                        }
+                    },
+                    "_generate_recommendations": {
+                        "args": [
+                            "self",
+                            "statistics"
+                        ],
+                        "start_line": 141,
+                        "end_line": 157,
+                        "used_functions": {}
+                    },
+                    "_prepare_chart_data": {
+                        "args": [
+                            "self",
+                            "dataset"
+                        ],
+                        "start_line": 159,
+                        "end_line": 182,
+                        "used_functions": {
+                            "Dataset": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "_calculate_distribution": {
+                        "args": [
+                            "self",
+                            "dataset"
+                        ],
+                        "start_line": 184,
+                        "end_line": 193,
+                        "used_functions": {
+                            "Dataset": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "_save_report_file": {
+                        "args": [
+                            "self",
+                            "report"
+                        ],
+                        "start_line": 195,
+                        "end_line": 213,
+                        "used_functions": {
+                            "Report": "from backend.complicated_project.models.report"
+                        }
+                    },
+                    "_save_csv_report": {
+                        "args": [
+                            "self",
+                            "report",
+                            "filename"
+                        ],
+                        "start_line": 215,
+                        "end_line": 230,
+                        "used_functions": {
+                            "Report": "from backend.complicated_project.models.report"
+                        }
+                    },
+                    "get_report": {
+                        "args": [
+                            "self",
+                            "report_id"
+                        ],
+                        "start_line": 232,
+                        "end_line": 249,
+                        "used_functions": {
+                            "Report": "from backend.complicated_project.models.report"
+                        }
+                    }
+                },
+                "used_functions": {}
+            }
+        },
+        "Class Visualisation/backend/complicated_project/tests/test_data_processor.py": {
+            "TestDataProcessor": {
+                "args": [],
+                "start_line": 12,
+                "end_line": 104,
+                "methods": {
+                    "setUp": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 15,
+                        "end_line": 25,
+                        "used_functions": {
+                            "DataProcessor": "from backend.complicated_project.core.data_processor"
+                        }
+                    },
+                    "test_initialization": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 27,
+                        "end_line": 31,
+                        "used_functions": {}
+                    },
+                    "test_validate_input_valid": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 33,
+                        "end_line": 36,
+                        "used_functions": {}
+                    },
+                    "test_validate_input_invalid": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 38,
+                        "end_line": 42,
+                        "used_functions": {}
+                    },
+                    "test_create_dataset": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 44,
+                        "end_line": 50,
+                        "used_functions": {
+                            "DataPoint": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "test_process_success": {
+                        "args": [
+                            "self",
+                            "mock_time"
+                        ],
+                        "start_line": 53,
+                        "end_line": 62,
+                        "used_functions": {}
+                    },
+                    "test_process_invalid_input": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 64,
+                        "end_line": 71,
+                        "used_functions": {}
+                    },
+                    "test_processing_stats_update": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 73,
+                        "end_line": 82,
+                        "used_functions": {}
+                    },
+                    "test_get_processing_stats": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 84,
+                        "end_line": 90,
+                        "used_functions": {}
+                    },
+                    "test_reset_stats": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 92,
+                        "end_line": 104,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "TestDataPoint": {
+                "args": [],
+                "start_line": 106,
+                "end_line": 139,
+                "methods": {
+                    "test_initialization": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 109,
+                        "end_line": 115,
+                        "used_functions": {
+                            "DataPoint": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "test_quality_calculation_numeric": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 117,
+                        "end_line": 123,
+                        "used_functions": {
+                            "DataPoint": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "test_quality_calculation_string": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 125,
+                        "end_line": 131,
+                        "used_functions": {
+                            "DataPoint": "from backend.complicated_project.models.data_models"
+                        }
+                    },
+                    "test_normalization": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 133,
+                        "end_line": 139,
+                        "used_functions": {
+                            "DataPoint": "from backend.complicated_project.models.data_models"
+                        }
+                    }
+                },
+                "used_functions": {}
+            }
+        },
+        "Class Visualisation/backend/complicated_project/utils/config_manager.py": {
+            "ConfigManager": {
+                "args": [],
+                "start_line": 10,
+                "end_line": 147,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "config_file"
+                        ],
+                        "start_line": 13,
+                        "end_line": 43,
+                        "used_functions": {
+                            "Logger": "from backend.complicated_project.utils.logger"
+                        }
+                    },
+                    "load_config": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 45,
+                        "end_line": 61,
+                        "used_functions": {}
+                    },
+                    "save_config": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 63,
+                        "end_line": 72,
+                        "used_functions": {}
+                    },
+                    "get": {
+                        "args": [
+                            "self",
+                            "key",
+                            "default"
+                        ],
+                        "start_line": 74,
+                        "end_line": 84,
+                        "used_functions": {}
+                    },
+                    "set": {
+                        "args": [
+                            "self",
+                            "key",
+                            "value"
+                        ],
+                        "start_line": 86,
+                        "end_line": 98,
+                        "used_functions": {}
+                    },
+                    "get_section": {
+                        "args": [
+                            "self",
+                            "section"
+                        ],
+                        "start_line": 100,
+                        "end_line": 102,
+                        "used_functions": {}
+                    },
+                    "update_section": {
+                        "args": [
+                            "self",
+                            "section",
+                            "values"
+                        ],
+                        "start_line": 104,
+                        "end_line": 110,
+                        "used_functions": {}
+                    },
+                    "reset_to_defaults": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 112,
+                        "end_line": 115,
+                        "used_functions": {}
+                    },
+                    "validate_config": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 117,
+                        "end_line": 135,
+                        "used_functions": {}
+                    },
+                    "_merge_configs": {
+                        "args": [
+                            "self",
+                            "base",
+                            "override"
+                        ],
+                        "start_line": 137,
+                        "end_line": 147,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "EnvironmentConfigManager": {
+                "args": [],
+                "start_line": 149,
+                "end_line": 171,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 152,
+                        "end_line": 154,
+                        "used_functions": {}
+                    },
+                    "load_from_env": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 156,
+                        "end_line": 171,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {
+                    "ConfigManager": "from backend.complicated_project.utils.config_manager"
+                }
+            }
+        },
+        "Class Visualisation/backend/complicated_project/utils/formatters.py": {
+            "DataFormatter": {
+                "args": [],
+                "start_line": 9,
+                "end_line": 68,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 12,
+                        "end_line": 13,
+                        "used_functions": {}
+                    },
+                    "format_display_name": {
+                        "args": [
+                            "self",
+                            "name"
+                        ],
+                        "start_line": 15,
+                        "end_line": 19,
+                        "used_functions": {}
+                    },
+                    "format_date": {
+                        "args": [
+                            "self",
+                            "date"
+                        ],
+                        "start_line": 21,
+                        "end_line": 23,
+                        "used_functions": {}
+                    },
+                    "normalize_value": {
+                        "args": [
+                            "self",
+                            "value"
+                        ],
+                        "start_line": 25,
+                        "end_line": 31,
+                        "used_functions": {}
+                    },
+                    "model_to_dict": {
+                        "args": [
+                            "self",
+                            "model"
+                        ],
+                        "start_line": 33,
+                        "end_line": 43,
+                        "used_functions": {}
+                    },
+                    "to_json": {
+                        "args": [
+                            "self",
+                            "data"
+                        ],
+                        "start_line": 45,
+                        "end_line": 52,
+                        "used_functions": {
+                            "json_serializer": "from backend.complicated_project.utils.formatters"
+                        }
+                    },
+                    "format_file_size": {
+                        "args": [
+                            "self",
+                            "size_bytes"
+                        ],
+                        "start_line": 54,
+                        "end_line": 60,
+                        "used_functions": {}
+                    },
+                    "format_percentage": {
+                        "args": [
+                            "self",
+                            "value"
+                        ],
+                        "start_line": 62,
+                        "end_line": 64,
+                        "used_functions": {}
+                    },
+                    "format_currency": {
+                        "args": [
+                            "self",
+                            "amount",
+                            "currency"
+                        ],
+                        "start_line": 66,
+                        "end_line": 68,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "ReportFormatter": {
+                "args": [],
+                "start_line": 70,
+                "end_line": 91,
+                "methods": {
+                    "format_report_summary": {
+                        "args": [
+                            "self",
+                            "report"
+                        ],
+                        "start_line": 73,
+                        "end_line": 81,
+                        "used_functions": {}
+                    },
+                    "format_user_summary": {
+                        "args": [
+                            "self",
+                            "user"
+                        ],
+                        "start_line": 83,
+                        "end_line": 91,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {
+                    "DataFormatter": "from backend.complicated_project.utils.formatters"
+                }
+            },
+            "CSVFormatter": {
+                "args": [],
+                "start_line": 93,
+                "end_line": 109,
+                "methods": {
+                    "format_row": {
+                        "args": [
+                            "self",
+                            "data"
+                        ],
+                        "start_line": 96,
+                        "end_line": 105,
+                        "used_functions": {}
+                    },
+                    "format_header": {
+                        "args": [
+                            "self",
+                            "data"
+                        ],
+                        "start_line": 107,
+                        "end_line": 109,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {
+                    "DataFormatter": "from backend.complicated_project.utils.formatters"
+                }
+            },
+            "json_serializer": {
+                "args": [
+                    "obj"
+                ],
+                "start_line": 47,
+                "end_line": 50,
+                "used_functions": {}
+            }
+        },
+        "Class Visualisation/backend/complicated_project/utils/logger.py": {
+            "Logger": {
+                "args": [],
+                "start_line": 11,
+                "end_line": 74,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "name"
+                        ],
+                        "start_line": 14,
+                        "end_line": 19,
+                        "used_functions": {
+                            "DataFormatter": "from backend.complicated_project.utils.formatters"
+                        }
+                    },
+                    "_setup_logger": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 21,
+                        "end_line": 47,
+                        "used_functions": {}
+                    },
+                    "info": {
+                        "args": [
+                            "self",
+                            "message",
+                            "extra"
+                        ],
+                        "start_line": 49,
+                        "end_line": 51,
+                        "used_functions": {}
+                    },
+                    "error": {
+                        "args": [
+                            "self",
+                            "message",
+                            "extra"
+                        ],
+                        "start_line": 53,
+                        "end_line": 55,
+                        "used_functions": {}
+                    },
+                    "warning": {
+                        "args": [
+                            "self",
+                            "message",
+                            "extra"
+                        ],
+                        "start_line": 57,
+                        "end_line": 59,
+                        "used_functions": {}
+                    },
+                    "debug": {
+                        "args": [
+                            "self",
+                            "message",
+                            "extra"
+                        ],
+                        "start_line": 61,
+                        "end_line": 63,
+                        "used_functions": {}
+                    },
+                    "log_performance": {
+                        "args": [
+                            "self",
+                            "operation",
+                            "duration"
+                        ],
+                        "start_line": 65,
+                        "end_line": 67,
+                        "used_functions": {}
+                    },
+                    "log_user_action": {
+                        "args": [
+                            "self",
+                            "user_id",
+                            "action",
+                            "details"
+                        ],
+                        "start_line": 69,
+                        "end_line": 74,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "AuditLogger": {
+                "args": [],
+                "start_line": 76,
+                "end_line": 103,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 79,
+                        "end_line": 81,
+                        "used_functions": {}
+                    },
+                    "log_security_event": {
+                        "args": [
+                            "self",
+                            "event",
+                            "user_id",
+                            "details"
+                        ],
+                        "start_line": 83,
+                        "end_line": 96,
+                        "used_functions": {}
+                    },
+                    "log_data_access": {
+                        "args": [
+                            "self",
+                            "user_id",
+                            "resource",
+                            "action"
+                        ],
+                        "start_line": 98,
+                        "end_line": 103,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {
+                    "Logger": "from backend.complicated_project.utils.logger"
+                }
+            }
+        },
+        "Class Visualisation/backend/complicated_project/utils/performance_monitor.py": {
+            "PerformanceMonitor": {
+                "args": [],
+                "start_line": 14,
+                "end_line": 215,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 17,
+                        "end_line": 23,
+                        "used_functions": {
+                            "Logger": "from backend.complicated_project.utils.logger",
+                            "ConfigManager": "from backend.complicated_project.utils.config_manager"
+                        }
+                    },
+                    "start_monitoring": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 25,
+                        "end_line": 33,
+                        "used_functions": {}
+                    },
+                    "stop_monitoring": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 35,
+                        "end_line": 40,
+                        "used_functions": {}
+                    },
+                    "time_function": {
+                        "args": [
+                            "self",
+                            "func_name"
+                        ],
+                        "start_line": 42,
+                        "end_line": 59,
+                        "used_functions": {
+                            "decorator": "from backend.complicated_project.utils.performance_monitor"
+                        }
+                    },
+                    "record_metric": {
+                        "args": [
+                            "self",
+                            "name",
+                            "value",
+                            "metric_type",
+                            "tags"
+                        ],
+                        "start_line": 61,
+                        "end_line": 79,
+                        "used_functions": {}
+                    },
+                    "get_metric": {
+                        "args": [
+                            "self",
+                            "name",
+                            "time_range"
+                        ],
+                        "start_line": 81,
+                        "end_line": 108,
+                        "used_functions": {}
+                    },
+                    "get_all_metrics": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 110,
+                        "end_line": 112,
+                        "used_functions": {}
+                    },
+                    "set_threshold": {
+                        "args": [
+                            "self",
+                            "metric_name",
+                            "threshold_type",
+                            "value",
+                            "alert_level"
+                        ],
+                        "start_line": 114,
+                        "end_line": 132,
+                        "used_functions": {}
+                    },
+                    "get_alerts": {
+                        "args": [
+                            "self",
+                            "since"
+                        ],
+                        "start_line": 134,
+                        "end_line": 138,
+                        "used_functions": {}
+                    },
+                    "_monitor_loop": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 140,
+                        "end_line": 152,
+                        "used_functions": {}
+                    },
+                    "_collect_system_metrics": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 154,
+                        "end_line": 177,
+                        "used_functions": {}
+                    },
+                    "_check_thresholds": {
+                        "args": [
+                            "self",
+                            "metric_name",
+                            "value"
+                        ],
+                        "start_line": 179,
+                        "end_line": 215,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "MetricsExporter": {
+                "args": [],
+                "start_line": 217,
+                "end_line": 278,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "monitor"
+                        ],
+                        "start_line": 220,
+                        "end_line": 222,
+                        "used_functions": {
+                            "Logger": "from backend.complicated_project.utils.logger",
+                            "PerformanceMonitor": "from backend.complicated_project.utils.performance_monitor"
+                        }
+                    },
+                    "export_to_prometheus": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 224,
+                        "end_line": 247,
+                        "used_functions": {}
+                    },
+                    "export_to_json": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 249,
+                        "end_line": 251,
+                        "used_functions": {}
+                    },
+                    "export_to_csv": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 253,
+                        "end_line": 278,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "decorator": {
+                "args": [
+                    "func"
+                ],
+                "start_line": 44,
+                "end_line": 58,
+                "used_functions": {
+                    "wrapper": "from backend.complicated_project.utils.performance_monitor"
+                }
+            },
+            "wrapper": {
+                "args": [],
+                "start_line": 45,
+                "end_line": 57,
+                "used_functions": {}
+            }
+        },
+        "Class Visualisation/backend/complicated_project/utils/validators.py": {
+            "DataValidator": {
+                "args": [],
+                "start_line": 9,
+                "end_line": 59,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 12,
+                        "end_line": 13,
+                        "used_functions": {}
+                    },
+                    "validate_email": {
+                        "args": [
+                            "self",
+                            "email"
+                        ],
+                        "start_line": 15,
+                        "end_line": 17,
+                        "used_functions": {}
+                    },
+                    "validate_password": {
+                        "args": [
+                            "self",
+                            "password"
+                        ],
+                        "start_line": 19,
+                        "end_line": 29,
+                        "used_functions": {}
+                    },
+                    "validate_model": {
+                        "args": [
+                            "self",
+                            "model"
+                        ],
+                        "start_line": 31,
+                        "end_line": 36,
+                        "used_functions": {}
+                    },
+                    "validate_data_point": {
+                        "args": [
+                            "self",
+                            "value"
+                        ],
+                        "start_line": 38,
+                        "end_line": 44,
+                        "used_functions": {}
+                    },
+                    "validate_dataset_name": {
+                        "args": [
+                            "self",
+                            "name"
+                        ],
+                        "start_line": 46,
+                        "end_line": 52,
+                        "used_functions": {}
+                    },
+                    "sanitize_string": {
+                        "args": [
+                            "self",
+                            "text"
+                        ],
+                        "start_line": 54,
+                        "end_line": 59,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "InputValidator": {
+                "args": [],
+                "start_line": 61,
+                "end_line": 92,
+                "methods": {
+                    "validate_user_input": {
+                        "args": [
+                            "self",
+                            "data"
+                        ],
+                        "start_line": 64,
+                        "end_line": 84,
+                        "used_functions": {}
+                    },
+                    "validate_report_data": {
+                        "args": [
+                            "self",
+                            "data"
+                        ],
+                        "start_line": 86,
+                        "end_line": 92,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {
+                    "DataValidator": "from backend.complicated_project.utils.validators"
+                }
+            }
+        },
+        "Class Visualisation/frontend/node_modules/flatted/python/flatted.py": {
+            "_Known": {
+                "args": [],
+                "start_line": 19,
+                "end_line": 22,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 20,
+                        "end_line": 22,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "_String": {
+                "args": [],
+                "start_line": 24,
+                "end_line": 26,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self",
+                            "value"
+                        ],
+                        "start_line": 25,
+                        "end_line": 26,
+                        "used_functions": {}
+                    }
+                },
+                "used_functions": {}
+            },
+            "_array_keys": {
+                "args": [
+                    "value"
+                ],
+                "start_line": 29,
+                "end_line": 35,
+                "used_functions": {}
+            },
+            "_object_keys": {
+                "args": [
+                    "value"
+                ],
+                "start_line": 37,
+                "end_line": 41,
+                "used_functions": {}
+            },
+            "_is_array": {
+                "args": [
+                    "value"
+                ],
+                "start_line": 43,
+                "end_line": 44,
+                "used_functions": {}
+            },
+            "_is_object": {
+                "args": [
+                    "value"
+                ],
+                "start_line": 46,
+                "end_line": 47,
+                "used_functions": {}
+            },
+            "_is_string": {
+                "args": [
+                    "value"
+                ],
+                "start_line": 49,
+                "end_line": 50,
+                "used_functions": {}
+            },
+            "_index": {
+                "args": [
+                    "known",
+                    "input",
+                    "value"
+                ],
+                "start_line": 52,
+                "end_line": 57,
+                "used_functions": {}
+            },
+            "_loop": {
+                "args": [
+                    "keys",
+                    "input",
+                    "known",
+                    "output"
+                ],
+                "start_line": 59,
+                "end_line": 65,
+                "used_functions": {
+                    "_String": "from frontend.node_modules.flattedthon.flatted",
+                    "_ref": "from frontend.node_modules.flattedthon.flatted"
+                }
+            },
+            "_ref": {
+                "args": [
+                    "key",
+                    "value",
+                    "input",
+                    "known",
+                    "output"
+                ],
+                "start_line": 67,
+                "end_line": 75,
+                "used_functions": {
+                    "_is_object": "from frontend.node_modules.flattedthon.flatted",
+                    "_loop": "from frontend.node_modules.flattedthon.flatted",
+                    "_array_keys": "from frontend.node_modules.flattedthon.flatted",
+                    "_is_array": "from frontend.node_modules.flattedthon.flatted",
+                    "_object_keys": "from frontend.node_modules.flattedthon.flatted"
+                }
+            },
+            "_relate": {
+                "args": [
+                    "known",
+                    "input",
+                    "value"
+                ],
+                "start_line": 77,
+                "end_line": 84,
+                "used_functions": {
+                    "_is_object": "from frontend.node_modules.flattedthon.flatted",
+                    "_is_string": "from frontend.node_modules.flattedthon.flatted",
+                    "_index": "from frontend.node_modules.flattedthon.flatted",
+                    "_is_array": "from frontend.node_modules.flattedthon.flatted"
+                }
+            },
+            "_transform": {
+                "args": [
+                    "known",
+                    "input",
+                    "value"
+                ],
+                "start_line": 86,
+                "end_line": 99,
+                "used_functions": {
+                    "_is_object": "from frontend.node_modules.flattedthon.flatted",
+                    "_relate": "from frontend.node_modules.flattedthon.flatted",
+                    "_is_array": "from frontend.node_modules.flattedthon.flatted"
+                }
+            },
+            "_wrap": {
+                "args": [
+                    "value"
+                ],
+                "start_line": 101,
+                "end_line": 115,
+                "used_functions": {
+                    "_is_object": "from frontend.node_modules.flattedthon.flatted",
+                    "_is_string": "from frontend.node_modules.flattedthon.flatted",
+                    "_String": "from frontend.node_modules.flattedthon.flatted",
+                    "_wrap": "from frontend.node_modules.flattedthon.flatted",
+                    "_is_array": "from frontend.node_modules.flattedthon.flatted"
+                }
+            },
+            "parse": {
+                "args": [
+                    "value"
+                ],
+                "start_line": 117,
+                "end_line": 138,
+                "used_functions": {
+                    "_is_object": "from frontend.node_modules.flattedthon.flatted",
+                    "_loop": "from frontend.node_modules.flattedthon.flatted",
+                    "_array_keys": "from frontend.node_modules.flattedthon.flatted",
+                    "_wrap": "from frontend.node_modules.flattedthon.flatted",
+                    "_String": "from frontend.node_modules.flattedthon.flatted",
+                    "_is_array": "from frontend.node_modules.flattedthon.flatted",
+                    "_object_keys": "from frontend.node_modules.flattedthon.flatted"
+                }
+            },
+            "stringify": {
+                "args": [
+                    "value"
+                ],
+                "start_line": 141,
+                "end_line": 149,
+                "used_functions": {
+                    "_Known": "from frontend.node_modules.flattedthon.flatted",
+                    "_index": "from frontend.node_modules.flattedthon.flatted",
+                    "_transform": "from frontend.node_modules.flattedthon.flatted"
+                }
+            }
         }
     }
 }

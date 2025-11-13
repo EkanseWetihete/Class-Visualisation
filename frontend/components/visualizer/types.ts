@@ -10,11 +10,18 @@ export interface OutputMeta {
   version: string;
   lastModified: number;
   size: number;
+  file?: string;
 }
 
 export interface OutputData {
   files: Record<string, Record<string, DataItem>>;
   _meta?: OutputMeta;
+}
+
+export interface DataFileInfo {
+  name: string;
+  size: number;
+  lastModified: number;
 }
 
 export interface Position {
