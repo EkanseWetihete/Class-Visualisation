@@ -3,15 +3,17 @@
         "Class Visualisation/backend/analyzer.py": {
             "CodeAnalyzer": {
                 "args": [],
-                "start_line": 5,
-                "end_line": 49,
+                "start_line": 19,
+                "end_line": 123,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
                             "self"
                         ],
-                        "start_line": 6,
-                        "end_line": 8,
+                        "start_line": 20,
+                        "end_line": 23,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "visit_ClassDef": {
@@ -19,8 +21,9 @@
                             "self",
                             "node"
                         ],
-                        "start_line": 10,
-                        "end_line": 22,
+                        "start_line": 25,
+                        "end_line": 38,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "visit_FunctionDef": {
@@ -28,8 +31,9 @@
                             "self",
                             "node"
                         ],
-                        "start_line": 24,
-                        "end_line": 37,
+                        "start_line": 40,
+                        "end_line": 54,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "visit_AsyncFunctionDef": {
@@ -37,8 +41,29 @@
                             "self",
                             "node"
                         ],
-                        "start_line": 39,
-                        "end_line": 40,
+                        "start_line": 56,
+                        "end_line": 57,
+                        "is_api_endpoint": false,
+                        "used_functions": {}
+                    },
+                    "visit_Import": {
+                        "args": [
+                            "self",
+                            "node"
+                        ],
+                        "start_line": 59,
+                        "end_line": 65,
+                        "is_api_endpoint": false,
+                        "used_functions": {}
+                    },
+                    "visit_ImportFrom": {
+                        "args": [
+                            "self",
+                            "node"
+                        ],
+                        "start_line": 67,
+                        "end_line": 77,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "visit_Name": {
@@ -46,8 +71,9 @@
                             "self",
                             "node"
                         ],
-                        "start_line": 42,
-                        "end_line": 44,
+                        "start_line": 79,
+                        "end_line": 82,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "visit_Attribute": {
@@ -55,9 +81,42 @@
                             "self",
                             "node"
                         ],
-                        "start_line": 46,
-                        "end_line": 49,
+                        "start_line": 84,
+                        "end_line": 88,
+                        "is_api_endpoint": false,
                         "used_functions": {}
+                    },
+                    "_canonical_name": {
+                        "args": [
+                            "self",
+                            "name"
+                        ],
+                        "start_line": 92,
+                        "end_line": 98,
+                        "is_api_endpoint": false,
+                        "used_functions": {}
+                    },
+                    "_canonical_attr_base": {
+                        "args": [
+                            "self",
+                            "name"
+                        ],
+                        "start_line": 100,
+                        "end_line": 108,
+                        "is_api_endpoint": false,
+                        "used_functions": {}
+                    },
+                    "_is_api_endpoint": {
+                        "args": [
+                            "self",
+                            "node"
+                        ],
+                        "start_line": 110,
+                        "end_line": 123,
+                        "is_api_endpoint": false,
+                        "used_functions": {
+                            "decorator": "from backend.complicated_project.utils.performance_monitor"
+                        }
                     }
                 },
                 "used_functions": {}
@@ -66,21 +125,66 @@
                 "args": [
                     "file_path"
                 ],
-                "start_line": 53,
-                "end_line": 66,
+                "start_line": 125,
+                "end_line": 138,
+                "is_api_endpoint": false,
                 "used_functions": {
                     "CodeAnalyzer": "from backend.analyzer"
                 }
             }
         },
         "Class Visualisation/backend/main.py": {
+            "normalize_dir": {
+                "args": [
+                    "path"
+                ],
+                "start_line": 9,
+                "end_line": 10,
+                "is_api_endpoint": false,
+                "used_functions": {}
+            },
+            "is_within": {
+                "args": [
+                    "root",
+                    "candidate"
+                ],
+                "start_line": 13,
+                "end_line": 17,
+                "is_api_endpoint": false,
+                "used_functions": {}
+            },
             "main": {
                 "args": [],
-                "start_line": 8,
-                "end_line": 114,
+                "start_line": 20,
+                "end_line": 171,
+                "is_api_endpoint": false,
                 "used_functions": {
+                    "build_used_functions": "from backend.main",
+                    "analyze_file": "from backend.analyzer",
+                    "normalize_dir": "from backend.main",
                     "get_py_files": "from backend.utils",
-                    "analyze_file": "from backend.analyzer"
+                    "is_within": "from backend.main"
+                }
+            },
+            "resolve_symbol": {
+                "args": [
+                    "name",
+                    "preferred_file"
+                ],
+                "start_line": 101,
+                "end_line": 110,
+                "is_api_endpoint": false,
+                "used_functions": {}
+            },
+            "build_used_functions": {
+                "args": [
+                    "def_data"
+                ],
+                "start_line": 112,
+                "end_line": 135,
+                "is_api_endpoint": false,
+                "used_functions": {
+                    "resolve_symbol": "from backend.main"
                 }
             }
         },
@@ -91,6 +195,7 @@
                 ],
                 "start_line": 4,
                 "end_line": 10,
+                "is_api_endpoint": false,
                 "used_functions": {}
             },
             "resolve_import": {
@@ -102,6 +207,7 @@
                 ],
                 "start_line": 12,
                 "end_line": 18,
+                "is_api_endpoint": false,
                 "used_functions": {}
             },
             "build_relationships": {
@@ -111,6 +217,7 @@
                 ],
                 "start_line": 20,
                 "end_line": 92,
+                "is_api_endpoint": false,
                 "used_functions": {}
             }
         },
@@ -119,6 +226,7 @@
                 "args": [],
                 "start_line": 18,
                 "end_line": 72,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -126,13 +234,14 @@
                         ],
                         "start_line": 21,
                         "end_line": 27,
+                        "is_api_endpoint": false,
                         "used_functions": {
-                            "Logger": "from backend.complicated_project.utils.logger",
-                            "DataProcessor": "from backend.complicated_project.core.data_processor",
-                            "NotificationService": "from backend.complicated_project.services.notification_service",
                             "ReportGenerator": "from backend.complicated_project.services.report_generator",
+                            "Logger": "from backend.complicated_project.utils.logger",
+                            "ConfigManager": "from backend.complicated_project.utils.config_manager",
+                            "DataProcessor": "from backend.complicated_project.core.data_processor",
                             "UserManager": "from backend.complicated_project.core.user_manager",
-                            "ConfigManager": "from backend.complicated_project.utils.config_manager"
+                            "NotificationService": "from backend.complicated_project.services.notification_service"
                         }
                     },
                     "initialize": {
@@ -141,6 +250,7 @@
                         ],
                         "start_line": 29,
                         "end_line": 35,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "process_user_data": {
@@ -150,6 +260,7 @@
                         ],
                         "start_line": 37,
                         "end_line": 58,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "run_batch_processing": {
@@ -158,6 +269,7 @@
                         ],
                         "start_line": 60,
                         "end_line": 72,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -167,6 +279,7 @@
                 "args": [],
                 "start_line": 74,
                 "end_line": 86,
+                "is_api_endpoint": false,
                 "used_functions": {
                     "Application": "from backend.complicated_project.start"
                 }
@@ -177,6 +290,7 @@
                 "args": [],
                 "start_line": 13,
                 "end_line": 181,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -184,10 +298,11 @@
                         ],
                         "start_line": 16,
                         "end_line": 25,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataValidator": "from backend.complicated_project.utils.validators",
-                            "Logger": "from backend.complicated_project.utils.logger",
-                            "ConfigManager": "from backend.complicated_project.utils.config_manager"
+                            "ConfigManager": "from backend.complicated_project.utils.config_manager",
+                            "Logger": "from backend.complicated_project.utils.logger"
                         }
                     },
                     "initialize": {
@@ -196,6 +311,7 @@
                         ],
                         "start_line": 27,
                         "end_line": 30,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "process": {
@@ -205,6 +321,7 @@
                         ],
                         "start_line": 32,
                         "end_line": 76,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "_validate_input": {
@@ -214,6 +331,7 @@
                         ],
                         "start_line": 78,
                         "end_line": 91,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "_create_dataset": {
@@ -223,9 +341,10 @@
                         ],
                         "start_line": 93,
                         "end_line": 107,
+                        "is_api_endpoint": false,
                         "used_functions": {
-                            "Dataset": "from backend.complicated_project.models.data_models",
-                            "DataPoint": "from backend.complicated_project.models.data_models"
+                            "DataPoint": "from backend.complicated_project.models.data_models",
+                            "Dataset": "from backend.complicated_project.models.data_models"
                         }
                     },
                     "_apply_processing_pipeline": {
@@ -235,6 +354,7 @@
                         ],
                         "start_line": 109,
                         "end_line": 127,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Dataset": "from backend.complicated_project.models.data_models"
                         }
@@ -246,6 +366,7 @@
                         ],
                         "start_line": 129,
                         "end_line": 138,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Dataset": "from backend.complicated_project.models.data_models"
                         }
@@ -257,6 +378,7 @@
                         ],
                         "start_line": 140,
                         "end_line": 154,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Dataset": "from backend.complicated_project.models.data_models"
                         }
@@ -269,6 +391,7 @@
                         ],
                         "start_line": 156,
                         "end_line": 167,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_processing_stats": {
@@ -277,6 +400,7 @@
                         ],
                         "start_line": 169,
                         "end_line": 171,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "reset_stats": {
@@ -285,6 +409,7 @@
                         ],
                         "start_line": 173,
                         "end_line": 181,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -296,6 +421,7 @@
                 "args": [],
                 "start_line": 13,
                 "end_line": 188,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -303,11 +429,12 @@
                         ],
                         "start_line": 16,
                         "end_line": 22,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Logger": "from backend.complicated_project.utils.logger",
+                            "ConfigManager": "from backend.complicated_project.utils.config_manager",
                             "InputValidator": "from backend.complicated_project.utils.validators",
-                            "AuditLogger": "from backend.complicated_project.utils.logger",
-                            "ConfigManager": "from backend.complicated_project.utils.config_manager"
+                            "AuditLogger": "from backend.complicated_project.utils.logger"
                         }
                     },
                     "initialize": {
@@ -316,6 +443,7 @@
                         ],
                         "start_line": 24,
                         "end_line": 28,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_user": {
@@ -325,6 +453,7 @@
                         ],
                         "start_line": 30,
                         "end_line": 37,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -336,6 +465,7 @@
                         ],
                         "start_line": 39,
                         "end_line": 65,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -348,6 +478,7 @@
                         ],
                         "start_line": 67,
                         "end_line": 89,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "delete_user": {
@@ -357,6 +488,7 @@
                         ],
                         "start_line": 91,
                         "end_line": 104,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_active_users": {
@@ -365,6 +497,7 @@
                         ],
                         "start_line": 106,
                         "end_line": 115,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -377,6 +510,7 @@
                         ],
                         "start_line": 117,
                         "end_line": 132,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -388,6 +522,7 @@
                         ],
                         "start_line": 134,
                         "end_line": 146,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -398,6 +533,7 @@
                         ],
                         "start_line": 148,
                         "end_line": 150,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_user_stats": {
@@ -406,6 +542,7 @@
                         ],
                         "start_line": 152,
                         "end_line": 164,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "_load_users": {
@@ -414,6 +551,7 @@
                         ],
                         "start_line": 166,
                         "end_line": 178,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "_save_users": {
@@ -422,6 +560,7 @@
                         ],
                         "start_line": 180,
                         "end_line": 188,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -433,6 +572,7 @@
                 "args": [],
                 "start_line": 15,
                 "end_line": 63,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -441,6 +581,7 @@
                         ],
                         "start_line": 18,
                         "end_line": 21,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Logger": "from backend.complicated_project.utils.logger"
                         }
@@ -451,6 +592,7 @@
                         ],
                         "start_line": 23,
                         "end_line": 31,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "disconnect": {
@@ -459,6 +601,7 @@
                         ],
                         "start_line": 33,
                         "end_line": 38,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "execute": {
@@ -469,6 +612,7 @@
                         ],
                         "start_line": 40,
                         "end_line": 53,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "fetch_one": {
@@ -479,6 +623,7 @@
                         ],
                         "start_line": 55,
                         "end_line": 58,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "fetch_all": {
@@ -489,6 +634,7 @@
                         ],
                         "start_line": 60,
                         "end_line": 63,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -498,6 +644,7 @@
                 "args": [],
                 "start_line": 65,
                 "end_line": 160,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -506,6 +653,7 @@
                         ],
                         "start_line": 68,
                         "end_line": 70,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DatabaseConnection": "from backend.complicated_project.data.database",
                             "Logger": "from backend.complicated_project.utils.logger"
@@ -517,6 +665,7 @@
                         ],
                         "start_line": 73,
                         "end_line": 75,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "to_dict": {
@@ -526,6 +675,7 @@
                         ],
                         "start_line": 78,
                         "end_line": 80,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "from_dict": {
@@ -535,6 +685,7 @@
                         ],
                         "start_line": 83,
                         "end_line": 85,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "find_by_id": {
@@ -544,6 +695,7 @@
                         ],
                         "start_line": 87,
                         "end_line": 98,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "find_all": {
@@ -554,6 +706,7 @@
                         ],
                         "start_line": 100,
                         "end_line": 109,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "save": {
@@ -563,6 +716,7 @@
                         ],
                         "start_line": 111,
                         "end_line": 125,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "_create": {
@@ -572,6 +726,7 @@
                         ],
                         "start_line": 127,
                         "end_line": 138,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "_update": {
@@ -582,6 +737,7 @@
                         ],
                         "start_line": 140,
                         "end_line": 149,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "delete": {
@@ -591,6 +747,7 @@
                         ],
                         "start_line": 151,
                         "end_line": 160,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -600,6 +757,7 @@
                 "args": [],
                 "start_line": 162,
                 "end_line": 213,
+                "is_api_endpoint": false,
                 "methods": {
                     "table_name": {
                         "args": [
@@ -607,6 +765,7 @@
                         ],
                         "start_line": 165,
                         "end_line": 166,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "to_dict": {
@@ -616,6 +775,7 @@
                         ],
                         "start_line": 168,
                         "end_line": 181,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "from_dict": {
@@ -625,6 +785,7 @@
                         ],
                         "start_line": 183,
                         "end_line": 200,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -636,6 +797,7 @@
                         ],
                         "start_line": 202,
                         "end_line": 213,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -647,6 +809,7 @@
                 "args": [],
                 "start_line": 215,
                 "end_line": 256,
+                "is_api_endpoint": false,
                 "methods": {
                     "table_name": {
                         "args": [
@@ -654,6 +817,7 @@
                         ],
                         "start_line": 218,
                         "end_line": 219,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "to_dict": {
@@ -663,6 +827,7 @@
                         ],
                         "start_line": 221,
                         "end_line": 232,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "from_dict": {
@@ -672,6 +837,7 @@
                         ],
                         "start_line": 234,
                         "end_line": 256,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Report": "from backend.complicated_project.models.report"
                         }
@@ -685,6 +851,7 @@
                 "args": [],
                 "start_line": 258,
                 "end_line": 325,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -693,6 +860,7 @@
                         ],
                         "start_line": 261,
                         "end_line": 263,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DatabaseConnection": "from backend.complicated_project.data.database",
                             "Logger": "from backend.complicated_project.utils.logger"
@@ -704,6 +872,7 @@
                         ],
                         "start_line": 265,
                         "end_line": 305,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "seed_sample_data": {
@@ -712,9 +881,10 @@
                         ],
                         "start_line": 307,
                         "end_line": 325,
+                        "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user",
-                            "UserRepository": "from backend.complicated_project.data.database"
+                            "UserRepository": "from backend.complicated_project.data.database",
+                            "User": "from backend.complicated_project.models.user"
                         }
                     }
                 },
@@ -727,6 +897,7 @@
                 "args": [],
                 "start_line": 9,
                 "end_line": 38,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -737,6 +908,7 @@
                         ],
                         "start_line": 12,
                         "end_line": 18,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataFormatter": "from backend.complicated_project.utils.formatters"
                         }
@@ -747,6 +919,7 @@
                         ],
                         "start_line": 20,
                         "end_line": 29,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "normalize": {
@@ -755,6 +928,7 @@
                         ],
                         "start_line": 31,
                         "end_line": 34,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "to_csv_row": {
@@ -763,6 +937,7 @@
                         ],
                         "start_line": 36,
                         "end_line": 38,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -772,6 +947,7 @@
                 "args": [],
                 "start_line": 40,
                 "end_line": 87,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -782,6 +958,7 @@
                         ],
                         "start_line": 43,
                         "end_line": 49,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataPoint": "from backend.complicated_project.models.data_models"
                         }
@@ -793,6 +970,7 @@
                         ],
                         "start_line": 51,
                         "end_line": 55,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataPoint": "from backend.complicated_project.models.data_models"
                         }
@@ -803,6 +981,7 @@
                         ],
                         "start_line": 57,
                         "end_line": 64,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "filter_by_quality": {
@@ -812,6 +991,7 @@
                         ],
                         "start_line": 66,
                         "end_line": 68,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataPoint": "from backend.complicated_project.models.data_models"
                         }
@@ -822,6 +1002,7 @@
                         ],
                         "start_line": 70,
                         "end_line": 81,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "export_to_csv": {
@@ -830,6 +1011,7 @@
                         ],
                         "start_line": 83,
                         "end_line": 87,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -841,6 +1023,7 @@
                 "args": [],
                 "start_line": 10,
                 "end_line": 53,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -852,9 +1035,10 @@
                         ],
                         "start_line": 13,
                         "end_line": 23,
+                        "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user",
-                            "DataFormatter": "from backend.complicated_project.utils.formatters"
+                            "DataFormatter": "from backend.complicated_project.utils.formatters",
+                            "User": "from backend.complicated_project.models.user"
                         }
                     },
                     "generate": {
@@ -863,6 +1047,7 @@
                         ],
                         "start_line": 25,
                         "end_line": 29,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "mark_as_failed": {
@@ -872,6 +1057,7 @@
                         ],
                         "start_line": 31,
                         "end_line": 34,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_summary": {
@@ -880,6 +1066,7 @@
                         ],
                         "start_line": 36,
                         "end_line": 44,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "export_to_json": {
@@ -888,6 +1075,7 @@
                         ],
                         "start_line": 46,
                         "end_line": 48,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_file_size": {
@@ -896,6 +1084,7 @@
                         ],
                         "start_line": 50,
                         "end_line": 53,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -907,6 +1096,7 @@
                 "args": [],
                 "start_line": 10,
                 "end_line": 30,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -915,6 +1105,7 @@
                         ],
                         "start_line": 13,
                         "end_line": 18,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataValidator": "from backend.complicated_project.utils.validators",
                             "DataFormatter": "from backend.complicated_project.utils.formatters"
@@ -926,6 +1117,7 @@
                         ],
                         "start_line": 20,
                         "end_line": 22,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "to_dict": {
@@ -934,6 +1126,7 @@
                         ],
                         "start_line": 24,
                         "end_line": 26,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "update_timestamp": {
@@ -942,6 +1135,7 @@
                         ],
                         "start_line": 28,
                         "end_line": 30,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -951,6 +1145,7 @@
                 "args": [],
                 "start_line": 32,
                 "end_line": 63,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -962,6 +1157,7 @@
                         ],
                         "start_line": 35,
                         "end_line": 43,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "authenticate": {
@@ -971,6 +1167,7 @@
                         ],
                         "start_line": 45,
                         "end_line": 48,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "update_profile": {
@@ -980,6 +1177,7 @@
                         ],
                         "start_line": 50,
                         "end_line": 55,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_display_name": {
@@ -988,6 +1186,7 @@
                         ],
                         "start_line": 57,
                         "end_line": 59,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "is_admin": {
@@ -996,6 +1195,7 @@
                         ],
                         "start_line": 61,
                         "end_line": 63,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -1009,6 +1209,7 @@
                 "args": [],
                 "start_line": 10,
                 "end_line": 30,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -1017,6 +1218,7 @@
                         ],
                         "start_line": 13,
                         "end_line": 18,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataValidator": "from backend.complicated_project.utils.validators",
                             "DataFormatter": "from backend.complicated_project.utils.formatters"
@@ -1028,6 +1230,7 @@
                         ],
                         "start_line": 20,
                         "end_line": 22,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "to_dict": {
@@ -1036,6 +1239,7 @@
                         ],
                         "start_line": 24,
                         "end_line": 26,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "update_timestamp": {
@@ -1044,6 +1248,7 @@
                         ],
                         "start_line": 28,
                         "end_line": 30,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -1053,6 +1258,7 @@
                 "args": [],
                 "start_line": 32,
                 "end_line": 63,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -1064,6 +1270,7 @@
                         ],
                         "start_line": 35,
                         "end_line": 43,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "authenticate": {
@@ -1073,6 +1280,7 @@
                         ],
                         "start_line": 45,
                         "end_line": 48,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "update_profile": {
@@ -1082,6 +1290,7 @@
                         ],
                         "start_line": 50,
                         "end_line": 55,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_display_name": {
@@ -1090,6 +1299,7 @@
                         ],
                         "start_line": 57,
                         "end_line": 59,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "is_admin": {
@@ -1098,6 +1308,7 @@
                         ],
                         "start_line": 61,
                         "end_line": 63,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -1109,6 +1320,7 @@
                 "args": [],
                 "start_line": 65,
                 "end_line": 99,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -1120,6 +1332,7 @@
                         ],
                         "start_line": 68,
                         "end_line": 76,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -1130,6 +1343,7 @@
                         ],
                         "start_line": 78,
                         "end_line": 83,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "mark_as_failed": {
@@ -1139,6 +1353,7 @@
                         ],
                         "start_line": 85,
                         "end_line": 89,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_summary": {
@@ -1147,6 +1362,7 @@
                         ],
                         "start_line": 91,
                         "end_line": 99,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -1158,6 +1374,7 @@
                 "args": [],
                 "start_line": 101,
                 "end_line": 125,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -1168,6 +1385,7 @@
                         ],
                         "start_line": 104,
                         "end_line": 109,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "calculate_quality": {
@@ -1176,6 +1394,7 @@
                         ],
                         "start_line": 111,
                         "end_line": 120,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "normalize": {
@@ -1184,6 +1403,7 @@
                         ],
                         "start_line": 122,
                         "end_line": 125,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -1195,6 +1415,7 @@
                 "args": [],
                 "start_line": 127,
                 "end_line": 168,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -1205,6 +1426,7 @@
                         ],
                         "start_line": 130,
                         "end_line": 135,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataPoint": "from backend.complicated_project.models.data_models"
                         }
@@ -1216,6 +1438,7 @@
                         ],
                         "start_line": 137,
                         "end_line": 142,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataPoint": "from backend.complicated_project.models.data_models"
                         }
@@ -1226,6 +1449,7 @@
                         ],
                         "start_line": 144,
                         "end_line": 151,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "filter_by_quality": {
@@ -1235,6 +1459,7 @@
                         ],
                         "start_line": 153,
                         "end_line": 155,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataPoint": "from backend.complicated_project.models.data_models"
                         }
@@ -1245,6 +1470,7 @@
                         ],
                         "start_line": 157,
                         "end_line": 168,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -1258,6 +1484,7 @@
                 "args": [],
                 "start_line": 17,
                 "end_line": 275,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -1265,10 +1492,11 @@
                         ],
                         "start_line": 20,
                         "end_line": 24,
+                        "is_api_endpoint": false,
                         "used_functions": {
-                            "Logger": "from backend.complicated_project.utils.logger",
                             "ConfigManager": "from backend.complicated_project.utils.config_manager",
-                            "DataFormatter": "from backend.complicated_project.utils.formatters"
+                            "DataFormatter": "from backend.complicated_project.utils.formatters",
+                            "Logger": "from backend.complicated_project.utils.logger"
                         }
                     },
                     "send_notification": {
@@ -1280,6 +1508,7 @@
                         ],
                         "start_line": 26,
                         "end_line": 62,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -1293,6 +1522,7 @@
                         ],
                         "start_line": 64,
                         "end_line": 75,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -1305,6 +1535,7 @@
                         ],
                         "start_line": 77,
                         "end_line": 83,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "_get_notification_channels": {
@@ -1315,6 +1546,7 @@
                         ],
                         "start_line": 85,
                         "end_line": 108,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -1328,6 +1560,7 @@
                         ],
                         "start_line": 110,
                         "end_line": 141,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -1340,6 +1573,7 @@
                         ],
                         "start_line": 143,
                         "end_line": 174,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -1353,6 +1587,7 @@
                         ],
                         "start_line": 176,
                         "end_line": 199,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -1366,6 +1601,7 @@
                         ],
                         "start_line": 201,
                         "end_line": 229,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -1380,6 +1616,7 @@
                         ],
                         "start_line": 231,
                         "end_line": 246,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -1392,6 +1629,7 @@
                         ],
                         "start_line": 248,
                         "end_line": 255,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_notification_stats": {
@@ -1400,6 +1638,7 @@
                         ],
                         "start_line": 257,
                         "end_line": 275,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -1411,6 +1650,7 @@
                 "args": [],
                 "start_line": 15,
                 "end_line": 249,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -1418,11 +1658,12 @@
                         ],
                         "start_line": 18,
                         "end_line": 23,
+                        "is_api_endpoint": false,
                         "used_functions": {
-                            "Logger": "from backend.complicated_project.utils.logger",
                             "CSVFormatter": "from backend.complicated_project.utils.formatters",
-                            "ReportFormatter": "from backend.complicated_project.utils.formatters",
-                            "ConfigManager": "from backend.complicated_project.utils.config_manager"
+                            "Logger": "from backend.complicated_project.utils.logger",
+                            "ConfigManager": "from backend.complicated_project.utils.config_manager",
+                            "ReportFormatter": "from backend.complicated_project.utils.formatters"
                         }
                     },
                     "generate_report": {
@@ -1433,6 +1674,7 @@
                         ],
                         "start_line": 25,
                         "end_line": 57,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user",
                             "Report": "from backend.complicated_project.models.report"
@@ -1445,6 +1687,7 @@
                         ],
                         "start_line": 59,
                         "end_line": 81,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Report": "from backend.complicated_project.models.report"
                         }
@@ -1457,6 +1700,7 @@
                         ],
                         "start_line": 83,
                         "end_line": 102,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "User": "from backend.complicated_project.models.user"
                         }
@@ -1468,6 +1712,7 @@
                         ],
                         "start_line": 104,
                         "end_line": 139,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Report": "from backend.complicated_project.models.report"
                         }
@@ -1479,6 +1724,7 @@
                         ],
                         "start_line": 141,
                         "end_line": 157,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "_prepare_chart_data": {
@@ -1488,6 +1734,7 @@
                         ],
                         "start_line": 159,
                         "end_line": 182,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Dataset": "from backend.complicated_project.models.data_models"
                         }
@@ -1499,6 +1746,7 @@
                         ],
                         "start_line": 184,
                         "end_line": 193,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Dataset": "from backend.complicated_project.models.data_models"
                         }
@@ -1510,6 +1758,7 @@
                         ],
                         "start_line": 195,
                         "end_line": 213,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Report": "from backend.complicated_project.models.report"
                         }
@@ -1522,6 +1771,7 @@
                         ],
                         "start_line": 215,
                         "end_line": 230,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Report": "from backend.complicated_project.models.report"
                         }
@@ -1533,6 +1783,7 @@
                         ],
                         "start_line": 232,
                         "end_line": 249,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Report": "from backend.complicated_project.models.report"
                         }
@@ -1546,6 +1797,7 @@
                 "args": [],
                 "start_line": 12,
                 "end_line": 104,
+                "is_api_endpoint": false,
                 "methods": {
                     "setUp": {
                         "args": [
@@ -1553,6 +1805,7 @@
                         ],
                         "start_line": 15,
                         "end_line": 25,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataProcessor": "from backend.complicated_project.core.data_processor"
                         }
@@ -1563,6 +1816,7 @@
                         ],
                         "start_line": 27,
                         "end_line": 31,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "test_validate_input_valid": {
@@ -1571,6 +1825,7 @@
                         ],
                         "start_line": 33,
                         "end_line": 36,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "test_validate_input_invalid": {
@@ -1579,6 +1834,7 @@
                         ],
                         "start_line": 38,
                         "end_line": 42,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "test_create_dataset": {
@@ -1587,6 +1843,7 @@
                         ],
                         "start_line": 44,
                         "end_line": 50,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataPoint": "from backend.complicated_project.models.data_models"
                         }
@@ -1598,6 +1855,7 @@
                         ],
                         "start_line": 53,
                         "end_line": 62,
+                        "is_api_endpoint": true,
                         "used_functions": {}
                     },
                     "test_process_invalid_input": {
@@ -1606,6 +1864,7 @@
                         ],
                         "start_line": 64,
                         "end_line": 71,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "test_processing_stats_update": {
@@ -1614,6 +1873,7 @@
                         ],
                         "start_line": 73,
                         "end_line": 82,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "test_get_processing_stats": {
@@ -1622,6 +1882,7 @@
                         ],
                         "start_line": 84,
                         "end_line": 90,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "test_reset_stats": {
@@ -1630,6 +1891,7 @@
                         ],
                         "start_line": 92,
                         "end_line": 104,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -1639,6 +1901,7 @@
                 "args": [],
                 "start_line": 106,
                 "end_line": 139,
+                "is_api_endpoint": false,
                 "methods": {
                     "test_initialization": {
                         "args": [
@@ -1646,6 +1909,7 @@
                         ],
                         "start_line": 109,
                         "end_line": 115,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataPoint": "from backend.complicated_project.models.data_models"
                         }
@@ -1656,6 +1920,7 @@
                         ],
                         "start_line": 117,
                         "end_line": 123,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataPoint": "from backend.complicated_project.models.data_models"
                         }
@@ -1666,6 +1931,7 @@
                         ],
                         "start_line": 125,
                         "end_line": 131,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataPoint": "from backend.complicated_project.models.data_models"
                         }
@@ -1676,6 +1942,7 @@
                         ],
                         "start_line": 133,
                         "end_line": 139,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataPoint": "from backend.complicated_project.models.data_models"
                         }
@@ -1689,6 +1956,7 @@
                 "args": [],
                 "start_line": 10,
                 "end_line": 147,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -1697,6 +1965,7 @@
                         ],
                         "start_line": 13,
                         "end_line": 43,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "Logger": "from backend.complicated_project.utils.logger"
                         }
@@ -1707,6 +1976,7 @@
                         ],
                         "start_line": 45,
                         "end_line": 61,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "save_config": {
@@ -1715,6 +1985,7 @@
                         ],
                         "start_line": 63,
                         "end_line": 72,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get": {
@@ -1725,6 +1996,7 @@
                         ],
                         "start_line": 74,
                         "end_line": 84,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "set": {
@@ -1735,6 +2007,7 @@
                         ],
                         "start_line": 86,
                         "end_line": 98,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_section": {
@@ -1744,6 +2017,7 @@
                         ],
                         "start_line": 100,
                         "end_line": 102,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "update_section": {
@@ -1754,6 +2028,7 @@
                         ],
                         "start_line": 104,
                         "end_line": 110,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "reset_to_defaults": {
@@ -1762,6 +2037,7 @@
                         ],
                         "start_line": 112,
                         "end_line": 115,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "validate_config": {
@@ -1770,6 +2046,7 @@
                         ],
                         "start_line": 117,
                         "end_line": 135,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "_merge_configs": {
@@ -1780,6 +2057,7 @@
                         ],
                         "start_line": 137,
                         "end_line": 147,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -1789,6 +2067,7 @@
                 "args": [],
                 "start_line": 149,
                 "end_line": 171,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -1796,6 +2075,7 @@
                         ],
                         "start_line": 152,
                         "end_line": 154,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "load_from_env": {
@@ -1804,6 +2084,7 @@
                         ],
                         "start_line": 156,
                         "end_line": 171,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -1817,6 +2098,7 @@
                 "args": [],
                 "start_line": 9,
                 "end_line": 68,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -1824,6 +2106,7 @@
                         ],
                         "start_line": 12,
                         "end_line": 13,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "format_display_name": {
@@ -1833,6 +2116,7 @@
                         ],
                         "start_line": 15,
                         "end_line": 19,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "format_date": {
@@ -1842,6 +2126,7 @@
                         ],
                         "start_line": 21,
                         "end_line": 23,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "normalize_value": {
@@ -1851,6 +2136,7 @@
                         ],
                         "start_line": 25,
                         "end_line": 31,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "model_to_dict": {
@@ -1860,6 +2146,7 @@
                         ],
                         "start_line": 33,
                         "end_line": 43,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "to_json": {
@@ -1869,6 +2156,7 @@
                         ],
                         "start_line": 45,
                         "end_line": 52,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "json_serializer": "from backend.complicated_project.utils.formatters"
                         }
@@ -1880,6 +2168,7 @@
                         ],
                         "start_line": 54,
                         "end_line": 60,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "format_percentage": {
@@ -1889,6 +2178,7 @@
                         ],
                         "start_line": 62,
                         "end_line": 64,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "format_currency": {
@@ -1899,6 +2189,7 @@
                         ],
                         "start_line": 66,
                         "end_line": 68,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -1908,6 +2199,7 @@
                 "args": [],
                 "start_line": 70,
                 "end_line": 91,
+                "is_api_endpoint": false,
                 "methods": {
                     "format_report_summary": {
                         "args": [
@@ -1916,6 +2208,7 @@
                         ],
                         "start_line": 73,
                         "end_line": 81,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "format_user_summary": {
@@ -1925,6 +2218,7 @@
                         ],
                         "start_line": 83,
                         "end_line": 91,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -1936,6 +2230,7 @@
                 "args": [],
                 "start_line": 93,
                 "end_line": 109,
+                "is_api_endpoint": false,
                 "methods": {
                     "format_row": {
                         "args": [
@@ -1944,6 +2239,7 @@
                         ],
                         "start_line": 96,
                         "end_line": 105,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "format_header": {
@@ -1953,6 +2249,7 @@
                         ],
                         "start_line": 107,
                         "end_line": 109,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -1966,6 +2263,7 @@
                 ],
                 "start_line": 47,
                 "end_line": 50,
+                "is_api_endpoint": false,
                 "used_functions": {}
             }
         },
@@ -1974,6 +2272,7 @@
                 "args": [],
                 "start_line": 11,
                 "end_line": 74,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -1982,6 +2281,7 @@
                         ],
                         "start_line": 14,
                         "end_line": 19,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "DataFormatter": "from backend.complicated_project.utils.formatters"
                         }
@@ -1992,6 +2292,7 @@
                         ],
                         "start_line": 21,
                         "end_line": 47,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "info": {
@@ -2002,6 +2303,7 @@
                         ],
                         "start_line": 49,
                         "end_line": 51,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "error": {
@@ -2012,6 +2314,7 @@
                         ],
                         "start_line": 53,
                         "end_line": 55,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "warning": {
@@ -2022,6 +2325,7 @@
                         ],
                         "start_line": 57,
                         "end_line": 59,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "debug": {
@@ -2032,6 +2336,7 @@
                         ],
                         "start_line": 61,
                         "end_line": 63,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "log_performance": {
@@ -2042,6 +2347,7 @@
                         ],
                         "start_line": 65,
                         "end_line": 67,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "log_user_action": {
@@ -2053,6 +2359,7 @@
                         ],
                         "start_line": 69,
                         "end_line": 74,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -2062,6 +2369,7 @@
                 "args": [],
                 "start_line": 76,
                 "end_line": 103,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -2069,6 +2377,7 @@
                         ],
                         "start_line": 79,
                         "end_line": 81,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "log_security_event": {
@@ -2080,6 +2389,7 @@
                         ],
                         "start_line": 83,
                         "end_line": 96,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "log_data_access": {
@@ -2091,6 +2401,7 @@
                         ],
                         "start_line": 98,
                         "end_line": 103,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -2104,6 +2415,7 @@
                 "args": [],
                 "start_line": 14,
                 "end_line": 215,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -2111,9 +2423,10 @@
                         ],
                         "start_line": 17,
                         "end_line": 23,
+                        "is_api_endpoint": false,
                         "used_functions": {
-                            "Logger": "from backend.complicated_project.utils.logger",
-                            "ConfigManager": "from backend.complicated_project.utils.config_manager"
+                            "ConfigManager": "from backend.complicated_project.utils.config_manager",
+                            "Logger": "from backend.complicated_project.utils.logger"
                         }
                     },
                     "start_monitoring": {
@@ -2122,6 +2435,7 @@
                         ],
                         "start_line": 25,
                         "end_line": 33,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "stop_monitoring": {
@@ -2130,6 +2444,7 @@
                         ],
                         "start_line": 35,
                         "end_line": 40,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "time_function": {
@@ -2139,6 +2454,7 @@
                         ],
                         "start_line": 42,
                         "end_line": 59,
+                        "is_api_endpoint": false,
                         "used_functions": {
                             "decorator": "from backend.complicated_project.utils.performance_monitor"
                         }
@@ -2153,6 +2469,7 @@
                         ],
                         "start_line": 61,
                         "end_line": 79,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_metric": {
@@ -2163,6 +2480,7 @@
                         ],
                         "start_line": 81,
                         "end_line": 108,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_all_metrics": {
@@ -2171,6 +2489,7 @@
                         ],
                         "start_line": 110,
                         "end_line": 112,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "set_threshold": {
@@ -2183,6 +2502,7 @@
                         ],
                         "start_line": 114,
                         "end_line": 132,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "get_alerts": {
@@ -2192,6 +2512,7 @@
                         ],
                         "start_line": 134,
                         "end_line": 138,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "_monitor_loop": {
@@ -2200,6 +2521,7 @@
                         ],
                         "start_line": 140,
                         "end_line": 152,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "_collect_system_metrics": {
@@ -2208,6 +2530,7 @@
                         ],
                         "start_line": 154,
                         "end_line": 177,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "_check_thresholds": {
@@ -2218,6 +2541,7 @@
                         ],
                         "start_line": 179,
                         "end_line": 215,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -2227,6 +2551,7 @@
                 "args": [],
                 "start_line": 217,
                 "end_line": 278,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -2235,9 +2560,10 @@
                         ],
                         "start_line": 220,
                         "end_line": 222,
+                        "is_api_endpoint": false,
                         "used_functions": {
-                            "Logger": "from backend.complicated_project.utils.logger",
-                            "PerformanceMonitor": "from backend.complicated_project.utils.performance_monitor"
+                            "PerformanceMonitor": "from backend.complicated_project.utils.performance_monitor",
+                            "Logger": "from backend.complicated_project.utils.logger"
                         }
                     },
                     "export_to_prometheus": {
@@ -2246,6 +2572,7 @@
                         ],
                         "start_line": 224,
                         "end_line": 247,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "export_to_json": {
@@ -2254,6 +2581,7 @@
                         ],
                         "start_line": 249,
                         "end_line": 251,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "export_to_csv": {
@@ -2262,6 +2590,7 @@
                         ],
                         "start_line": 253,
                         "end_line": 278,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -2273,6 +2602,7 @@
                 ],
                 "start_line": 44,
                 "end_line": 58,
+                "is_api_endpoint": false,
                 "used_functions": {
                     "wrapper": "from backend.complicated_project.utils.performance_monitor"
                 }
@@ -2281,6 +2611,7 @@
                 "args": [],
                 "start_line": 45,
                 "end_line": 57,
+                "is_api_endpoint": false,
                 "used_functions": {}
             }
         },
@@ -2289,6 +2620,7 @@
                 "args": [],
                 "start_line": 9,
                 "end_line": 59,
+                "is_api_endpoint": false,
                 "methods": {
                     "__init__": {
                         "args": [
@@ -2296,6 +2628,7 @@
                         ],
                         "start_line": 12,
                         "end_line": 13,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "validate_email": {
@@ -2305,6 +2638,7 @@
                         ],
                         "start_line": 15,
                         "end_line": 17,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "validate_password": {
@@ -2314,6 +2648,7 @@
                         ],
                         "start_line": 19,
                         "end_line": 29,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "validate_model": {
@@ -2323,6 +2658,7 @@
                         ],
                         "start_line": 31,
                         "end_line": 36,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "validate_data_point": {
@@ -2332,6 +2668,7 @@
                         ],
                         "start_line": 38,
                         "end_line": 44,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "validate_dataset_name": {
@@ -2341,6 +2678,7 @@
                         ],
                         "start_line": 46,
                         "end_line": 52,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "sanitize_string": {
@@ -2350,6 +2688,7 @@
                         ],
                         "start_line": 54,
                         "end_line": 59,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -2359,6 +2698,7 @@
                 "args": [],
                 "start_line": 61,
                 "end_line": 92,
+                "is_api_endpoint": false,
                 "methods": {
                     "validate_user_input": {
                         "args": [
@@ -2367,6 +2707,7 @@
                         ],
                         "start_line": 64,
                         "end_line": 84,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     },
                     "validate_report_data": {
@@ -2376,6 +2717,7 @@
                         ],
                         "start_line": 86,
                         "end_line": 92,
+                        "is_api_endpoint": false,
                         "used_functions": {}
                     }
                 },
@@ -2383,194 +2725,92 @@
                     "DataValidator": "from backend.complicated_project.utils.validators"
                 }
             }
-        },
-        "Class Visualisation/frontend/node_modules/flatted/python/flatted.py": {
-            "_Known": {
-                "args": [],
-                "start_line": 19,
-                "end_line": 22,
-                "methods": {
-                    "__init__": {
-                        "args": [
-                            "self"
-                        ],
-                        "start_line": 20,
-                        "end_line": 22,
-                        "used_functions": {}
-                    }
-                },
-                "used_functions": {}
-            },
-            "_String": {
-                "args": [],
-                "start_line": 24,
-                "end_line": 26,
-                "methods": {
-                    "__init__": {
-                        "args": [
-                            "self",
-                            "value"
-                        ],
-                        "start_line": 25,
-                        "end_line": 26,
-                        "used_functions": {}
-                    }
-                },
-                "used_functions": {}
-            },
-            "_array_keys": {
-                "args": [
-                    "value"
-                ],
-                "start_line": 29,
-                "end_line": 35,
-                "used_functions": {}
-            },
-            "_object_keys": {
-                "args": [
-                    "value"
-                ],
-                "start_line": 37,
-                "end_line": 41,
-                "used_functions": {}
-            },
-            "_is_array": {
-                "args": [
-                    "value"
-                ],
-                "start_line": 43,
-                "end_line": 44,
-                "used_functions": {}
-            },
-            "_is_object": {
-                "args": [
-                    "value"
-                ],
-                "start_line": 46,
-                "end_line": 47,
-                "used_functions": {}
-            },
-            "_is_string": {
-                "args": [
-                    "value"
-                ],
-                "start_line": 49,
-                "end_line": 50,
-                "used_functions": {}
-            },
-            "_index": {
-                "args": [
-                    "known",
-                    "input",
-                    "value"
-                ],
-                "start_line": 52,
-                "end_line": 57,
-                "used_functions": {}
-            },
-            "_loop": {
-                "args": [
-                    "keys",
-                    "input",
-                    "known",
-                    "output"
-                ],
-                "start_line": 59,
-                "end_line": 65,
-                "used_functions": {
-                    "_String": "from frontend.node_modules.flattedthon.flatted",
-                    "_ref": "from frontend.node_modules.flattedthon.flatted"
-                }
-            },
-            "_ref": {
-                "args": [
-                    "key",
-                    "value",
-                    "input",
-                    "known",
-                    "output"
-                ],
-                "start_line": 67,
-                "end_line": 75,
-                "used_functions": {
-                    "_is_object": "from frontend.node_modules.flattedthon.flatted",
-                    "_loop": "from frontend.node_modules.flattedthon.flatted",
-                    "_array_keys": "from frontend.node_modules.flattedthon.flatted",
-                    "_is_array": "from frontend.node_modules.flattedthon.flatted",
-                    "_object_keys": "from frontend.node_modules.flattedthon.flatted"
-                }
-            },
-            "_relate": {
-                "args": [
-                    "known",
-                    "input",
-                    "value"
-                ],
-                "start_line": 77,
-                "end_line": 84,
-                "used_functions": {
-                    "_is_object": "from frontend.node_modules.flattedthon.flatted",
-                    "_is_string": "from frontend.node_modules.flattedthon.flatted",
-                    "_index": "from frontend.node_modules.flattedthon.flatted",
-                    "_is_array": "from frontend.node_modules.flattedthon.flatted"
-                }
-            },
-            "_transform": {
-                "args": [
-                    "known",
-                    "input",
-                    "value"
-                ],
-                "start_line": 86,
-                "end_line": 99,
-                "used_functions": {
-                    "_is_object": "from frontend.node_modules.flattedthon.flatted",
-                    "_relate": "from frontend.node_modules.flattedthon.flatted",
-                    "_is_array": "from frontend.node_modules.flattedthon.flatted"
-                }
-            },
-            "_wrap": {
-                "args": [
-                    "value"
-                ],
-                "start_line": 101,
-                "end_line": 115,
-                "used_functions": {
-                    "_is_object": "from frontend.node_modules.flattedthon.flatted",
-                    "_is_string": "from frontend.node_modules.flattedthon.flatted",
-                    "_String": "from frontend.node_modules.flattedthon.flatted",
-                    "_wrap": "from frontend.node_modules.flattedthon.flatted",
-                    "_is_array": "from frontend.node_modules.flattedthon.flatted"
-                }
-            },
-            "parse": {
-                "args": [
-                    "value"
-                ],
-                "start_line": 117,
-                "end_line": 138,
-                "used_functions": {
-                    "_is_object": "from frontend.node_modules.flattedthon.flatted",
-                    "_loop": "from frontend.node_modules.flattedthon.flatted",
-                    "_array_keys": "from frontend.node_modules.flattedthon.flatted",
-                    "_wrap": "from frontend.node_modules.flattedthon.flatted",
-                    "_String": "from frontend.node_modules.flattedthon.flatted",
-                    "_is_array": "from frontend.node_modules.flattedthon.flatted",
-                    "_object_keys": "from frontend.node_modules.flattedthon.flatted"
-                }
-            },
-            "stringify": {
-                "args": [
-                    "value"
-                ],
-                "start_line": 141,
-                "end_line": 149,
-                "used_functions": {
-                    "_Known": "from frontend.node_modules.flattedthon.flatted",
-                    "_index": "from frontend.node_modules.flattedthon.flatted",
-                    "_transform": "from frontend.node_modules.flattedthon.flatted"
-                }
-            }
         }
+    },
+    "file_meta": {
+        "Class Visualisation/backend/analyzer.py": {
+            "is_router": false,
+            "module": "backend.analyzer"
+        },
+        "Class Visualisation/backend/main.py": {
+            "is_router": false,
+            "module": "backend.main"
+        },
+        "Class Visualisation/backend/utils.py": {
+            "is_router": false,
+            "module": "backend.utils"
+        },
+        "Class Visualisation/backend/complicated_project/start.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.start"
+        },
+        "Class Visualisation/backend/complicated_project/core/data_processor.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.core.data_processor"
+        },
+        "Class Visualisation/backend/complicated_project/core/user_manager.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.core.user_manager"
+        },
+        "Class Visualisation/backend/complicated_project/data/database.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.data.database"
+        },
+        "Class Visualisation/backend/complicated_project/data/sample_data.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.data.sample_data"
+        },
+        "Class Visualisation/backend/complicated_project/models/data_models.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.models.data_models"
+        },
+        "Class Visualisation/backend/complicated_project/models/report.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.models.report"
+        },
+        "Class Visualisation/backend/complicated_project/models/user.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.models.user"
+        },
+        "Class Visualisation/backend/complicated_project/models/__init__.py": {
+            "is_router": true,
+            "module": "backend.complicated_project.models.__init__"
+        },
+        "Class Visualisation/backend/complicated_project/services/notification_service.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.services.notification_service"
+        },
+        "Class Visualisation/backend/complicated_project/services/report_generator.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.services.report_generator"
+        },
+        "Class Visualisation/backend/complicated_project/tests/test_data_processor.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.tests.test_data_processor"
+        },
+        "Class Visualisation/backend/complicated_project/utils/config_manager.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.utils.config_manager"
+        },
+        "Class Visualisation/backend/complicated_project/utils/formatters.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.utils.formatters"
+        },
+        "Class Visualisation/backend/complicated_project/utils/logger.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.utils.logger"
+        },
+        "Class Visualisation/backend/complicated_project/utils/performance_monitor.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.utils.performance_monitor"
+        },
+        "Class Visualisation/backend/complicated_project/utils/validators.py": {
+            "is_router": false,
+            "module": "backend.complicated_project.utils.validators"
+        }
+    },
+    "config": {
+        "scan_root": "C:\\Users\\Snake\\Documents\\Visual Studio Code Projects\\Class Visualisation",
+        "focus_root": "C:\\Users\\Snake\\Documents\\Visual Studio Code Projects\\Class Visualisation\\backend"
     }
 }

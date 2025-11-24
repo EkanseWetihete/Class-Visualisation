@@ -31,7 +31,13 @@ export const FileCard: React.FC<FileCardProps> = ({
   showIncomingHighlights
 }) => {
   const isSelectedFile = selectedFileId === fileBox.id || (selectedItemId && fileBox.items.some(item => item.id === selectedItemId));
-  const fileClassName = isSelectedFile ? `${styles.fileBox} ${styles.fileBoxSelected}` : styles.fileBox;
+  const fileClassName = [
+    styles.fileBox,
+    fileBox.isRouter ? styles.fileBoxRouter : '',
+    isSelectedFile ? styles.fileBoxSelected : ''
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <g
@@ -61,6 +67,16 @@ export const FileCard: React.FC<FileCardProps> = ({
       >
         {fileBox.displayName}
       </text>
+      {fileBox.isRouter && (
+        <text
+          x={fileBox.position.x + fileBox.size.width / 2}
+          y={fileBox.position.y + 38}
+          className={styles.fileBadge}
+          textAnchor="middle"
+        >
+          Router (__init__)
+        </text>
+      )}
 
       {fileBox.items.map(item => {
         const itemX = fileBox.position.x + item.position.x;
@@ -68,7 +84,11 @@ export const FileCard: React.FC<FileCardProps> = ({
         const isItemSelected = selectedItemId === item.id;
         const isOutgoing = showOutgoingHighlights && highlightedOutgoingTargets.has(item.id);
         const isIncoming = showIncomingHighlights && highlightedIncomingTargets.has(item.id);
-        const baseClass = item.type === 'class' ? styles.classBox : styles.functionBox;
+        const baseClass = item.isApiEndpoint
+          ? styles.apiEndpointBox
+          : item.type === 'class'
+            ? styles.classBox
+            : styles.functionBox;
         const itemClassName = [
           baseClass,
           isItemSelected ? styles.itemSelected : '',
@@ -94,6 +114,11 @@ export const FileCard: React.FC<FileCardProps> = ({
               height={item.size.height}
               className={itemClassName}
             />
+            {item.isApiEndpoint && (
+              <text x={itemX + item.size.width - 8} y={itemY + 20} className={styles.itemBadge} textAnchor="end">
+                API
+              </text>
+            )}
             <text x={itemX + 10} y={itemY + 22} className={styles.itemName}>
               {item.name}
             </text>

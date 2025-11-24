@@ -16,7 +16,9 @@ import {
 import {
   ConnectionPlan,
   ConnectionRender,
+  DataItem,
   FileBox,
+  FileMeta,
   ItemBox,
   OutputData,
   Position,
@@ -36,6 +38,7 @@ export function buildVisualizerLayout(data: OutputData | null): VisualizerLayout
     };
   }
 
+  const fileMetaMap = (data.file_meta ?? data.fileMeta ?? {}) as Record<string, FileMeta | undefined>;
   const fileBoxes: FileBox[] = [];
   const fileBoxById = new Map<string, FileBox>();
   const nameModuleIndex = new Map<string, Map<string, ItemBox[]>>();
@@ -107,13 +110,16 @@ export function buildVisualizerLayout(data: OutputData | null): VisualizerLayout
     const moduleKey = moduleKeyFromPath(filePath);
     const pathSegments = filePath.split(/[/\\]/);
     const displayName = pathSegments.slice(-2).join('/');
+    const metaForFile = fileMetaMap[filePath];
+    const isRouter = Boolean(metaForFile?.is_router ?? metaForFile?.isRouter);
 
     const items: ItemBox[] = [];
-    let itemYOffset = FILE_PADDING;
+    let itemYOffset = FILE_PADDING + (isRouter ? 18 : 0);
 
     Object.entries(fileData).forEach(([itemName, itemData]) => {
       const itemId = `${fileId}-${itemName}`;
       const isClass = !!itemData.methods;
+      const isApiEndpoint = Boolean((itemData as DataItem)['is_api_endpoint'] ?? itemData.isApiEndpoint);
 
       let methods: string[] = [];
       let itemHeight = ITEM_MIN_HEIGHT;
@@ -129,6 +135,7 @@ export function buildVisualizerLayout(data: OutputData | null): VisualizerLayout
         type: isClass ? 'class' : 'function',
         args: itemData.args ?? [],
         methods,
+        isApiEndpoint,
         position: { x: FILE_PADDING, y: itemYOffset },
         size: { width: ITEM_WIDTH, height: itemHeight },
         fileId,
@@ -159,6 +166,7 @@ export function buildVisualizerLayout(data: OutputData | null): VisualizerLayout
       path: filePath,
       moduleKey,
       displayName,
+      isRouter,
       position: { x: 0, y: 0 },
       size: { width: fileWidth, height: fileHeight },
       items
@@ -184,8 +192,8 @@ export function buildVisualizerLayout(data: OutputData | null): VisualizerLayout
         let bestMatch: { item: ItemBox; score: number } | null = null;
         const hintPath = moduleHint.replace(/\./g, '/');
 
-        moduleMap.forEach(items => {
-          items.forEach(candidate => {
+        for (const items of moduleMap.values()) {
+          for (const candidate of items) {
             const candidatePath = candidate.filePath
               .replace(/\.py$/i, '')
               .replace(/[\\]/g, '/')
@@ -202,8 +210,8 @@ export function buildVisualizerLayout(data: OutputData | null): VisualizerLayout
             if (!bestMatch || score > bestMatch.score) {
               bestMatch = { item: candidate, score };
             }
-          });
-        });
+          }
+        }
 
         if (bestMatch) {
           return bestMatch.item;

@@ -123,6 +123,10 @@
   transition: none;
 }
 
+.fileBoxRouter {
+  stroke: #ff9800;
+}
+
 .fileBoxSelected {
   stroke: #ff5252;
   stroke-width: 3.5px;
@@ -137,6 +141,13 @@
 
 .fileTitleSelected {
   fill: #d32f2f;
+}
+
+.fileBadge {
+  font-size: 12px;
+  font-weight: 700;
+  fill: #fb8c00;
+  text-transform: uppercase;
 }
 
 /* Class Box Styles */
@@ -165,6 +176,18 @@
 .functionBox:hover {
   fill: #e1bee7;
   filter: drop-shadow(0 4px 8px rgba(106, 27, 154, 0.3));
+}
+
+.apiEndpointBox {
+  fill: #d1c4e9;
+  stroke: #8e24aa;
+  stroke-width: 2.5px;
+  rx: 6;
+  filter: drop-shadow(0 4px 12px rgba(142, 36, 170, 0.35));
+}
+
+.apiEndpointBox:hover {
+  fill: #ce93d8;
 }
 
 .itemSelected {
@@ -209,6 +232,13 @@
   stroke: #90a4ae;
   stroke-width: 1;
   stroke-dasharray: 2, 2;
+}
+
+.itemBadge {
+  font-size: 11px;
+  font-weight: 700;
+  fill: #6a1b9a;
+  text-transform: uppercase;
 }
 
 /* Connection Styles */

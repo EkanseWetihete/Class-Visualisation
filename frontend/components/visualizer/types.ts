@@ -4,6 +4,8 @@ export interface DataItem {
   end_line: number;
   used_functions?: Record<string, string | { file?: string; methods?: string[] }>;
   methods?: Record<string, DataItem>;
+  'is_api_endpoint'?: boolean;
+  isApiEndpoint?: boolean;
 }
 
 export interface OutputMeta {
@@ -15,7 +17,21 @@ export interface OutputMeta {
 
 export interface OutputData {
   files: Record<string, Record<string, DataItem>>;
+  file_meta?: Record<string, FileMeta>;
+  fileMeta?: Record<string, FileMeta>;
+  config?: {
+    scan_root?: string;
+    focus_root?: string;
+    scanRoot?: string;
+    focusRoot?: string;
+  };
   _meta?: OutputMeta;
+}
+
+export interface FileMeta {
+  is_router?: boolean;
+  isRouter?: boolean;
+  module?: string;
 }
 
 export interface DataFileInfo {
@@ -48,6 +64,7 @@ export interface ItemBox {
   type: 'class' | 'function';
   args: string[];
   methods?: string[];
+  isApiEndpoint?: boolean;
   position: Position;
   size: Size;
   fileId: string;
@@ -61,6 +78,7 @@ export interface FileBox {
   path: string;
   moduleKey: string;
   displayName: string;
+  isRouter?: boolean;
   position: Position;
   size: Size;
   items: ItemBox[];

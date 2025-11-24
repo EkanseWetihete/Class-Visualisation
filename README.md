@@ -12,6 +12,8 @@ A professional UML-style code visualization tool built with Next.js that provide
   - File boxes: White with blue border
   - Class boxes: Light blue with darker blue border
   - Function boxes: Light purple with dark purple border
+  - API endpoints: Deep purple boxes with an "API" badge for quick scanning
+  - Router (`__init__.py`) files: Orange-accented outlines with a router badge under the title
 
 ### 📐 **Smart Coordinate System**
 - **Grid Layout**: Files are automatically arranged in a 3-column grid
@@ -63,6 +65,7 @@ The system reads from JSON files in the `data/` directory (e.g., `output.json`),
         "args": ["arg1", "arg2"],
         "start_line": 10,
         "end_line": 20,
+        "is_api_endpoint": true,
         "used_functions": {
           "other_function": "from module.name"
         }
@@ -75,6 +78,12 @@ The system reads from JSON files in the `data/` directory (e.g., `output.json`),
         "used_functions": { ... }
       }
     }
+    },
+    "file_meta": {
+      "path/to/file.py": {
+        "is_router": false,
+        "module": "package.module"
+      }
   },
   "_meta": {
     "version": "file_hash",
@@ -92,22 +101,30 @@ The system includes a Python-based backend analyzer that processes Python codeba
 ### Features
 - **AST Parsing**: Uses Python's `ast` module to analyze source code
 - **Dependency Tracking**: Identifies function and class references across modules
+- **Alias Awareness**: Resolves `import ... as ...` statements so references stay connected even when renamed
+- **API Endpoint Detection**: Flags decorated view functions/endpoints so the UI can highlight them automatically
 - **Metadata Generation**: Creates versioned JSON output with file metadata
 - **Multi-File Support**: Processes entire project directories and generates separate JSON files
+- **Scoped Scans**: Separate *scan root* and *focus root* let you analyze a whole project while only rendering the directories you care about
 
 ### Usage
 ```bash
 cd backend
 pip install -r requirements.txt
-python main.py  # Analyzes the sample project and generates output.json
+python main.py --scan-root .. --focus-root backend --output ..\data\output.json
 ```
+
+- `--scan-root` / `--entire-project`: directory that will be fully traversed for symbol definitions (defaults to the project root)
+- `--focus-root` / `--read-project`: directory whose files appear in the visualization (defaults to `backend`)
+- `--output`: target JSON file (defaults to `backend/output.json`)
 
 ### Output
 Generates JSON files in the `data/` directory with detailed code structure, including:
 - Function and class definitions with arguments and line numbers
 - Method lists for classes
 - Cross-references between functions and modules
-- File metadata for versioning and caching
+- API endpoint flags and router awareness for richer visuals
+- File metadata (module name, router flag) plus analyzer config for traceability
 
 The analyzer is designed to work with any Python project structure and can be extended for additional analysis features.
 
@@ -135,7 +152,7 @@ npm start
 
 1. Place your Python project in the `backend` analyzer
 2. Install backend dependencies: `cd backend && pip install -r requirements.txt`
-3. Run the analyzer: `python main.py` (or `python analyzer.py` depending on entry point)
+3. Run the analyzer: `python main.py --scan-root <entire project> --focus-root <directory to visualize> --output ..\data\output.json`
 4. Generated JSON files will be saved to `data/` directory
 5. The frontend will automatically list available data files
 6. Use the visualization to:
