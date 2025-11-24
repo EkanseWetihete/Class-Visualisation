@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from '../CodeVisualizer.module.css';
 import { DataFileInfo } from './types';
 import { SavedLayoutSummary } from './hooks/usePersistentPositions';
@@ -13,6 +13,8 @@ interface LoadPanelProps {
   onSelectDataFile: (fileName: string) => void;
   onSelectLayout: (layoutId: string) => void;
   onDeleteLayout: (layoutId: string) => void;
+  onDownloadLayout: (layoutId: string) => void;
+  onUploadLayout: (file: File) => void;
 }
 
 const formatSize = (size: number) => {
@@ -36,11 +38,27 @@ export const LoadPanel: React.FC<LoadPanelProps> = ({
   onRefreshDataFiles,
   onSelectDataFile,
   onSelectLayout,
-  onDeleteLayout
+  onDeleteLayout,
+  onDownloadLayout,
+  onUploadLayout
 }) => {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
   if (!isOpen) {
     return null;
   }
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      onUploadLayout(file);
+      event.target.value = '';
+    }
+  };
 
   return (
     <div className={styles.loadPanel}>
@@ -83,7 +101,19 @@ export const LoadPanel: React.FC<LoadPanelProps> = ({
       <div className={styles.loadPanelSection}>
         <div className={styles.loadPanelSectionHeader}>
           <span>Saved Layouts</span>
+          <div className={styles.loadPanelRowActions}>
+            <button className={styles.loadPanelAction} onClick={handleUploadClick}>
+              Upload Layout
+            </button>
+          </div>
         </div>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="application/json"
+          style={{ display: 'none' }}
+          onChange={handleFileChange}
+        />
         <div className={styles.loadPanelList}>
           {savedLayouts.length === 0 && <div className={styles.loadPanelEmpty}>No saved layouts yet</div>}
           {savedLayouts.map(layout => (
@@ -97,6 +127,9 @@ export const LoadPanel: React.FC<LoadPanelProps> = ({
               <div className={styles.loadPanelRowActions}>
                 <button className={styles.loadPanelAction} onClick={() => onSelectLayout(layout.id)}>
                   Load
+                </button>
+                <button className={styles.loadPanelAction} onClick={() => onDownloadLayout(layout.id)}>
+                  Download
                 </button>
                 <button className={styles.loadPanelDanger} onClick={() => onDeleteLayout(layout.id)}>
                   Delete

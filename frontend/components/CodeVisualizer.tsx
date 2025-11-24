@@ -4,7 +4,7 @@ import { Controls } from './visualizer/Controls';
 import { Canvas } from './visualizer/Canvas';
 import { LoadPanel } from './visualizer/LoadPanel';
 import { useOutputData } from './visualizer/hooks/useOutputData';
-import { PositionMap, usePersistentPositions } from './visualizer/hooks/usePersistentPositions';
+import { PositionMap, SavedLayoutRecord, usePersistentPositions } from './visualizer/hooks/usePersistentPositions';
 import {
   applyCustomPositions,
   buildVisualizerLayout,
@@ -12,6 +12,7 @@ import {
   computeConnectionPositions
 } from './visualizer/utils/layout';
 import { DataFileInfo, FileBox, Position, ViewBox } from './visualizer/types';
+import { SearchBar, SearchResult } from './visualizer/SearchBar';
 
 const DEFAULT_VIEWBOX: ViewBox = { x: 0, y: 0 };
 
@@ -29,12 +30,27 @@ type AggregatedEntry = {
   connections: Set<string>;
 };
 
+type SearchEntry = SearchResult & {
+  fileId: string;
+  itemId?: string;
+};
+
 export default function CodeVisualizer() {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [dataFile, setDataFile] = useState('output.json');
   const { data, versionKey, status, refresh, lastUpdated, error } = useOutputData(dataFile);
-  const { positions, updatePosition, resetPositions, saveLayout, deleteLayout, getLayoutById, layouts, applyPositions } =
-    usePersistentPositions(versionKey, dataFile);
+  const {
+    positions,
+    updatePosition,
+    updatePositionsBatch,
+    resetPositions,
+    saveLayout,
+    deleteLayout,
+    getLayoutById,
+    importLayout,
+    layouts,
+    applyPositions
+  } = usePersistentPositions(versionKey, dataFile);
 
   const layout = useMemo(() => buildVisualizerLayout(data), [data]);
   const fileBoxes = useMemo(() => applyCustomPositions(layout.fileBoxes, positions), [layout.fileBoxes, positions]);
@@ -49,15 +65,34 @@ export default function CodeVisualizer() {
 
   const [zoom, setZoom] = useState(1);
   const [viewBox, setViewBox] = useState<ViewBox>(DEFAULT_VIEWBOX);
+  const viewBoxRef = useRef<ViewBox>(DEFAULT_VIEWBOX);
   const [isPanning, setIsPanning] = useState(false);
-  const panStartRef = useRef({ x: 0, y: 0, viewBoxX: 0, viewBoxY: 0 });
-  const [draggingFile, setDraggingFile] = useState<{ filePath: string; offsetX: number; offsetY: number } | null>(null);
+  const panStartRef = useRef({ x: 0, y: 0, viewBoxX: 0, viewBoxY: 0, worldX: 0, worldY: 0 });
+  const [dragState, setDragState] = useState<
+    | null
+    | {
+        fileIds: string[];
+        startWorld: Position;
+        initialPositions: Record<string, Position>;
+        filePaths: Record<string, string>;
+      }
+  >(null);
+  const [selectedFileIds, setSelectedFileIds] = useState<Set<string>>(new Set());
   const [highlightState, setHighlightState] = useState<HighlightState | null>(null);
   const [showOutgoingHighlights, setShowOutgoingHighlights] = useState(true);
   const [showIncomingHighlights, setShowIncomingHighlights] = useState(true);
   const [isLoadPanelOpen, setIsLoadPanelOpen] = useState(false);
   const [dataFiles, setDataFiles] = useState<DataFileInfo[]>([]);
   const [pendingLayout, setPendingLayout] = useState<{ dataFile: string; positions: PositionMap } | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  useEffect(() => {
+    viewBoxRef.current = viewBox;
+  }, [viewBox]);
+
+  useEffect(() => {
+    svgRef.current?.setAttribute('viewBox', `${viewBox.x} ${viewBox.y} ${canvasBounds.width / zoom} ${canvasBounds.height / zoom}`);
+  }, [viewBox, canvasBounds, zoom]);
 
   const connectionAggregates = useMemo(() => {
     const makeEntry = () => ({ items: new Set<string>(), connections: new Set<string>() });
@@ -82,6 +117,90 @@ export default function CodeVisualizer() {
 
     return { outgoingByFile, outgoingByItem, incomingByFile, incomingByItem };
   }, [layout.connections]);
+
+  const fileBoxMap = useMemo(() => new Map(fileBoxes.map(box => [box.id, box])), [fileBoxes]);
+
+  const searchEntries = useMemo(() => {
+    const entries: SearchEntry[] = [];
+    fileBoxes.forEach(fileBox => {
+      entries.push({
+        id: `file:${fileBox.id}`,
+        label: fileBox.displayName,
+        detail: fileBox.path,
+        type: 'file',
+        fileId: fileBox.id
+      });
+
+      fileBox.items.forEach(item => {
+        entries.push({
+          id: `${fileBox.id}:${item.id}`,
+          label: item.name,
+          detail: fileBox.displayName,
+          type: item.type,
+          fileId: fileBox.id,
+          itemId: item.id
+        });
+      });
+    });
+    return entries;
+  }, [fileBoxes]);
+
+  const searchResults = useMemo(() => {
+    const term = searchQuery.trim().toLowerCase();
+    if (!term) {
+      return [] as SearchEntry[];
+    }
+    return searchEntries
+      .filter(entry => entry.label.toLowerCase().includes(term) || entry.detail.toLowerCase().includes(term))
+      .slice(0, 12);
+  }, [searchEntries, searchQuery]);
+
+  const searchEntryMap = useMemo(() => new Map(searchEntries.map(entry => [entry.id, entry])), [searchEntries]);
+
+  const handleSearchSelect = useCallback(
+    (resultId: string) => {
+      const result = searchEntryMap.get(resultId);
+      if (!result) {
+        return;
+      }
+      const file = fileBoxMap.get(result.fileId);
+      if (!file) {
+        return;
+      }
+
+      let targetX = file.position.x + file.size.width / 2;
+      let targetY = file.position.y + file.size.height / 2;
+      let targetItemId: string | undefined;
+
+      if (result.itemId) {
+        const item = file.items.find(entry => entry.id === result.itemId);
+        if (item) {
+          targetX = file.position.x + item.position.x + item.size.width / 2;
+          targetY = file.position.y + item.position.y + item.size.height / 2;
+          targetItemId = item.id;
+        }
+      }
+
+      const viewWidth = canvasBounds.width / zoom;
+      const viewHeight = canvasBounds.height / zoom;
+
+      setViewBox({
+        x: targetX - viewWidth / 2,
+        y: targetY - viewHeight / 2
+      });
+      setSelectedFileIds(new Set([file.id]));
+      setHighlightState({
+        fileId: file.id,
+        itemId: targetItemId,
+        outgoingItemIds: new Set(),
+        incomingItemIds: new Set(),
+        outgoingConnectionIds: new Set(),
+        incomingConnectionIds: new Set()
+      });
+      setSearchQuery('');
+    },
+    [canvasBounds.height, canvasBounds.width, fileBoxMap, searchEntryMap, zoom]
+  );
 
   const getWorldPoint = useCallback(
     (clientX: number, clientY: number): Position | null => {
@@ -108,13 +227,13 @@ export default function CodeVisualizer() {
   );
 
   useEffect(() => {
-    const handleWindowUp = () => setDraggingFile(null);
+    const handleWindowUp = () => setDragState(null);
     window.addEventListener('mouseup', handleWindowUp);
     return () => window.removeEventListener('mouseup', handleWindowUp);
   }, []);
 
   useEffect(() => {
-    if (!draggingFile) {
+    if (!dragState) {
       return;
     }
     const handleMove = (event: MouseEvent) => {
@@ -122,18 +241,32 @@ export default function CodeVisualizer() {
       if (!point) {
         return;
       }
-      updatePosition(draggingFile.filePath, {
-        x: point.x - draggingFile.offsetX,
-        y: point.y - draggingFile.offsetY
+      const deltaX = point.x - dragState.startWorld.x;
+      const deltaY = point.y - dragState.startWorld.y;
+      const updates: PositionMap = {};
+      dragState.fileIds.forEach(id => {
+        const path = dragState.filePaths[id];
+        const base = path ? dragState.initialPositions[path] : undefined;
+        if (!path || !base) {
+          return;
+        }
+        updates[path] = {
+          x: base.x + deltaX,
+          y: base.y + deltaY
+        };
       });
+      if (Object.keys(updates).length > 0) {
+        updatePositionsBatch(updates);
+      }
     };
     window.addEventListener('mousemove', handleMove);
     return () => window.removeEventListener('mousemove', handleMove);
-  }, [draggingFile, getWorldPoint, updatePosition]);
+  }, [dragState, getWorldPoint, updatePositionsBatch]);
 
   useEffect(() => {
     setHighlightState(null);
-    setDraggingFile(null);
+    setDragState(null);
+    setSelectedFileIds(new Set());
   }, [versionKey]);
 
   const fetchDataFiles = useCallback(async () => {
@@ -228,14 +361,23 @@ export default function CodeVisualizer() {
 
   const handleCanvasMouseDown = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
-      if (e.button !== 0 || draggingFile) {
+      if (e.button !== 0 || dragState) {
         return;
       }
       setIsPanning(true);
-      panStartRef.current = { x: e.clientX, y: e.clientY, viewBoxX: viewBox.x, viewBoxY: viewBox.y };
+      const anchor = getWorldPoint(e.clientX, e.clientY);
+      panStartRef.current = {
+        x: e.clientX,
+        y: e.clientY,
+        viewBoxX: viewBox.x,
+        viewBoxY: viewBox.y,
+        worldX: anchor?.x ?? viewBox.x,
+        worldY: anchor?.y ?? viewBox.y
+      };
+      viewBoxRef.current = viewBox;
       e.preventDefault();
     },
-    [draggingFile, viewBox]
+    [dragState, getWorldPoint, viewBox]
   );
 
   const handleCanvasMouseMove = useCallback(
@@ -244,29 +386,27 @@ export default function CodeVisualizer() {
         return;
       }
 
-      const svg = svgRef.current;
-      if (!svg) {
+      const point = getWorldPoint(e.clientX, e.clientY);
+      if (!point) {
         return;
       }
 
-      const rect = svg.getBoundingClientRect();
-      const deltaX = e.clientX - panStartRef.current.x;
-      const deltaY = e.clientY - panStartRef.current.y;
+      const deltaX = point.x - panStartRef.current.worldX;
+      const deltaY = point.y - panStartRef.current.worldY;
 
-      const scaleX = (canvasBounds.width / zoom) / rect.width;
-      const scaleY = (canvasBounds.height / zoom) / rect.height;
+      const newX = panStartRef.current.viewBoxX - deltaX;
+      const newY = panStartRef.current.viewBoxY - deltaY;
 
-      setViewBox({
-        x: panStartRef.current.viewBoxX - deltaX * scaleX,
-        y: panStartRef.current.viewBoxY - deltaY * scaleY
-      });
+      viewBoxRef.current = { x: newX, y: newY };
+      svgRef.current?.setAttribute('viewBox', `${newX} ${newY} ${canvasBounds.width / zoom} ${canvasBounds.height / zoom}`);
     },
-    [canvasBounds, isPanning, zoom]
+    [getWorldPoint, isPanning, canvasBounds, zoom]
   );
 
   const handleCanvasMouseUp = useCallback(() => {
     setIsPanning(false);
-    setDraggingFile(null);
+    setDragState(null);
+    setViewBox(viewBoxRef.current);
   }, []);
 
   const handleCanvasContextMenu = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
@@ -281,24 +421,59 @@ export default function CodeVisualizer() {
       }
       event.preventDefault();
 
+      if (event.ctrlKey || event.metaKey) {
+        setSelectedFileIds(prev => {
+          const next = new Set(prev);
+          if (next.has(fileBox.id)) {
+            next.delete(fileBox.id);
+          } else {
+            next.add(fileBox.id);
+          }
+          return next;
+        });
+        return;
+      }
+
+      const selectionHasFile = selectedFileIds.has(fileBox.id);
+      if (!selectionHasFile) {
+        setSelectedFileIds(new Set([fileBox.id]));
+      }
+
+      const activeIds = selectionHasFile && selectedFileIds.size > 0 ? Array.from(selectedFileIds) : [fileBox.id];
       const point = getWorldPoint(event.clientX, event.clientY);
       if (!point) {
         return;
       }
 
-      setDraggingFile({
-        filePath: fileBox.path,
-        offsetX: point.x - fileBox.position.x,
-        offsetY: point.y - fileBox.position.y
+      const filePaths: Record<string, string> = {};
+      const initialPositions: Record<string, Position> = {};
+      activeIds.forEach(id => {
+        const target = fileBoxMap.get(id);
+        if (target) {
+          filePaths[id] = target.path;
+          initialPositions[target.path] = { ...target.position };
+        }
+      });
+
+      if (Object.keys(initialPositions).length === 0) {
+        return;
+      }
+
+      setDragState({
+        fileIds: activeIds,
+        startWorld: point,
+        initialPositions,
+        filePaths
       });
     },
-    [getWorldPoint]
+    [fileBoxMap, getWorldPoint, selectedFileIds]
   );
 
   const handleFileContextMenu = useCallback(
     (_event: React.MouseEvent<SVGGElement>, fileBox: FileBox) => {
       const outgoing = connectionAggregates.outgoingByFile.get(fileBox.id);
       const incoming = connectionAggregates.incomingByFile.get(fileBox.id);
+      setSelectedFileIds(new Set([fileBox.id]));
       setHighlightState({
         fileId: fileBox.id,
         outgoingItemIds: outgoing ? new Set(outgoing.items) : new Set<string>(),
@@ -317,6 +492,7 @@ export default function CodeVisualizer() {
     ) => {
       const outgoing = connectionAggregates.outgoingByItem.get(payload.itemId);
       const incoming = connectionAggregates.incomingByItem.get(payload.itemId);
+      setSelectedFileIds(new Set([payload.fileBox.id]));
       setHighlightState({
         fileId: payload.fileBox.id,
         itemId: payload.itemId,
@@ -337,7 +513,8 @@ export default function CodeVisualizer() {
 
   const handleRefreshData = useCallback(() => {
     setHighlightState(null);
-    setDraggingFile(null);
+    setDragState(null);
+    setSelectedFileIds(new Set());
     setIsPanning(false);
     setZoom(1);
     setViewBox(DEFAULT_VIEWBOX);
@@ -366,6 +543,8 @@ export default function CodeVisualizer() {
       }
       setPendingLayout({ dataFile: layoutRecord.dataFile, positions: layoutRecord.positions });
       setDataFile(layoutRecord.dataFile);
+      setSelectedFileIds(new Set());
+      setDragState(null);
       setIsLoadPanelOpen(false);
     },
     [getLayoutById]
@@ -378,8 +557,69 @@ export default function CodeVisualizer() {
     [deleteLayout]
   );
 
+  const handleDownloadLayout = useCallback(
+    (layoutId: string) => {
+      const layoutRecord = getLayoutById(layoutId);
+      if (!layoutRecord) {
+        window.alert('Unable to find that layout');
+        return;
+      }
+      const payload = {
+        version: 1,
+        layout: layoutRecord
+      } satisfies { version: number; layout: SavedLayoutRecord };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const safeName = `${layoutRecord.name.replace(/[^a-z0-9-_]+/gi, '_') || 'layout'}_${layoutRecord.id}.json`;
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      anchor.download = safeName;
+      anchor.click();
+      URL.revokeObjectURL(url);
+    },
+    [getLayoutById]
+  );
+
+  const handleUploadLayout = useCallback(
+    async (file: File) => {
+      try {
+        const text = await file.text();
+        const parsed = JSON.parse(text);
+        const candidate: SavedLayoutRecord | undefined = parsed?.layout ?? parsed;
+        if (!candidate || typeof candidate !== 'object' || !candidate.positions) {
+          throw new Error('Invalid layout file. Missing positions.');
+        }
+        const newId = importLayout({
+          name: candidate.name ?? file.name.replace(/\.json$/i, ''),
+          dataFile: candidate.dataFile ?? dataFile,
+          versionKey: candidate.versionKey ?? null,
+          positions: candidate.positions,
+          createdAt: typeof candidate.createdAt === 'number' ? candidate.createdAt : Date.now(),
+          updatedAt: Date.now()
+        });
+        setIsLoadPanelOpen(true);
+        if ((candidate.dataFile ?? dataFile) === dataFile) {
+          const shouldApply = window.confirm('Layout imported for current data file. Apply it now?');
+          if (shouldApply) {
+            applyPositions(candidate.positions);
+          }
+        } else {
+          window.alert('Layout imported. Switch to its data file via Load panel to apply it.');
+        }
+        return newId;
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Unknown error';
+        window.alert(`Failed to upload layout: ${message}`);
+        return null;
+      }
+    },
+    [applyPositions, dataFile, importLayout]
+  );
+
   const handleSelectDataFile = useCallback((fileName: string) => {
     setHighlightState(null);
+    setSelectedFileIds(new Set());
+    setDragState(null);
     setDataFile(fileName);
     setIsLoadPanelOpen(false);
   }, []);
@@ -419,15 +659,21 @@ export default function CodeVisualizer() {
         onToggleOutgoing={() => setShowOutgoingHighlights(prev => !prev)}
         onToggleIncoming={() => setShowIncomingHighlights(prev => !prev)}
       />
+        <SearchBar
+          query={searchQuery}
+          onQueryChange={setSearchQuery}
+          results={searchResults}
+          onSelect={handleSearchSelect}
+        />
       {error && <div className={styles.errorBanner}>{error}</div>}
       <Canvas
         canvasBounds={canvasBounds}
         zoom={zoom}
-        viewBox={viewBox}
         svgRef={svgRef}
         fileBoxes={fileBoxes}
         connections={connections}
         selectedFileId={selectedFileId}
+        selectedFileIds={selectedFileIds}
         selectedItemId={selectedItemId}
         highlightedOutgoingTargets={highlightedOutgoingTargets}
         highlightedIncomingTargets={highlightedIncomingTargets}
@@ -454,6 +700,8 @@ export default function CodeVisualizer() {
         onSelectDataFile={handleSelectDataFile}
         onSelectLayout={handleLoadSavedLayout}
         onDeleteLayout={handleDeleteLayout}
+        onDownloadLayout={handleDownloadLayout}
+        onUploadLayout={handleUploadLayout}
       />
     </div>
   );

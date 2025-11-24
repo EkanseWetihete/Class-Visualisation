@@ -7,11 +7,11 @@ import { ConnectionRender, FileBox, Size, ViewBox } from './types';
 interface CanvasProps {
   canvasBounds: Size;
   zoom: number;
-  viewBox: ViewBox;
   svgRef: React.RefObject<SVGSVGElement>;
   fileBoxes: FileBox[];
   connections: ConnectionRender[];
   selectedFileId?: string;
+  selectedFileIds: Set<string>;
   selectedItemId?: string;
   highlightedOutgoingTargets: Set<string>;
   highlightedIncomingTargets: Set<string>;
@@ -32,11 +32,11 @@ interface CanvasProps {
 export const Canvas: React.FC<CanvasProps> = ({
   canvasBounds,
   zoom,
-  viewBox,
   svgRef,
   fileBoxes,
   connections,
   selectedFileId,
+  selectedFileIds,
   selectedItemId,
   highlightedOutgoingTargets,
   highlightedIncomingTargets,
@@ -68,7 +68,6 @@ export const Canvas: React.FC<CanvasProps> = ({
         className={styles.canvas}
         width="100%"
         height="100%"
-        viewBox={`${viewBox.x} ${viewBox.y} ${canvasBounds.width / zoom} ${canvasBounds.height / zoom}`}
       >
         <defs>
           <marker id="arrowheadDefault" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
@@ -97,6 +96,7 @@ export const Canvas: React.FC<CanvasProps> = ({
             onContextMenuFile={onFileContextMenu}
             onContextMenuItem={onItemContextMenu}
             selectedFileId={selectedFileId}
+            selectedFileIds={selectedFileIds}
             selectedItemId={selectedItemId}
             highlightedOutgoingTargets={highlightedOutgoingTargets}
             highlightedIncomingTargets={highlightedIncomingTargets}

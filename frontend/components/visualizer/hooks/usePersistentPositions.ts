@@ -4,7 +4,7 @@ import { Position } from '../types';
 
 export type PositionMap = Record<string, Position>;
 
-interface SavedLayoutRecord {
+export interface SavedLayoutRecord {
   id: string;
   name: string;
   dataFile: string;
@@ -123,6 +123,16 @@ export function usePersistentPositions(versionKey: string | null, dataFile: stri
     [persistDraft]
   );
 
+  const updatePositionsBatch = useCallback(
+    (updates: PositionMap) => {
+      updatePositions(prev => ({
+        ...prev,
+        ...updates
+      }));
+    },
+    [updatePositions]
+  );
+
   const updatePosition = useCallback(
     (filePath: string, position: Position) => {
       updatePositions(prev => ({
@@ -170,6 +180,36 @@ export function usePersistentPositions(versionKey: string | null, dataFile: stri
     [dataFile, positions, versionKey]
   );
 
+  const importLayout = useCallback(
+    (payload: {
+      id?: string;
+      name: string;
+      dataFile: string;
+      versionKey: string | null;
+      positions: PositionMap;
+      createdAt?: number;
+      updatedAt?: number;
+    }) => {
+      const store = readStore();
+      const id = payload.id ?? createId();
+      const createdAt = payload.createdAt ?? Date.now();
+      const updatedAt = payload.updatedAt ?? Date.now();
+      store.layouts[id] = {
+        id,
+        name: payload.name.trim() || 'Imported Layout',
+        dataFile: payload.dataFile,
+        versionKey: payload.versionKey,
+        createdAt,
+        updatedAt,
+        positions: payload.positions
+      };
+      writeStore(store);
+      setLayouts(sortSummaries(Object.values(store.layouts ?? {})));
+      return id;
+    },
+    []
+  );
+
   const deleteLayout = useCallback((layoutId: string) => {
     const store = readStore();
     if (!store.layouts[layoutId]) {
@@ -189,11 +229,13 @@ export function usePersistentPositions(versionKey: string | null, dataFile: stri
   return {
     positions,
     updatePosition,
+    updatePositionsBatch,
     applyPositions,
     resetPositions,
     saveLayout,
     deleteLayout,
     getLayoutById,
+    importLayout,
     layouts
   };
 }

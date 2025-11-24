@@ -11,6 +11,7 @@ interface FileCardProps {
     payload: { fileBox: FileBox; itemId: string }
   ) => void;
   selectedFileId?: string;
+  selectedFileIds: Set<string>;
   selectedItemId?: string;
   highlightedOutgoingTargets: Set<string>;
   highlightedIncomingTargets: Set<string>;
@@ -24,13 +25,17 @@ export const FileCard: React.FC<FileCardProps> = ({
   onContextMenuFile,
   onContextMenuItem,
   selectedFileId,
+  selectedFileIds,
   selectedItemId,
   highlightedOutgoingTargets,
   highlightedIncomingTargets,
   showOutgoingHighlights,
   showIncomingHighlights
 }) => {
-  const isSelectedFile = selectedFileId === fileBox.id || (selectedItemId && fileBox.items.some(item => item.id === selectedItemId));
+  const isDirectlySelected =
+    selectedFileId === fileBox.id || (selectedItemId && fileBox.items.some(item => item.id === selectedItemId));
+  const isMultiSelected = selectedFileIds.has(fileBox.id);
+  const isSelectedFile = isDirectlySelected || isMultiSelected;
   const fileClassName = [
     styles.fileBox,
     fileBox.isRouter ? styles.fileBoxRouter : '',
