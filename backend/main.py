@@ -22,6 +22,16 @@ def main():
     default_scan_root = os.path.abspath(os.path.join(script_dir, os.pardir))
     parser = argparse.ArgumentParser(description='Analyze Python project structure for visualization output.')
     parser.add_argument(
+        'scan_root_pos',
+        nargs='?',
+        help='Root directory that will be fully scanned for symbol definitions (positional, overrides --scan-root).'
+    )
+    parser.add_argument(
+        'focus_root_pos',
+        nargs='?',
+        help='Directory whose files should be rendered in the visualization (positional, overrides --focus-root).'
+    )
+    parser.add_argument(
         '--scan-root',
         '--entire-project',
         dest='scan_root',
@@ -43,8 +53,8 @@ def main():
     )
     args = parser.parse_args()
 
-    scan_root = normalize_dir(args.scan_root)
-    focus_root = normalize_dir(args.focus_root)
+    scan_root = normalize_dir(args.scan_root_pos) if args.scan_root_pos else normalize_dir(args.scan_root)
+    focus_root = normalize_dir(args.focus_root_pos) if args.focus_root_pos else normalize_dir(args.focus_root)
     output_path = os.path.abspath(args.output_path)
 
     if not os.path.isdir(scan_root):
@@ -170,6 +180,9 @@ def main():
         json.dump(output, f, indent=4)
     print(f'Analysis complete. Output saved to {output_path}')
 
-
+# Usage: python main.py [scan_root] [focus_root]
+# scan_root: Root directory to scan for symbol definitions (default: project root)
+# focus_root: Directory whose files to render in visualization (default: backend)
+# Example: <...\Class Visualisation\backend> python main.py . complicated_project 
 if __name__ == '__main__':
     main()
