@@ -217,10 +217,11 @@ export default function CodeVisualizer() {
       const currentHeight = canvasBounds.height / zoom;
       const mouseX = clientX - rect.left;
       const mouseY = clientY - rect.top;
+      const scale = currentHeight / rect.height;
 
       return {
-        x: viewBox.x + (mouseX / rect.width) * currentWidth,
-        y: viewBox.y + (mouseY / rect.height) * currentHeight
+        x: viewBox.x + mouseX * scale,
+        y: viewBox.y + mouseY * scale
       };
     },
     [canvasBounds, viewBox, zoom]
@@ -386,21 +387,25 @@ export default function CodeVisualizer() {
         return;
       }
 
-      const point = getWorldPoint(e.clientX, e.clientY);
-      if (!point) {
+      const svg = svgRef.current;
+      if (!svg) {
         return;
       }
+      const rect = svg.getBoundingClientRect();
+      const currentWidth = canvasBounds.width / zoom;
+      const currentHeight = canvasBounds.height / zoom;
+      const factor = currentHeight / rect.height;
 
-      const deltaX = point.x - panStartRef.current.worldX;
-      const deltaY = point.y - panStartRef.current.worldY;
+      const deltaX = (e.clientX - panStartRef.current.x) * factor;
+      const deltaY = (e.clientY - panStartRef.current.y) * factor;
 
       const newX = panStartRef.current.viewBoxX - deltaX;
       const newY = panStartRef.current.viewBoxY - deltaY;
 
       viewBoxRef.current = { x: newX, y: newY };
-      svgRef.current?.setAttribute('viewBox', `${newX} ${newY} ${canvasBounds.width / zoom} ${canvasBounds.height / zoom}`);
+      svg.setAttribute('viewBox', `${newX} ${newY} ${canvasBounds.width / zoom} ${canvasBounds.height / zoom}`);
     },
-    [getWorldPoint, isPanning, canvasBounds, zoom]
+    [isPanning, canvasBounds, zoom]
   );
 
   const handleCanvasMouseUp = useCallback(() => {
