@@ -1,227 +1,6 @@
 {
     "files": {
-        "Class Visualisation/backend/analyzer.py": {
-            "CodeAnalyzer": {
-                "args": [],
-                "start_line": 19,
-                "end_line": 123,
-                "is_api_endpoint": false,
-                "methods": {
-                    "__init__": {
-                        "args": [
-                            "self"
-                        ],
-                        "start_line": 20,
-                        "end_line": 23,
-                        "is_api_endpoint": false,
-                        "used_functions": {}
-                    },
-                    "visit_ClassDef": {
-                        "args": [
-                            "self",
-                            "node"
-                        ],
-                        "start_line": 25,
-                        "end_line": 38,
-                        "is_api_endpoint": false,
-                        "used_functions": {}
-                    },
-                    "visit_FunctionDef": {
-                        "args": [
-                            "self",
-                            "node"
-                        ],
-                        "start_line": 40,
-                        "end_line": 54,
-                        "is_api_endpoint": false,
-                        "used_functions": {}
-                    },
-                    "visit_AsyncFunctionDef": {
-                        "args": [
-                            "self",
-                            "node"
-                        ],
-                        "start_line": 56,
-                        "end_line": 57,
-                        "is_api_endpoint": false,
-                        "used_functions": {}
-                    },
-                    "visit_Import": {
-                        "args": [
-                            "self",
-                            "node"
-                        ],
-                        "start_line": 59,
-                        "end_line": 65,
-                        "is_api_endpoint": false,
-                        "used_functions": {}
-                    },
-                    "visit_ImportFrom": {
-                        "args": [
-                            "self",
-                            "node"
-                        ],
-                        "start_line": 67,
-                        "end_line": 77,
-                        "is_api_endpoint": false,
-                        "used_functions": {}
-                    },
-                    "visit_Name": {
-                        "args": [
-                            "self",
-                            "node"
-                        ],
-                        "start_line": 79,
-                        "end_line": 82,
-                        "is_api_endpoint": false,
-                        "used_functions": {}
-                    },
-                    "visit_Attribute": {
-                        "args": [
-                            "self",
-                            "node"
-                        ],
-                        "start_line": 84,
-                        "end_line": 88,
-                        "is_api_endpoint": false,
-                        "used_functions": {}
-                    },
-                    "_canonical_name": {
-                        "args": [
-                            "self",
-                            "name"
-                        ],
-                        "start_line": 92,
-                        "end_line": 98,
-                        "is_api_endpoint": false,
-                        "used_functions": {}
-                    },
-                    "_canonical_attr_base": {
-                        "args": [
-                            "self",
-                            "name"
-                        ],
-                        "start_line": 100,
-                        "end_line": 108,
-                        "is_api_endpoint": false,
-                        "used_functions": {}
-                    },
-                    "_is_api_endpoint": {
-                        "args": [
-                            "self",
-                            "node"
-                        ],
-                        "start_line": 110,
-                        "end_line": 123,
-                        "is_api_endpoint": false,
-                        "used_functions": {
-                            "decorator": "from backend.complicated_project.utils.performance_monitor"
-                        }
-                    }
-                },
-                "used_functions": {}
-            },
-            "analyze_file": {
-                "args": [
-                    "file_path"
-                ],
-                "start_line": 125,
-                "end_line": 138,
-                "is_api_endpoint": false,
-                "used_functions": {
-                    "CodeAnalyzer": "from backend.analyzer"
-                }
-            }
-        },
-        "Class Visualisation/backend/main.py": {
-            "normalize_dir": {
-                "args": [
-                    "path"
-                ],
-                "start_line": 9,
-                "end_line": 10,
-                "is_api_endpoint": false,
-                "used_functions": {}
-            },
-            "is_within": {
-                "args": [
-                    "root",
-                    "candidate"
-                ],
-                "start_line": 13,
-                "end_line": 17,
-                "is_api_endpoint": false,
-                "used_functions": {}
-            },
-            "main": {
-                "args": [],
-                "start_line": 20,
-                "end_line": 171,
-                "is_api_endpoint": false,
-                "used_functions": {
-                    "build_used_functions": "from backend.main",
-                    "analyze_file": "from backend.analyzer",
-                    "normalize_dir": "from backend.main",
-                    "get_py_files": "from backend.utils",
-                    "is_within": "from backend.main"
-                }
-            },
-            "resolve_symbol": {
-                "args": [
-                    "name",
-                    "preferred_file"
-                ],
-                "start_line": 101,
-                "end_line": 110,
-                "is_api_endpoint": false,
-                "used_functions": {}
-            },
-            "build_used_functions": {
-                "args": [
-                    "def_data"
-                ],
-                "start_line": 112,
-                "end_line": 135,
-                "is_api_endpoint": false,
-                "used_functions": {
-                    "resolve_symbol": "from backend.main"
-                }
-            }
-        },
-        "Class Visualisation/backend/utils.py": {
-            "get_py_files": {
-                "args": [
-                    "root_dir"
-                ],
-                "start_line": 4,
-                "end_line": 10,
-                "is_api_endpoint": false,
-                "used_functions": {}
-            },
-            "resolve_import": {
-                "args": [
-                    "imp",
-                    "file_path",
-                    "root_dir",
-                    "all_files"
-                ],
-                "start_line": 12,
-                "end_line": 18,
-                "is_api_endpoint": false,
-                "used_functions": {}
-            },
-            "build_relationships": {
-                "args": [
-                    "files_data",
-                    "root_dir"
-                ],
-                "start_line": 20,
-                "end_line": 92,
-                "is_api_endpoint": false,
-                "used_functions": {}
-            }
-        },
-        "Class Visualisation/backend/complicated_project/start.py": {
+        "backend/complicated_project/start.py": {
             "Application": {
                 "args": [],
                 "start_line": 18,
@@ -236,12 +15,12 @@
                         "end_line": 27,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "ReportGenerator": "from backend.complicated_project.services.report_generator",
-                            "Logger": "from backend.complicated_project.utils.logger",
-                            "ConfigManager": "from backend.complicated_project.utils.config_manager",
-                            "DataProcessor": "from backend.complicated_project.core.data_processor",
-                            "UserManager": "from backend.complicated_project.core.user_manager",
-                            "NotificationService": "from backend.complicated_project.services.notification_service"
+                            "NotificationService": "from complicated_project.services.notification_service",
+                            "UserManager": "from complicated_project.core.user_manager",
+                            "ConfigManager": "from complicated_project.utils.config_manager",
+                            "ReportGenerator": "from complicated_project.services.report_generator",
+                            "DataProcessor": "from complicated_project.core.data_processor",
+                            "Logger": "from complicated_project.utils.logger"
                         }
                     },
                     "initialize": {
@@ -251,7 +30,32 @@
                         "start_line": 29,
                         "end_line": 35,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            },
+                            "ConfigManager": {
+                                "file": "from complicated_project.utils.config_manager",
+                                "methods": [
+                                    "load_config"
+                                ]
+                            },
+                            "DataProcessor": {
+                                "file": "from complicated_project.core.data_processor",
+                                "methods": [
+                                    "initialize"
+                                ]
+                            },
+                            "UserManager": {
+                                "file": "from complicated_project.core.user_manager",
+                                "methods": [
+                                    "initialize"
+                                ]
+                            }
+                        }
                     },
                     "process_user_data": {
                         "args": [
@@ -261,7 +65,39 @@
                         "start_line": 37,
                         "end_line": 58,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "UserManager": {
+                                "file": "from complicated_project.core.user_manager",
+                                "methods": [
+                                    "get_user"
+                                ]
+                            },
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            },
+                            "DataProcessor": {
+                                "file": "from complicated_project.core.data_processor",
+                                "methods": [
+                                    "process"
+                                ]
+                            },
+                            "ReportGenerator": {
+                                "file": "from complicated_project.services.report_generator",
+                                "methods": [
+                                    "generate_report"
+                                ]
+                            },
+                            "NotificationService": {
+                                "file": "from complicated_project.services.notification_service",
+                                "methods": [
+                                    "send_notification"
+                                ]
+                            }
+                        }
                     },
                     "run_batch_processing": {
                         "args": [
@@ -270,7 +106,26 @@
                         "start_line": 60,
                         "end_line": 72,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "UserManager": {
+                                "file": "from complicated_project.core.user_manager",
+                                "methods": [
+                                    "get_active_users"
+                                ]
+                            },
+                            "ReportGenerator": {
+                                "file": "from complicated_project.services.report_generator",
+                                "methods": [
+                                    "generate_summary_report"
+                                ]
+                            },
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            }
+                        }
                     }
                 },
                 "used_functions": {}
@@ -281,11 +136,11 @@
                 "end_line": 86,
                 "is_api_endpoint": false,
                 "used_functions": {
-                    "Application": "from backend.complicated_project.start"
+                    "Application": "from complicated_project.start"
                 }
             }
         },
-        "Class Visualisation/backend/complicated_project/core/data_processor.py": {
+        "backend/complicated_project/core/data_processor.py": {
             "DataProcessor": {
                 "args": [],
                 "start_line": 13,
@@ -300,9 +155,9 @@
                         "end_line": 25,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataValidator": "from backend.complicated_project.utils.validators",
-                            "ConfigManager": "from backend.complicated_project.utils.config_manager",
-                            "Logger": "from backend.complicated_project.utils.logger"
+                            "DataValidator": "from complicated_project.utils.validators",
+                            "ConfigManager": "from complicated_project.utils.config_manager",
+                            "Logger": "from complicated_project.utils.logger"
                         }
                     },
                     "initialize": {
@@ -312,7 +167,20 @@
                         "start_line": 27,
                         "end_line": 30,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            },
+                            "ConfigManager": {
+                                "file": "from complicated_project.utils.config_manager",
+                                "methods": [
+                                    "load_config"
+                                ]
+                            }
+                        }
                     },
                     "process": {
                         "args": [
@@ -322,7 +190,15 @@
                         "start_line": 32,
                         "end_line": 76,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            }
+                        }
                     },
                     "_validate_input": {
                         "args": [
@@ -343,8 +219,14 @@
                         "end_line": 107,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataPoint": "from backend.complicated_project.models.data_models",
-                            "Dataset": "from backend.complicated_project.models.data_models"
+                            "Dataset": "from complicated_project.models.data_models",
+                            "DataPoint": "from complicated_project.models.data_models",
+                            "DataValidator": {
+                                "file": "from complicated_project.utils.validators",
+                                "methods": [
+                                    "validate_data_point"
+                                ]
+                            }
                         }
                     },
                     "_apply_processing_pipeline": {
@@ -356,7 +238,13 @@
                         "end_line": 127,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Dataset": "from backend.complicated_project.models.data_models"
+                            "Dataset": "from complicated_project.models.data_models",
+                            "ConfigManager": {
+                                "file": "from complicated_project.utils.config_manager",
+                                "methods": [
+                                    "get"
+                                ]
+                            }
                         }
                     },
                     "_apply_transformations": {
@@ -368,7 +256,13 @@
                         "end_line": 138,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Dataset": "from backend.complicated_project.models.data_models"
+                            "Dataset": "from complicated_project.models.data_models",
+                            "ConfigManager": {
+                                "file": "from complicated_project.utils.config_manager",
+                                "methods": [
+                                    "get"
+                                ]
+                            }
                         }
                     },
                     "_calculate_derived_metrics": {
@@ -380,7 +274,7 @@
                         "end_line": 154,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Dataset": "from backend.complicated_project.models.data_models"
+                            "Dataset": "from complicated_project.models.data_models"
                         }
                     },
                     "_update_processing_stats": {
@@ -410,13 +304,20 @@
                         "start_line": 173,
                         "end_line": 181,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            }
+                        }
                     }
                 },
                 "used_functions": {}
             }
         },
-        "Class Visualisation/backend/complicated_project/core/user_manager.py": {
+        "backend/complicated_project/core/user_manager.py": {
             "UserManager": {
                 "args": [],
                 "start_line": 13,
@@ -431,10 +332,10 @@
                         "end_line": 22,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Logger": "from backend.complicated_project.utils.logger",
-                            "ConfigManager": "from backend.complicated_project.utils.config_manager",
-                            "InputValidator": "from backend.complicated_project.utils.validators",
-                            "AuditLogger": "from backend.complicated_project.utils.logger"
+                            "ConfigManager": "from complicated_project.utils.config_manager",
+                            "InputValidator": "from complicated_project.utils.validators",
+                            "AuditLogger": "from complicated_project.utils.logger",
+                            "Logger": "from complicated_project.utils.logger"
                         }
                     },
                     "initialize": {
@@ -444,7 +345,20 @@
                         "start_line": 24,
                         "end_line": 28,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            },
+                            "ConfigManager": {
+                                "file": "from complicated_project.utils.config_manager",
+                                "methods": [
+                                    "load_config"
+                                ]
+                            }
+                        }
                     },
                     "get_user": {
                         "args": [
@@ -455,7 +369,13 @@
                         "end_line": 37,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user",
+                            "AuditLogger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "log_data_access"
+                                ]
+                            }
                         }
                     },
                     "create_user": {
@@ -467,7 +387,26 @@
                         "end_line": 65,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user",
+                            "InputValidator": {
+                                "file": "from complicated_project.utils.validators",
+                                "methods": [
+                                    "validate_user_input"
+                                ]
+                            },
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            },
+                            "AuditLogger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "log_security_event"
+                                ]
+                            }
                         }
                     },
                     "update_user": {
@@ -479,7 +418,27 @@
                         "start_line": 67,
                         "end_line": 89,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            },
+                            "InputValidator": {
+                                "file": "from complicated_project.utils.validators",
+                                "methods": [
+                                    "validate_user_input"
+                                ]
+                            },
+                            "AuditLogger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "log_security_event"
+                                ]
+                            }
+                        }
                     },
                     "delete_user": {
                         "args": [
@@ -489,7 +448,21 @@
                         "start_line": 91,
                         "end_line": 104,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            },
+                            "AuditLogger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "log_security_event"
+                                ]
+                            }
+                        }
                     },
                     "get_active_users": {
                         "args": [
@@ -499,7 +472,13 @@
                         "end_line": 115,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user",
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            }
                         }
                     },
                     "authenticate_user": {
@@ -512,7 +491,20 @@
                         "end_line": 132,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user",
+                            "AuditLogger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "log_security_event"
+                                ]
+                            },
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info",
+                                    "warning"
+                                ]
+                            }
                         }
                     },
                     "search_users": {
@@ -524,7 +516,13 @@
                         "end_line": 146,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user",
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            }
                         }
                     },
                     "get_user_count": {
@@ -552,7 +550,15 @@
                         "start_line": 166,
                         "end_line": 178,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            }
+                        }
                     },
                     "_save_users": {
                         "args": [
@@ -561,13 +567,21 @@
                         "start_line": 180,
                         "end_line": 188,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "debug",
+                                    "error"
+                                ]
+                            }
+                        }
                     }
                 },
                 "used_functions": {}
             }
         },
-        "Class Visualisation/backend/complicated_project/data/database.py": {
+        "backend/complicated_project/data/database.py": {
             "DatabaseConnection": {
                 "args": [],
                 "start_line": 15,
@@ -583,7 +597,7 @@
                         "end_line": 21,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Logger": "from backend.complicated_project.utils.logger"
+                            "Logger": "from complicated_project.utils.logger"
                         }
                     },
                     "connect": {
@@ -593,7 +607,15 @@
                         "start_line": 23,
                         "end_line": 31,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            }
+                        }
                     },
                     "disconnect": {
                         "args": [
@@ -602,7 +624,14 @@
                         "start_line": 33,
                         "end_line": 38,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            }
+                        }
                     },
                     "execute": {
                         "args": [
@@ -613,7 +642,14 @@
                         "start_line": 40,
                         "end_line": 53,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error"
+                                ]
+                            }
+                        }
                     },
                     "fetch_one": {
                         "args": [
@@ -655,8 +691,8 @@
                         "end_line": 70,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DatabaseConnection": "from backend.complicated_project.data.database",
-                            "Logger": "from backend.complicated_project.utils.logger"
+                            "Logger": "from complicated_project.utils.logger",
+                            "DatabaseConnection": "from complicated_project.data.database"
                         }
                     },
                     "table_name": {
@@ -696,7 +732,14 @@
                         "start_line": 87,
                         "end_line": 98,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error"
+                                ]
+                            }
+                        }
                     },
                     "find_all": {
                         "args": [
@@ -707,7 +750,14 @@
                         "start_line": 100,
                         "end_line": 109,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error"
+                                ]
+                            }
+                        }
                     },
                     "save": {
                         "args": [
@@ -717,7 +767,14 @@
                         "start_line": 111,
                         "end_line": 125,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error"
+                                ]
+                            }
+                        }
                     },
                     "_create": {
                         "args": [
@@ -748,7 +805,15 @@
                         "start_line": 151,
                         "end_line": 160,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            }
+                        }
                     }
                 },
                 "used_functions": {}
@@ -787,7 +852,7 @@
                         "end_line": 200,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user"
                         }
                     },
                     "find_by_email": {
@@ -802,7 +867,7 @@
                     }
                 },
                 "used_functions": {
-                    "BaseRepository": "from backend.complicated_project.data.database"
+                    "BaseRepository": "from complicated_project.data.database"
                 }
             },
             "ReportRepository": {
@@ -839,12 +904,12 @@
                         "end_line": 256,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Report": "from backend.complicated_project.models.report"
+                            "Report": "from complicated_project.models.report"
                         }
                     }
                 },
                 "used_functions": {
-                    "BaseRepository": "from backend.complicated_project.data.database"
+                    "BaseRepository": "from complicated_project.data.database"
                 }
             },
             "DatabaseInitializer": {
@@ -862,8 +927,8 @@
                         "end_line": 263,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DatabaseConnection": "from backend.complicated_project.data.database",
-                            "Logger": "from backend.complicated_project.utils.logger"
+                            "Logger": "from complicated_project.utils.logger",
+                            "DatabaseConnection": "from complicated_project.data.database"
                         }
                     },
                     "initialize_schema": {
@@ -873,7 +938,14 @@
                         "start_line": 265,
                         "end_line": 305,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            }
+                        }
                     },
                     "seed_sample_data": {
                         "args": [
@@ -883,16 +955,23 @@
                         "end_line": 325,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "UserRepository": "from backend.complicated_project.data.database",
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user",
+                            "UserRepository": "from complicated_project.data.database",
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            }
                         }
                     }
                 },
                 "used_functions": {}
             }
         },
-        "Class Visualisation/backend/complicated_project/data/sample_data.py": {},
-        "Class Visualisation/backend/complicated_project/models/data_models.py": {
+        "backend/complicated_project/data/sample_data.py": {},
+        "backend/complicated_project/models/data_models.py": {
             "DataPoint": {
                 "args": [],
                 "start_line": 9,
@@ -910,7 +989,7 @@
                         "end_line": 18,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataFormatter": "from backend.complicated_project.utils.formatters"
+                            "DataFormatter": "from complicated_project.utils.formatters"
                         }
                     },
                     "calculate_quality": {
@@ -929,7 +1008,14 @@
                         "start_line": 31,
                         "end_line": 34,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataFormatter": {
+                                "file": "from complicated_project.utils.formatters",
+                                "methods": [
+                                    "normalize_value"
+                                ]
+                            }
+                        }
                     },
                     "to_csv_row": {
                         "args": [
@@ -960,7 +1046,7 @@
                         "end_line": 49,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataPoint": "from backend.complicated_project.models.data_models"
+                            "DataPoint": "from complicated_project.models.data_models"
                         }
                     },
                     "add_point": {
@@ -972,7 +1058,7 @@
                         "end_line": 55,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataPoint": "from backend.complicated_project.models.data_models"
+                            "DataPoint": "from complicated_project.models.data_models"
                         }
                     },
                     "calculate_average_quality": {
@@ -993,7 +1079,7 @@
                         "end_line": 68,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataPoint": "from backend.complicated_project.models.data_models"
+                            "DataPoint": "from complicated_project.models.data_models"
                         }
                     },
                     "get_statistics": {
@@ -1018,7 +1104,7 @@
                 "used_functions": {}
             }
         },
-        "Class Visualisation/backend/complicated_project/models/report.py": {
+        "backend/complicated_project/models/report.py": {
             "Report": {
                 "args": [],
                 "start_line": 10,
@@ -1037,8 +1123,8 @@
                         "end_line": 23,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataFormatter": "from backend.complicated_project.utils.formatters",
-                            "User": "from backend.complicated_project.models.user"
+                            "DataFormatter": "from complicated_project.utils.formatters",
+                            "User": "from complicated_project.models.user"
                         }
                     },
                     "generate": {
@@ -1076,7 +1162,14 @@
                         "start_line": 46,
                         "end_line": 48,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataFormatter": {
+                                "file": "from complicated_project.utils.formatters",
+                                "methods": [
+                                    "to_json"
+                                ]
+                            }
+                        }
                     },
                     "get_file_size": {
                         "args": [
@@ -1091,7 +1184,7 @@
                 "used_functions": {}
             }
         },
-        "Class Visualisation/backend/complicated_project/models/user.py": {
+        "backend/complicated_project/models/user.py": {
             "BaseModel": {
                 "args": [],
                 "start_line": 10,
@@ -1107,8 +1200,8 @@
                         "end_line": 18,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataValidator": "from backend.complicated_project.utils.validators",
-                            "DataFormatter": "from backend.complicated_project.utils.formatters"
+                            "DataFormatter": "from complicated_project.utils.formatters",
+                            "DataValidator": "from complicated_project.utils.validators"
                         }
                     },
                     "validate": {
@@ -1118,7 +1211,14 @@
                         "start_line": 20,
                         "end_line": 22,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataValidator": {
+                                "file": "from complicated_project.utils.validators",
+                                "methods": [
+                                    "validate_model"
+                                ]
+                            }
+                        }
                     },
                     "to_dict": {
                         "args": [
@@ -1127,7 +1227,14 @@
                         "start_line": 24,
                         "end_line": 26,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataFormatter": {
+                                "file": "from complicated_project.utils.formatters",
+                                "methods": [
+                                    "model_to_dict"
+                                ]
+                            }
+                        }
                     },
                     "update_timestamp": {
                         "args": [
@@ -1200,11 +1307,11 @@
                     }
                 },
                 "used_functions": {
-                    "BaseModel": "from backend.complicated_project.models.user"
+                    "BaseModel": "from complicated_project.models.user"
                 }
             }
         },
-        "Class Visualisation/backend/complicated_project/models/__init__.py": {
+        "backend/complicated_project/models/__init__.py": {
             "BaseModel": {
                 "args": [],
                 "start_line": 10,
@@ -1220,8 +1327,8 @@
                         "end_line": 18,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataValidator": "from backend.complicated_project.utils.validators",
-                            "DataFormatter": "from backend.complicated_project.utils.formatters"
+                            "DataFormatter": "from complicated_project.utils.formatters",
+                            "DataValidator": "from complicated_project.utils.validators"
                         }
                     },
                     "validate": {
@@ -1231,7 +1338,14 @@
                         "start_line": 20,
                         "end_line": 22,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataValidator": {
+                                "file": "from complicated_project.utils.validators",
+                                "methods": [
+                                    "validate_model"
+                                ]
+                            }
+                        }
                     },
                     "to_dict": {
                         "args": [
@@ -1240,7 +1354,14 @@
                         "start_line": 24,
                         "end_line": 26,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataFormatter": {
+                                "file": "from complicated_project.utils.formatters",
+                                "methods": [
+                                    "model_to_dict"
+                                ]
+                            }
+                        }
                     },
                     "update_timestamp": {
                         "args": [
@@ -1313,7 +1434,7 @@
                     }
                 },
                 "used_functions": {
-                    "BaseModel": "from backend.complicated_project.models.user"
+                    "BaseModel": "from complicated_project.models.user"
                 }
             },
             "Report": {
@@ -1334,7 +1455,7 @@
                         "end_line": 76,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user"
                         }
                     },
                     "generate": {
@@ -1367,7 +1488,7 @@
                     }
                 },
                 "used_functions": {
-                    "BaseModel": "from backend.complicated_project.models.user"
+                    "BaseModel": "from complicated_project.models.user"
                 }
             },
             "DataPoint": {
@@ -1408,7 +1529,7 @@
                     }
                 },
                 "used_functions": {
-                    "BaseModel": "from backend.complicated_project.models.user"
+                    "BaseModel": "from complicated_project.models.user"
                 }
             },
             "Dataset": {
@@ -1428,7 +1549,7 @@
                         "end_line": 135,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataPoint": "from backend.complicated_project.models.data_models"
+                            "DataPoint": "from complicated_project.models.data_models"
                         }
                     },
                     "add_point": {
@@ -1440,7 +1561,7 @@
                         "end_line": 142,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataPoint": "from backend.complicated_project.models.data_models"
+                            "DataPoint": "from complicated_project.models.data_models"
                         }
                     },
                     "calculate_average_quality": {
@@ -1461,7 +1582,7 @@
                         "end_line": 155,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataPoint": "from backend.complicated_project.models.data_models"
+                            "DataPoint": "from complicated_project.models.data_models"
                         }
                     },
                     "get_statistics": {
@@ -1475,11 +1596,11 @@
                     }
                 },
                 "used_functions": {
-                    "BaseModel": "from backend.complicated_project.models.user"
+                    "BaseModel": "from complicated_project.models.user"
                 }
             }
         },
-        "Class Visualisation/backend/complicated_project/services/notification_service.py": {
+        "backend/complicated_project/services/notification_service.py": {
             "NotificationService": {
                 "args": [],
                 "start_line": 17,
@@ -1494,9 +1615,9 @@
                         "end_line": 24,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "ConfigManager": "from backend.complicated_project.utils.config_manager",
-                            "DataFormatter": "from backend.complicated_project.utils.formatters",
-                            "Logger": "from backend.complicated_project.utils.logger"
+                            "DataFormatter": "from complicated_project.utils.formatters",
+                            "ConfigManager": "from complicated_project.utils.config_manager",
+                            "Logger": "from complicated_project.utils.logger"
                         }
                     },
                     "send_notification": {
@@ -1510,7 +1631,21 @@
                         "end_line": 62,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user",
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info",
+                                    "warning"
+                                ]
+                            },
+                            "ConfigManager": {
+                                "file": "from complicated_project.utils.config_manager",
+                                "methods": [
+                                    "get"
+                                ]
+                            }
                         }
                     },
                     "send_bulk_notification": {
@@ -1524,7 +1659,13 @@
                         "end_line": 75,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user",
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            }
                         }
                     },
                     "send_system_alert": {
@@ -1536,7 +1677,14 @@
                         "start_line": 77,
                         "end_line": 83,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "warning"
+                                ]
+                            }
+                        }
                     },
                     "_get_notification_channels": {
                         "args": [
@@ -1548,7 +1696,7 @@
                         "end_line": 108,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user"
                         }
                     },
                     "_send_email_notification": {
@@ -1562,7 +1710,20 @@
                         "end_line": 141,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user",
+                            "ConfigManager": {
+                                "file": "from complicated_project.utils.config_manager",
+                                "methods": [
+                                    "get"
+                                ]
+                            },
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "debug",
+                                    "error"
+                                ]
+                            }
                         }
                     },
                     "_send_sms_notification": {
@@ -1575,7 +1736,21 @@
                         "end_line": 174,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user",
+                            "ConfigManager": {
+                                "file": "from complicated_project.utils.config_manager",
+                                "methods": [
+                                    "get"
+                                ]
+                            },
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "debug",
+                                    "error",
+                                    "warning"
+                                ]
+                            }
                         }
                     },
                     "_send_webhook_notification": {
@@ -1589,7 +1764,20 @@
                         "end_line": 199,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user",
+                            "ConfigManager": {
+                                "file": "from complicated_project.utils.config_manager",
+                                "methods": [
+                                    "get"
+                                ]
+                            },
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "debug",
+                                    "error"
+                                ]
+                            }
                         }
                     },
                     "_format_email_body": {
@@ -1603,7 +1791,7 @@
                         "end_line": 229,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user"
                         }
                     },
                     "_log_notification": {
@@ -1618,7 +1806,7 @@
                         "end_line": 246,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user"
                         }
                     },
                     "get_notification_history": {
@@ -1645,7 +1833,178 @@
                 "used_functions": {}
             }
         },
-        "Class Visualisation/backend/complicated_project/services/report_generator.py": {
+        "backend/complicated_project/services/plugin_manager.py": {
+            "PluginRegistry": {
+                "args": [],
+                "start_line": 19,
+                "end_line": 50,
+                "is_api_endpoint": false,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 22,
+                        "end_line": 27,
+                        "is_api_endpoint": false,
+                        "used_functions": {
+                            "ConfigManager": "from complicated_project.utils.config_manager",
+                            "InputValidator": "from complicated_project.utils.validators",
+                            "DataProcessor": "from complicated_project.core.data_processor",
+                            "Logger": "from complicated_project.utils.logger"
+                        }
+                    },
+                    "register_plugin": {
+                        "args": [
+                            "self",
+                            "plugin_name",
+                            "plugin_data"
+                        ],
+                        "start_line": 29,
+                        "end_line": 43,
+                        "is_api_endpoint": false,
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            },
+                            "InputValidator": {
+                                "file": "from complicated_project.utils.validators",
+                                "methods": [
+                                    "validate_user_input"
+                                ]
+                            },
+                            "ConfigManager": {
+                                "file": "from complicated_project.utils.config_manager",
+                                "methods": [
+                                    "set_config"
+                                ]
+                            }
+                        }
+                    },
+                    "process_plugin_data": {
+                        "args": [
+                            "self",
+                            "data"
+                        ],
+                        "start_line": 45,
+                        "end_line": 50,
+                        "is_api_endpoint": false,
+                        "used_functions": {
+                            "DataProcessor": {
+                                "file": "from complicated_project.core.data_processor",
+                                "methods": [
+                                    "process_data"
+                                ]
+                            },
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "used_functions": {}
+            },
+            "PluginLoader": {
+                "args": [],
+                "start_line": 53,
+                "end_line": 71,
+                "is_api_endpoint": false,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 56,
+                        "end_line": 58,
+                        "is_api_endpoint": false,
+                        "used_functions": {
+                            "Logger": "from complicated_project.utils.logger"
+                        }
+                    },
+                    "load_plugins": {
+                        "args": [
+                            "self",
+                            "plugin_path"
+                        ],
+                        "start_line": 60,
+                        "end_line": 71,
+                        "is_api_endpoint": false,
+                        "used_functions": {
+                            "User": "from complicated_project.models.user",
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "used_functions": {}
+            },
+            "PluginExecutor": {
+                "args": [],
+                "start_line": 74,
+                "end_line": 95,
+                "is_api_endpoint": false,
+                "methods": {
+                    "__init__": {
+                        "args": [
+                            "self"
+                        ],
+                        "start_line": 77,
+                        "end_line": 81,
+                        "is_api_endpoint": false,
+                        "used_functions": {
+                            "InputValidator": "from complicated_project.utils.validators",
+                            "DataProcessor": "from complicated_project.core.data_processor",
+                            "Logger": "from complicated_project.utils.logger"
+                        }
+                    },
+                    "execute": {
+                        "args": [
+                            "self",
+                            "plugin_name",
+                            "input_data"
+                        ],
+                        "start_line": 83,
+                        "end_line": 95,
+                        "is_api_endpoint": false,
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "debug",
+                                    "info",
+                                    "warning"
+                                ]
+                            },
+                            "InputValidator": {
+                                "file": "from complicated_project.utils.validators",
+                                "methods": [
+                                    "validate_email"
+                                ]
+                            },
+                            "DataProcessor": {
+                                "file": "from complicated_project.core.data_processor",
+                                "methods": [
+                                    "transform_data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "used_functions": {}
+            }
+        },
+        "backend/complicated_project/services/report_generator.py": {
             "ReportGenerator": {
                 "args": [],
                 "start_line": 15,
@@ -1660,10 +2019,10 @@
                         "end_line": 23,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "CSVFormatter": "from backend.complicated_project.utils.formatters",
-                            "Logger": "from backend.complicated_project.utils.logger",
-                            "ConfigManager": "from backend.complicated_project.utils.config_manager",
-                            "ReportFormatter": "from backend.complicated_project.utils.formatters"
+                            "ConfigManager": "from complicated_project.utils.config_manager",
+                            "ReportFormatter": "from complicated_project.utils.formatters",
+                            "CSVFormatter": "from complicated_project.utils.formatters",
+                            "Logger": "from complicated_project.utils.logger"
                         }
                     },
                     "generate_report": {
@@ -1676,8 +2035,15 @@
                         "end_line": 57,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user",
-                            "Report": "from backend.complicated_project.models.report"
+                            "User": "from complicated_project.models.user",
+                            "Report": "from complicated_project.models.report",
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            }
                         }
                     },
                     "generate_summary_report": {
@@ -1689,7 +2055,14 @@
                         "end_line": 81,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Report": "from backend.complicated_project.models.report"
+                            "Report": "from complicated_project.models.report",
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            }
                         }
                     },
                     "_compile_report_data": {
@@ -1702,7 +2075,13 @@
                         "end_line": 102,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "User": "from backend.complicated_project.models.user"
+                            "User": "from complicated_project.models.user",
+                            "ReportFormatter": {
+                                "file": "from complicated_project.utils.formatters",
+                                "methods": [
+                                    "format_user_summary"
+                                ]
+                            }
                         }
                     },
                     "_compile_summary_data": {
@@ -1714,7 +2093,13 @@
                         "end_line": 139,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Report": "from backend.complicated_project.models.report"
+                            "Report": "from complicated_project.models.report",
+                            "ReportFormatter": {
+                                "file": "from complicated_project.utils.formatters",
+                                "methods": [
+                                    "format_report_summary"
+                                ]
+                            }
                         }
                     },
                     "_generate_recommendations": {
@@ -1736,7 +2121,7 @@
                         "end_line": 182,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Dataset": "from backend.complicated_project.models.data_models"
+                            "Dataset": "from complicated_project.models.data_models"
                         }
                     },
                     "_calculate_distribution": {
@@ -1748,7 +2133,7 @@
                         "end_line": 193,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Dataset": "from backend.complicated_project.models.data_models"
+                            "Dataset": "from complicated_project.models.data_models"
                         }
                     },
                     "_save_report_file": {
@@ -1760,7 +2145,14 @@
                         "end_line": 213,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Report": "from backend.complicated_project.models.report"
+                            "Report": "from complicated_project.models.report",
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "debug",
+                                    "error"
+                                ]
+                            }
                         }
                     },
                     "_save_csv_report": {
@@ -1773,7 +2165,13 @@
                         "end_line": 230,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Report": "from backend.complicated_project.models.report"
+                            "Report": "from complicated_project.models.report",
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error"
+                                ]
+                            }
                         }
                     },
                     "get_report": {
@@ -1785,14 +2183,20 @@
                         "end_line": 249,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Report": "from backend.complicated_project.models.report"
+                            "Report": "from complicated_project.models.report",
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error"
+                                ]
+                            }
                         }
                     }
                 },
                 "used_functions": {}
             }
         },
-        "Class Visualisation/backend/complicated_project/tests/test_data_processor.py": {
+        "backend/complicated_project/tests/test_data_processor.py": {
             "TestDataProcessor": {
                 "args": [],
                 "start_line": 12,
@@ -1807,7 +2211,7 @@
                         "end_line": 25,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataProcessor": "from backend.complicated_project.core.data_processor"
+                            "DataProcessor": "from complicated_project.core.data_processor"
                         }
                     },
                     "test_initialization": {
@@ -1817,7 +2221,16 @@
                         "start_line": 27,
                         "end_line": 31,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataProcessor": {
+                                "file": "from complicated_project.core.data_processor",
+                                "methods": [
+                                    "config",
+                                    "logger",
+                                    "validator"
+                                ]
+                            }
+                        }
                     },
                     "test_validate_input_valid": {
                         "args": [
@@ -1826,7 +2239,14 @@
                         "start_line": 33,
                         "end_line": 36,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataProcessor": {
+                                "file": "from complicated_project.core.data_processor",
+                                "methods": [
+                                    "_validate_input"
+                                ]
+                            }
+                        }
                     },
                     "test_validate_input_invalid": {
                         "args": [
@@ -1835,7 +2255,14 @@
                         "start_line": 38,
                         "end_line": 42,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataProcessor": {
+                                "file": "from complicated_project.core.data_processor",
+                                "methods": [
+                                    "_validate_input"
+                                ]
+                            }
+                        }
                     },
                     "test_create_dataset": {
                         "args": [
@@ -1845,7 +2272,13 @@
                         "end_line": 50,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataPoint": "from backend.complicated_project.models.data_models"
+                            "DataPoint": "from complicated_project.models.data_models",
+                            "DataProcessor": {
+                                "file": "from complicated_project.core.data_processor",
+                                "methods": [
+                                    "_create_dataset"
+                                ]
+                            }
                         }
                     },
                     "test_process_success": {
@@ -1856,7 +2289,14 @@
                         "start_line": 53,
                         "end_line": 62,
                         "is_api_endpoint": true,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataProcessor": {
+                                "file": "from complicated_project.core.data_processor",
+                                "methods": [
+                                    "process"
+                                ]
+                            }
+                        }
                     },
                     "test_process_invalid_input": {
                         "args": [
@@ -1865,7 +2305,14 @@
                         "start_line": 64,
                         "end_line": 71,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataProcessor": {
+                                "file": "from complicated_project.core.data_processor",
+                                "methods": [
+                                    "process"
+                                ]
+                            }
+                        }
                     },
                     "test_processing_stats_update": {
                         "args": [
@@ -1874,7 +2321,15 @@
                         "start_line": 73,
                         "end_line": 82,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataProcessor": {
+                                "file": "from complicated_project.core.data_processor",
+                                "methods": [
+                                    "process",
+                                    "processing_stats"
+                                ]
+                            }
+                        }
                     },
                     "test_get_processing_stats": {
                         "args": [
@@ -1883,7 +2338,14 @@
                         "start_line": 84,
                         "end_line": 90,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataProcessor": {
+                                "file": "from complicated_project.core.data_processor",
+                                "methods": [
+                                    "get_processing_stats"
+                                ]
+                            }
+                        }
                     },
                     "test_reset_stats": {
                         "args": [
@@ -1892,7 +2354,16 @@
                         "start_line": 92,
                         "end_line": 104,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataProcessor": {
+                                "file": "from complicated_project.core.data_processor",
+                                "methods": [
+                                    "process",
+                                    "processing_stats",
+                                    "reset_stats"
+                                ]
+                            }
+                        }
                     }
                 },
                 "used_functions": {}
@@ -1911,7 +2382,7 @@
                         "end_line": 115,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataPoint": "from backend.complicated_project.models.data_models"
+                            "DataPoint": "from complicated_project.models.data_models"
                         }
                     },
                     "test_quality_calculation_numeric": {
@@ -1922,7 +2393,7 @@
                         "end_line": 123,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataPoint": "from backend.complicated_project.models.data_models"
+                            "DataPoint": "from complicated_project.models.data_models"
                         }
                     },
                     "test_quality_calculation_string": {
@@ -1933,7 +2404,7 @@
                         "end_line": 131,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataPoint": "from backend.complicated_project.models.data_models"
+                            "DataPoint": "from complicated_project.models.data_models"
                         }
                     },
                     "test_normalization": {
@@ -1944,14 +2415,14 @@
                         "end_line": 139,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataPoint": "from backend.complicated_project.models.data_models"
+                            "DataPoint": "from complicated_project.models.data_models"
                         }
                     }
                 },
                 "used_functions": {}
             }
         },
-        "Class Visualisation/backend/complicated_project/utils/config_manager.py": {
+        "backend/complicated_project/utils/config_manager.py": {
             "ConfigManager": {
                 "args": [],
                 "start_line": 10,
@@ -1967,7 +2438,7 @@
                         "end_line": 43,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "Logger": "from backend.complicated_project.utils.logger"
+                            "Logger": "from complicated_project.utils.logger"
                         }
                     },
                     "load_config": {
@@ -1977,7 +2448,15 @@
                         "start_line": 45,
                         "end_line": 61,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            }
+                        }
                     },
                     "save_config": {
                         "args": [
@@ -1986,7 +2465,15 @@
                         "start_line": 63,
                         "end_line": 72,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "info"
+                                ]
+                            }
+                        }
                     },
                     "get": {
                         "args": [
@@ -2089,11 +2576,11 @@
                     }
                 },
                 "used_functions": {
-                    "ConfigManager": "from backend.complicated_project.utils.config_manager"
+                    "ConfigManager": "from complicated_project.utils.config_manager"
                 }
             }
         },
-        "Class Visualisation/backend/complicated_project/utils/formatters.py": {
+        "backend/complicated_project/utils/formatters.py": {
             "DataFormatter": {
                 "args": [],
                 "start_line": 9,
@@ -2158,7 +2645,7 @@
                         "end_line": 52,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "json_serializer": "from backend.complicated_project.utils.formatters"
+                            "json_serializer": "from complicated_project.utils.formatters"
                         }
                     },
                     "format_file_size": {
@@ -2223,7 +2710,7 @@
                     }
                 },
                 "used_functions": {
-                    "DataFormatter": "from backend.complicated_project.utils.formatters"
+                    "DataFormatter": "from complicated_project.utils.formatters"
                 }
             },
             "CSVFormatter": {
@@ -2254,7 +2741,7 @@
                     }
                 },
                 "used_functions": {
-                    "DataFormatter": "from backend.complicated_project.utils.formatters"
+                    "DataFormatter": "from complicated_project.utils.formatters"
                 }
             },
             "json_serializer": {
@@ -2267,7 +2754,7 @@
                 "used_functions": {}
             }
         },
-        "Class Visualisation/backend/complicated_project/utils/logger.py": {
+        "backend/complicated_project/utils/logger.py": {
             "Logger": {
                 "args": [],
                 "start_line": 11,
@@ -2283,7 +2770,7 @@
                         "end_line": 19,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "DataFormatter": "from backend.complicated_project.utils.formatters"
+                            "DataFormatter": "from complicated_project.utils.formatters"
                         }
                     },
                     "_setup_logger": {
@@ -2360,7 +2847,14 @@
                         "start_line": 69,
                         "end_line": 74,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "DataFormatter": {
+                                "file": "from complicated_project.utils.formatters",
+                                "methods": [
+                                    "to_json"
+                                ]
+                            }
+                        }
                     }
                 },
                 "used_functions": {}
@@ -2406,11 +2900,11 @@
                     }
                 },
                 "used_functions": {
-                    "Logger": "from backend.complicated_project.utils.logger"
+                    "Logger": "from complicated_project.utils.logger"
                 }
             }
         },
-        "Class Visualisation/backend/complicated_project/utils/performance_monitor.py": {
+        "backend/complicated_project/utils/performance_monitor.py": {
             "PerformanceMonitor": {
                 "args": [],
                 "start_line": 14,
@@ -2425,8 +2919,8 @@
                         "end_line": 23,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "ConfigManager": "from backend.complicated_project.utils.config_manager",
-                            "Logger": "from backend.complicated_project.utils.logger"
+                            "ConfigManager": "from complicated_project.utils.config_manager",
+                            "Logger": "from complicated_project.utils.logger"
                         }
                     },
                     "start_monitoring": {
@@ -2436,7 +2930,14 @@
                         "start_line": 25,
                         "end_line": 33,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            }
+                        }
                     },
                     "stop_monitoring": {
                         "args": [
@@ -2445,7 +2946,14 @@
                         "start_line": 35,
                         "end_line": 40,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "info"
+                                ]
+                            }
+                        }
                     },
                     "time_function": {
                         "args": [
@@ -2456,7 +2964,7 @@
                         "end_line": 59,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "decorator": "from backend.complicated_project.utils.performance_monitor"
+                            "decorator": "from complicated_project.utils.performance_monitor"
                         }
                     },
                     "record_metric": {
@@ -2522,7 +3030,14 @@
                         "start_line": 140,
                         "end_line": 152,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error"
+                                ]
+                            }
+                        }
                     },
                     "_collect_system_metrics": {
                         "args": [
@@ -2531,7 +3046,14 @@
                         "start_line": 154,
                         "end_line": 177,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error"
+                                ]
+                            }
+                        }
                     },
                     "_check_thresholds": {
                         "args": [
@@ -2542,7 +3064,15 @@
                         "start_line": 179,
                         "end_line": 215,
                         "is_api_endpoint": false,
-                        "used_functions": {}
+                        "used_functions": {
+                            "Logger": {
+                                "file": "from complicated_project.utils.logger",
+                                "methods": [
+                                    "error",
+                                    "warning"
+                                ]
+                            }
+                        }
                     }
                 },
                 "used_functions": {}
@@ -2562,8 +3092,8 @@
                         "end_line": 222,
                         "is_api_endpoint": false,
                         "used_functions": {
-                            "PerformanceMonitor": "from backend.complicated_project.utils.performance_monitor",
-                            "Logger": "from backend.complicated_project.utils.logger"
+                            "PerformanceMonitor": "from complicated_project.utils.performance_monitor",
+                            "Logger": "from complicated_project.utils.logger"
                         }
                     },
                     "export_to_prometheus": {
@@ -2604,7 +3134,7 @@
                 "end_line": 58,
                 "is_api_endpoint": false,
                 "used_functions": {
-                    "wrapper": "from backend.complicated_project.utils.performance_monitor"
+                    "wrapper": "from complicated_project.utils.performance_monitor"
                 }
             },
             "wrapper": {
@@ -2615,7 +3145,7 @@
                 "used_functions": {}
             }
         },
-        "Class Visualisation/backend/complicated_project/utils/validators.py": {
+        "backend/complicated_project/utils/validators.py": {
             "DataValidator": {
                 "args": [],
                 "start_line": 9,
@@ -2722,95 +3252,87 @@
                     }
                 },
                 "used_functions": {
-                    "DataValidator": "from backend.complicated_project.utils.validators"
+                    "DataValidator": "from complicated_project.utils.validators"
                 }
             }
         }
     },
     "file_meta": {
-        "Class Visualisation/backend/analyzer.py": {
+        "backend/complicated_project/start.py": {
             "is_router": false,
-            "module": "backend.analyzer"
+            "module": "complicated_project.start"
         },
-        "Class Visualisation/backend/main.py": {
+        "backend/complicated_project/core/data_processor.py": {
             "is_router": false,
-            "module": "backend.main"
+            "module": "complicated_project.core.data_processor"
         },
-        "Class Visualisation/backend/utils.py": {
+        "backend/complicated_project/core/user_manager.py": {
             "is_router": false,
-            "module": "backend.utils"
+            "module": "complicated_project.core.user_manager"
         },
-        "Class Visualisation/backend/complicated_project/start.py": {
+        "backend/complicated_project/data/database.py": {
             "is_router": false,
-            "module": "backend.complicated_project.start"
+            "module": "complicated_project.data.database"
         },
-        "Class Visualisation/backend/complicated_project/core/data_processor.py": {
+        "backend/complicated_project/data/sample_data.py": {
             "is_router": false,
-            "module": "backend.complicated_project.core.data_processor"
+            "module": "complicated_project.data.sample_data"
         },
-        "Class Visualisation/backend/complicated_project/core/user_manager.py": {
+        "backend/complicated_project/models/data_models.py": {
             "is_router": false,
-            "module": "backend.complicated_project.core.user_manager"
+            "module": "complicated_project.models.data_models"
         },
-        "Class Visualisation/backend/complicated_project/data/database.py": {
+        "backend/complicated_project/models/report.py": {
             "is_router": false,
-            "module": "backend.complicated_project.data.database"
+            "module": "complicated_project.models.report"
         },
-        "Class Visualisation/backend/complicated_project/data/sample_data.py": {
+        "backend/complicated_project/models/user.py": {
             "is_router": false,
-            "module": "backend.complicated_project.data.sample_data"
+            "module": "complicated_project.models.user"
         },
-        "Class Visualisation/backend/complicated_project/models/data_models.py": {
-            "is_router": false,
-            "module": "backend.complicated_project.models.data_models"
-        },
-        "Class Visualisation/backend/complicated_project/models/report.py": {
-            "is_router": false,
-            "module": "backend.complicated_project.models.report"
-        },
-        "Class Visualisation/backend/complicated_project/models/user.py": {
-            "is_router": false,
-            "module": "backend.complicated_project.models.user"
-        },
-        "Class Visualisation/backend/complicated_project/models/__init__.py": {
+        "backend/complicated_project/models/__init__.py": {
             "is_router": true,
-            "module": "backend.complicated_project.models.__init__"
+            "module": "complicated_project.models.__init__"
         },
-        "Class Visualisation/backend/complicated_project/services/notification_service.py": {
+        "backend/complicated_project/services/notification_service.py": {
             "is_router": false,
-            "module": "backend.complicated_project.services.notification_service"
+            "module": "complicated_project.services.notification_service"
         },
-        "Class Visualisation/backend/complicated_project/services/report_generator.py": {
+        "backend/complicated_project/services/plugin_manager.py": {
             "is_router": false,
-            "module": "backend.complicated_project.services.report_generator"
+            "module": "complicated_project.services.plugin_manager"
         },
-        "Class Visualisation/backend/complicated_project/tests/test_data_processor.py": {
+        "backend/complicated_project/services/report_generator.py": {
             "is_router": false,
-            "module": "backend.complicated_project.tests.test_data_processor"
+            "module": "complicated_project.services.report_generator"
         },
-        "Class Visualisation/backend/complicated_project/utils/config_manager.py": {
+        "backend/complicated_project/tests/test_data_processor.py": {
             "is_router": false,
-            "module": "backend.complicated_project.utils.config_manager"
+            "module": "complicated_project.tests.test_data_processor"
         },
-        "Class Visualisation/backend/complicated_project/utils/formatters.py": {
+        "backend/complicated_project/utils/config_manager.py": {
             "is_router": false,
-            "module": "backend.complicated_project.utils.formatters"
+            "module": "complicated_project.utils.config_manager"
         },
-        "Class Visualisation/backend/complicated_project/utils/logger.py": {
+        "backend/complicated_project/utils/formatters.py": {
             "is_router": false,
-            "module": "backend.complicated_project.utils.logger"
+            "module": "complicated_project.utils.formatters"
         },
-        "Class Visualisation/backend/complicated_project/utils/performance_monitor.py": {
+        "backend/complicated_project/utils/logger.py": {
             "is_router": false,
-            "module": "backend.complicated_project.utils.performance_monitor"
+            "module": "complicated_project.utils.logger"
         },
-        "Class Visualisation/backend/complicated_project/utils/validators.py": {
+        "backend/complicated_project/utils/performance_monitor.py": {
             "is_router": false,
-            "module": "backend.complicated_project.utils.validators"
+            "module": "complicated_project.utils.performance_monitor"
+        },
+        "backend/complicated_project/utils/validators.py": {
+            "is_router": false,
+            "module": "complicated_project.utils.validators"
         }
     },
     "config": {
-        "scan_root": "C:\\Users\\Snake\\Documents\\Visual Studio Code Projects\\Class Visualisation",
-        "focus_root": "C:\\Users\\Snake\\Documents\\Visual Studio Code Projects\\Class Visualisation\\backend"
+        "scan_root": "C:\\Users\\Snake\\Documents\\Visual Studio Code Projects\\Class Visualisation\\backend",
+        "focus_root": "C:\\Users\\Snake\\Documents\\Visual Studio Code Projects\\Class Visualisation\\backend\\complicated_project"
     }
 }
